@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>China Quest — Educational Journeys for Schools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===================== NAVIGATION ===================== -->
+<nav class="nav" id="nav">
+    <div class="nav-top">
+        <div class="container">
+            <div class="nav-top-left">
+                <a href="mailto:info@milesminds.com">info@milesminds.com</a>
+                <a href="tel:+353873752491">+353 87 375 2491</a>
+            </div>
+            <div class="nav-top-right">
+                <span>Ireland-based since 2005</span>
+                <a href="#">Download Brochure</a>
+            </div>
+        </div>
+    </div>
+    <div class="nav-main">
+        <div class="container">
+            <a href="index.html" class="logo">
+                China Quest
+            </a>
+            <ul class="nav-links">
+                <li><a href="#programmes">Programmes</a></li>
+                <li><a href="why.html">Why Us</a></li>
+                <li><a href="safety.html">Safety</a></li>
+                <li><a href="contact.html" class="nav-cta">Get Info Pack</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            </button>
+        </div>
+    </div>
+    <div class="mobile-menu">
+        <a href="#programmes">Programmes</a>
+        <a href="why.html">Why China Quest</a>
+        <a href="safety.html">Safety</a>
+        <a href="contact.html" style="background:var(--accent);color:white;border-radius:6px;text-align:center;padding:12px;">Get Info Pack</a>
+    </div>
+</nav>
+
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="hero">
+    <div class="hero-video-wrap">
+        <video id="heroVideo" preload="auto" muted autoplay playsinline>
+            <source src="images/banner_video.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+        <div style="font-family:var(--font-brand);font-size:0.72rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;opacity:0.5;margin-bottom:20px;opacity:0;animation:fadeSlideUp 0.8s ease 0.4s forwards;">China Quest</div>
+        <h1 style="font-family:var(--font-display);font-size:3rem;font-weight:400;line-height:1.2;margin-bottom:10px;opacity:0;animation:fadeSlideUp 0.8s ease 0.7s forwards;">Not a Study Trip.<br><span style="color:var(--accent);">A Real Education.</span></h1>
+        <div style="width:40px;height:2px;background:var(--accent);margin:20px auto;opacity:0;animation:fadeSlideUp 0.6s ease 1s forwards;"></div>
+    </div>
+
+    <div class="hero-scroll" onclick="document.getElementById('programmes').scrollIntoView({behavior:'smooth'})">
+        <div class="scroll-line"></div>
+        <div class="scroll-text">Scroll</div>
+    </div>
+</section>
+
+
+<!-- ===================== PROGRAMMES ===================== -->
+<!-- 3 unified vertical cards: image + info + price + CTA in one component -->
+<section class="section" id="programmes" style="background:var(--white);">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label">Choose Your Journey</div>
+            <h2 class="section-title">Three Programmes. One Decision.</h2>
+            <p class="section-desc">All 12 days. All-inclusive from Dublin. Designed for TY and Senior Cycle. Pick the one that fits your subjects.</p>
+        </div>
+
+        <!-- 3 unified product cards -->
+        <div class="products-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;">
+
+            <!-- ROOTS -->
+            <a href="roots.html" style="background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-md);overflow:hidden;display:flex;flex-direction:column;transition:all 0.35s ease;">
+                <!-- Image -->
+                <div style="position:relative;aspect-ratio:16/10;overflow:hidden;">
+                    <img src="images/greatwall.jpg" alt="Roots — Beijing" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;">
+                    <div style="position:absolute;top:14px;left:14px;display:flex;gap:6px;">
+                        <span style="padding:4px 10px;border-radius:4px;font-size:0.7rem;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;background:var(--accent);color:white;">Most Popular</span>
+                    </div>
+                    <div style="position:absolute;bottom:0;left:0;right:0;padding:16px 20px;background:linear-gradient(transparent,rgba(15,25,35,0.8));color:white;">
+                        <div style="font-family:var(--font-display);font-size:1.6rem;line-height:1.2;">Roots</div>
+                        <div style="font-size:0.82rem;opacity:0.7;">History &amp; Culture</div>
+                    </div>
+                </div>
+                <!-- Info -->
+                <div style="padding:24px;flex:1;display:flex;flex-direction:column;">
+                    <div style="font-size:0.72rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary);margin-bottom:10px;">LC History &middot; Art &middot; Chinese &middot; Geography</div>
+                    <div style="font-size:0.88rem;color:var(--gray-600);margin-bottom:14px;">Beijing → Xi'an → Shanghai &nbsp;&middot;&nbsp; 12 days</div>
+                    <ul style="list-style:none;margin-bottom:auto;padding:0;">
+                        <li style="padding:5px 0;font-size:0.84rem;color:var(--gray-600);padding-left:16px;position:relative;"><span style="position:absolute;left:0;color:var(--primary);font-weight:700;">&#8250;</span> Jinshanling Great Wall hike</li>
+                        <li style="padding:5px 0;font-size:0.84rem;color:var(--gray-600);padding-left:16px;position:relative;"><span style="position:absolute;left:0;color:var(--primary);font-weight:700;">&#8250;</span> Terracotta Warriors &amp; DIY figurine</li>
+                        <li style="padding:5px 0;font-size:0.84rem;color:var(--gray-600);padding-left:16px;position:relative;"><span style="position:absolute;left:0;color:var(--primary);font-weight:700;">&#8250;</span> Muslim Quarter food walk &amp; dumplings</li>
+                        <li style="padding:5px 0;font-size:0.84rem;color:var(--gray-600);padding-left:16px;position:relative;"><span style="position:absolute;left:0;color:var(--primary);font-weight:700;">&#8250;</span> Shanghai school exchange</li>
+                    </ul>
+                    <!-- Price + CTA -->
+                    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--gray-100);display:flex;align-items:center;justify-content:space-between;">
+                        <div>
+                            <div style="font-size:0.75rem;color:var(--gray-400);">All-in from Dublin</div>
+                            <div style="font-family:var(--font-display);font-size:1.6rem;color:var(--ink);">€3,190<span style="font-size:0.8rem;color:var(--gray-400);font-family:var(--font-body);">pp</span></div>
+                        </div>
+                        <span style="display:inline-flex;align-items:center;gap:6px;padding:10px 20px;background:var(--ink);color:white;border-radius:6px;font-size:0.82rem;font-weight:600;">View Details <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h8M8 3l4 4-4 4"/></svg></span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- PULSE (Flagship — elevated styling) -->
+            <a href="pulse.html" style="background:var(--white);border:2px solid var(--accent);border-radius:var(--radius-md);overflow:hidden;display:flex;flex-direction:column;transition:all 0.35s ease;box-shadow:0 8px 30px rgba(196,104,60,0.1);position:relative;">
+                <!-- Flagship ribbon -->
+                <div style="position:absolute;top:0;left:0;right:0;z-index:2;text-align:center;">
+                    <span style="display:inline-block;background:var(--accent);color:white;font-size:0.68rem;font-weight:700;padding:5px 20px;border-radius:0 0 6px 6px;letter-spacing:1.5px;text-transform:uppercase;">Flagship Programme</span>
+                </div>
+                <!-- Image -->
+                <div style="position:relative;aspect-ratio:16/10;overflow:hidden;">
+                    <img src="images/pulse-bg.jpg" alt="Pulse — Shanghai" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;">
+                    <div style="position:absolute;top:14px;left:14px;display:flex;gap:6px;">
+                        <span style="padding:4px 10px;border-radius:4px;font-size:0.7rem;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;background:var(--primary-light);color:white;">STEM</span>
+                    </div>
+                    <div style="position:absolute;bottom:0;left:0;right:0;padding:16px 20px;background:linear-gradient(transparent,rgba(15,25,35,0.8));color:white;">
+                        <div style="font-family:var(--font-display);font-size:1.6rem;line-height:1.2;">Pulse</div>
+                        <div style="font-size:0.82rem;opacity:0.7;">Technology &amp; Innovation</div>
+                    </div>
+                </div>
+                <!-- Info -->
+                <div style="padding:24px;flex:1;display:flex;flex-direction:column;">
+                    <div style="font-size:0.72rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary);margin-bottom:10px;">LC Physics &middot; Business &middot; CS &middot; Biology</div>
+                    <div style="font-size:0.88rem;color:var(--gray-600);margin-bottom:14px;">Shanghai → Hangzhou → Shenzhen &nbsp;&middot;&nbsp; 12 days</div>
+                    <ul style="list-style:none;margin-bottom:auto;padding:0;">
+                        <li style="padding:5px 0;font-size:0.84rem;color:var(--gray-600);padding-left:16px;position:relative;"><span style="position:absolute;left:0;color:var(--primary);font-weight:700;">&#8250;</span> DJI drone workshop &amp; AI lab</li>
+                        <li style="padding:5px 0;font-size:0.84rem;color:var(--gray-600);padding-left:16px;position:relative;"><span style="position:absolute;left:0;color:var(--primary);font-weight:700;">&#8250;</span> Alibaba campus &amp; cashless challenge</li>
+                        <li style="padding:5px 0;font-size:0.84rem;color:var(--gray-600);padding-left:16px;position:relative;"><span style="position:absolute;left:0;color:var(--primary);font-weight:700;">&#8250;</span> Tesla/NIO EV tour &amp; Maglev 430km/h</li>
+                        <li style="padding:5px 0;font-size:0.84rem;color:var(--gray-600);padding-left:16px;position:relative;"><span style="position:absolute;left:0;color:var(--primary);font-weight:700;">&#8250;</span> Huaqiangbei maker circuit challenge</li>
+                    </ul>
+                    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--gray-100);display:flex;align-items:center;justify-content:space-between;">
+                        <div>
+                            <div style="font-size:0.75rem;color:var(--gray-400);">All-in from Dublin</div>
+                            <div style="font-family:var(--font-display);font-size:1.6rem;color:var(--ink);">€3,390<span style="font-size:0.8rem;color:var(--gray-400);font-family:var(--font-body);">pp</span></div>
+                        </div>
+                        <span style="display:inline-flex;align-items:center;gap:6px;padding:10px 20px;background:var(--accent);color:white;border-radius:6px;font-size:0.82rem;font-weight:600;">View Details <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h8M8 3l4 4-4 4"/></svg></span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- HORIZON -->
+            <a href="horizon.html" style="background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-md);overflow:hidden;display:flex;flex-direction:column;transition:all 0.35s ease;">
+                <!-- Image -->
+                <div style="position:relative;aspect-ratio:16/10;overflow:hidden;">
+                    <img src="images/guilin.jpg" alt="Horizon — Zhangjiajie" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;">
+                    <div style="position:absolute;top:14px;left:14px;display:flex;gap:6px;">
+                        <span style="padding:4px 10px;border-radius:4px;font-size:0.7rem;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;background:var(--primary);color:white;">Nature</span>
+                    </div>
+                    <div style="position:absolute;bottom:0;left:0;right:0;padding:16px 20px;background:linear-gradient(transparent,rgba(15,25,35,0.8));color:white;">
+                        <div style="font-family:var(--font-display);font-size:1.6rem;line-height:1.2;">Horizon</div>
+                        <div style="font-size:0.82rem;opacity:0.7;">Nature &amp; Landscapes</div>
+                    </div>
+                </div>
+                <!-- Info -->
+                <div style="padding:24px;flex:1;display:flex;flex-direction:column;">
+                    <div style="font-size:0.72rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary);margin-bottom:10px;">LC Geography &middot; Biology &middot; Art &middot; SDGs</div>
+                    <div style="font-size:0.88rem;color:var(--gray-600);margin-bottom:14px;">Chengdu → Guilin → Zhangjiajie &nbsp;&middot;&nbsp; 12 days</div>
+                    <ul style="list-style:none;margin-bottom:auto;padding:0;">
+                        <li style="padding:5px 0;font-size:0.84rem;color:var(--gray-600);padding-left:16px;position:relative;"><span style="position:absolute;left:0;color:var(--primary);font-weight:700;">&#8250;</span> Giant Panda Keeper Program</li>
+                        <li style="padding:5px 0;font-size:0.84rem;color:var(--gray-600);padding-left:16px;position:relative;"><span style="position:absolute;left:0;color:var(--primary);font-weight:700;">&#8250;</span> Longji Rice Terraces homestay</li>
+                        <li style="padding:5px 0;font-size:0.84rem;color:var(--gray-600);padding-left:16px;position:relative;"><span style="position:absolute;left:0;color:var(--primary);font-weight:700;">&#8250;</span> Li River cruise with geology notes</li>
+                        <li style="padding:5px 0;font-size:0.84rem;color:var(--gray-600);padding-left:16px;position:relative;"><span style="position:absolute;left:0;color:var(--primary);font-weight:700;">&#8250;</span> Avatar mountains &amp; glass bridge</li>
+                    </ul>
+                    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--gray-100);display:flex;align-items:center;justify-content:space-between;">
+                        <div>
+                            <div style="font-size:0.75rem;color:var(--gray-400);">All-in from Dublin</div>
+                            <div style="font-family:var(--font-display);font-size:1.6rem;color:var(--ink);">€3,290<span style="font-size:0.8rem;color:var(--gray-400);font-family:var(--font-body);">pp</span></div>
+                        </div>
+                        <span style="display:inline-flex;align-items:center;gap:6px;padding:10px 20px;background:var(--ink);color:white;border-radius:6px;font-size:0.82rem;font-weight:600;">View Details <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h8M8 3l4 4-4 4"/></svg></span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- "Including" line -->
+        <div style="text-align:center;padding:32px 0 8px;font-size:0.88rem;color:var(--gray-500);">
+            <strong style="color:var(--ink);">All prices include:</strong> return Dublin flights, hotels, all meals, internal transport, entrance fees, bilingual leaders, insurance, Garda-vetted Irish leader, Taskbook &amp; curriculum mapping.
+        </div>
+        <div style="text-align:center;padding:0 0 8px;font-size:0.82rem;color:var(--accent);font-weight:600;">
+            Early-bird: €300 off when booked 9+ months ahead &nbsp;|&nbsp; 2 free teacher places per 15 students
+        </div>
+
+        <!-- Custom CTA -->
+        <div style="text-align:center; margin-top:40px; padding:32px; background:var(--gray-50); border-radius:var(--radius-md); border:1px dashed var(--gray-300);">
+            <p style="font-size:0.95rem; color:var(--gray-500); margin-bottom:16px;">Can't decide? Mix cities from any package, or add Hong Kong, Dunhuang, or a Yangtze cruise.</p>
+            <a href="tailored.html" class="btn-primary" style="padding:12px 24px;font-size:0.88rem;">Design a Custom Programme</a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===================== TESTIMONIALS ===================== -->
+<!-- Large editorial quote — one at a time, impactful, not 3 small cards -->
+<section class="section" style="background:var(--ink);color:white;overflow:hidden;">
+    <div class="container" style="position:relative;">
+        <div class="section-label" style="color:var(--accent);text-align:center;">Student Voices</div>
+        <div style="max-width:740px;margin:0 auto;text-align:center;padding:20px 0;">
+            <!-- Large decorative quote mark -->
+            <div style="font-family:var(--font-display);font-size:8rem;line-height:0.6;color:rgba(255,255,255,0.06);margin-bottom:16px;">"</div>
+            <!-- Quote text — large, editorial -->
+            <blockquote style="font-family:var(--font-display);font-size:1.8rem;line-height:1.5;color:white;font-style:normal;margin-bottom:32px;">
+                You get boots on the ground and talk to people. China is ahead in tech — exciting to see firsthand. It changed how I think about the world.
+            </blockquote>
+            <div style="display:flex;align-items:center;justify-content:center;gap:16px;">
+                <div style="width:48px;height:48px;border-radius:50%;background:var(--primary-light);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;">SD</div>
+                <div style="text-align:left;">
+                    <div style="font-weight:600;font-size:0.92rem;">Sean D.</div>
+                    <div style="font-size:0.8rem;color:rgba(255,255,255,0.45);">American Student, Summer 2025 Programme</div>
+                </div>
+            </div>
+        </div>
+        <!-- Other quotes as smaller supporting text -->
+        <div class="testimonial-sub-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:48px;padding-top:40px;border-top:1px solid rgba(255,255,255,0.08);">
+            <div style="padding:24px;border-left:2px solid var(--accent);">
+                <p style="font-size:0.95rem;color:rgba(255,255,255,0.75);line-height:1.8;font-style:italic;margin-bottom:12px;">"Really neat talking with inspiring students interested in Chinese culture. Great to attend lectures from PKU professors."</p>
+                <div style="font-size:0.82rem;color:rgba(255,255,255,0.4);"><strong style="color:rgba(255,255,255,0.6);">Naila T.</strong> &mdash; French Student, Summer 2025</div>
+            </div>
+            <div style="padding:24px;border-left:2px solid var(--accent);">
+                <p style="font-size:0.95rem;color:rgba(255,255,255,0.75);line-height:1.8;font-style:italic;margin-bottom:12px;">"When researching, I learned how broad and vibrant China is. People are welcoming and good. It changed my perspective completely."</p>
+                <div style="font-size:0.82rem;color:rgba(255,255,255,0.4);"><strong style="color:rgba(255,255,255,0.6);">Dhrumil K.</strong> &mdash; British Student, Summer 2025</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===================== PARTNERS & INSTITUTIONS ===================== -->
+<section style="padding:80px 0;background:var(--white);border-top:1px solid var(--gray-100);border-bottom:1px solid var(--gray-100);">
+    <div class="container">
+        <div style="text-align:center;margin-bottom:40px;">
+            <div style="font-size:0.72rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--gray-400);margin-bottom:8px;">Our Partners &amp; Programme Collaborators</div>
+            <p style="font-size:0.88rem;color:var(--gray-400);max-width:500px;margin:0 auto;">Institutions, companies, and organisations involved in our programmes</p>
+        </div>
+
+        <!-- Logo grid -->
+        <div class="partners-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:0;max-width:1000px;margin:0 auto;">
+
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;border:1px solid var(--gray-100);text-align:center;">
+                <img src="images/logos/bytedance.png" alt="ByteDance" style="height:48px;width:48px;object-fit:contain;margin-bottom:10px;">
+                <div style="font-weight:700;font-size:0.82rem;color:var(--ink);">ByteDance</div>
+                <div style="font-size:0.68rem;color:var(--gray-400);margin-top:2px;">TikTok parent</div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;border:1px solid var(--gray-100);text-align:center;">
+                <img src="images/logos/peking-university.png" alt="Peking University" style="height:48px;width:48px;object-fit:contain;margin-bottom:10px;">
+                <div style="font-weight:700;font-size:0.82rem;color:var(--ink);">Peking University</div>
+                <div style="font-size:0.68rem;color:var(--gray-400);margin-top:2px;">Campus visit</div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;border:1px solid var(--gray-100);text-align:center;">
+                <img src="images/logos/confucius-institute.png" alt="Confucius Institute" style="height:48px;width:48px;object-fit:contain;margin-bottom:10px;">
+                <div style="font-weight:700;font-size:0.82rem;color:var(--ink);">Confucius Institute</div>
+                <div style="font-size:0.68rem;color:var(--gray-400);margin-top:2px;">Language &amp; culture</div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;border:1px solid var(--gray-100);text-align:center;">
+                <img src="images/logos/gaisce.png" alt="Gaisce" style="height:48px;width:48px;object-fit:contain;margin-bottom:10px;">
+                <div style="font-weight:700;font-size:0.82rem;color:var(--ink);">Gaisce</div>
+                <div style="font-size:0.68rem;color:var(--gray-400);margin-top:2px;">President's Award</div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;border:1px solid var(--gray-100);text-align:center;">
+                <img src="images/logos/unesco.png" alt="UNESCO" style="height:48px;width:48px;object-fit:contain;margin-bottom:10px;">
+                <div style="font-weight:700;font-size:0.82rem;color:var(--ink);">UNESCO</div>
+                <div style="font-size:0.68rem;color:var(--gray-400);margin-top:2px;">Heritage sites</div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;border:1px solid var(--gray-100);text-align:center;">
+                <img src="images/logos/dji.png" alt="DJI" style="height:48px;width:48px;object-fit:contain;margin-bottom:10px;">
+                <div style="font-weight:700;font-size:0.82rem;color:var(--ink);">DJI</div>
+                <div style="font-size:0.68rem;color:var(--gray-400);margin-top:2px;">Drones &amp; robotics</div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;border:1px solid var(--gray-100);text-align:center;">
+                <img src="images/logos/huawei.png" alt="Huawei" style="height:48px;width:48px;object-fit:contain;margin-bottom:10px;">
+                <div style="font-weight:700;font-size:0.82rem;color:var(--ink);">Huawei</div>
+                <div style="font-size:0.68rem;color:var(--gray-400);margin-top:2px;">5G &amp; smart tech</div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;border:1px solid var(--gray-100);text-align:center;">
+                <img src="images/logos/byd.png" alt="BYD" style="height:48px;width:48px;object-fit:contain;margin-bottom:10px;">
+                <div style="font-weight:700;font-size:0.82rem;color:var(--ink);">BYD</div>
+                <div style="font-size:0.68rem;color:var(--gray-400);margin-top:2px;">Electric vehicles</div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;border:1px solid var(--gray-100);text-align:center;">
+                <img src="images/logos/alibaba.png" alt="Alibaba" style="height:48px;width:48px;object-fit:contain;margin-bottom:10px;">
+                <div style="font-weight:700;font-size:0.82rem;color:var(--ink);">Alibaba</div>
+                <div style="font-size:0.68rem;color:var(--gray-400);margin-top:2px;">E-commerce</div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;border:1px solid var(--gray-100);text-align:center;">
+                <img src="images/logos/deepseek.png" alt="DeepSeek" style="height:48px;width:48px;object-fit:contain;margin-bottom:10px;">
+                <div style="font-weight:700;font-size:0.82rem;color:var(--ink);">DeepSeek</div>
+                <div style="font-size:0.68rem;color:var(--gray-400);margin-top:2px;">AI research</div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;border:1px solid var(--gray-100);text-align:center;">
+                <img src="images/logos/xiaomi.png" alt="Xiaomi" style="height:48px;width:48px;object-fit:contain;margin-bottom:10px;">
+                <div style="font-weight:700;font-size:0.82rem;color:var(--ink);">Xiaomi</div>
+                <div style="font-size:0.68rem;color:var(--gray-400);margin-top:2px;">Smart devices</div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;border:1px solid var(--gray-100);text-align:center;">
+                <img src="images/logos/catl.png" alt="CATL" style="height:48px;width:48px;object-fit:contain;margin-bottom:10px;">
+                <div style="font-weight:700;font-size:0.82rem;color:var(--ink);">CATL</div>
+                <div style="font-size:0.68rem;color:var(--gray-400);margin-top:2px;">EV batteries</div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;border:1px solid var(--gray-100);text-align:center;">
+                <img src="images/logos/baidu.png" alt="Baidu" style="height:48px;width:48px;object-fit:contain;margin-bottom:10px;">
+                <div style="font-weight:700;font-size:0.82rem;color:var(--ink);">Baidu</div>
+                <div style="font-size:0.68rem;color:var(--gray-400);margin-top:2px;">AI &amp; self-driving</div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;border:1px solid var(--gray-100);text-align:center;">
+                <img src="images/logos/tesla.png" alt="Tesla" style="height:48px;width:48px;object-fit:contain;margin-bottom:10px;">
+                <div style="font-weight:700;font-size:0.82rem;color:var(--ink);">Tesla</div>
+                <div style="font-size:0.68rem;color:var(--gray-400);margin-top:2px;">Shanghai Gigafactory</div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;border:1px solid var(--gray-100);text-align:center;">
+                <img src="images/logos/tencent.png" alt="Tencent" style="height:48px;width:48px;object-fit:contain;margin-bottom:10px;">
+                <div style="font-weight:700;font-size:0.82rem;color:var(--ink);">Tencent</div>
+                <div style="font-size:0.68rem;color:var(--gray-400);margin-top:2px;">WeChat &amp; gaming</div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo">China Quest</div>
+                <p>A structured educational journey across modern China. Designed for Irish and international schools by Miles Minds Limited, Ireland. Founded 2005.</p>
+            </div>
+            <div>
+                <h5>Programmes</h5>
+                <ul>
+                    <li><a href="roots.html">Roots — History &amp; Culture</a></li>
+                    <li><a href="pulse.html">Pulse — STEM &amp; Innovation</a></li>
+                    <li><a href="horizon.html">Horizon — Nature &amp; Landscapes</a></li>
+                    <li><a href="tailored.html">Custom Programmes</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5>For Schools</h5>
+                <ul>
+                    <li><a href="why.html">Why China Quest</a></li>
+                    <li><a href="safety.html">Safety &amp; Support</a></li>
+                    <li><a href="contact.html">Contact / TY Show</a></li>
+                    <li><a href="#">Download Brochure</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5>Contact</h5>
+                <ul>
+                    <li><a href="mailto:info@milesminds.com">info@milesminds.com</a></li>
+                    <li><a href="tel:+353873752491">+353 87 375 2491</a></li>
+                    <li style="margin-top:16px; font-size:0.82rem; color:rgba(255,255,255,0.35);">Miles Minds Limited<br>Company No. 802673<br>Ireland</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 China Quest / Miles Minds Limited. All rights reserved.</span>
+            <div class="footer-legal">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms</a>
+                <a href="#">Cookie Policy</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>

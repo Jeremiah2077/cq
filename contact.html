@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — China Quest</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="nav" id="nav">
+        <div class="nav-top"><div class="container"><div class="nav-top-left"><a href="mailto:info@milesminds.com">info@milesminds.com</a><a href="tel:+353873752491">+353 87 375 2491</a></div><div class="nav-top-right"><span>Ireland-based since 2005</span><a href="#">Download Brochure</a></div></div></div>
+        <div class="nav-main"><div class="container">
+            <a href="index.html" class="logo">China Quest</a>
+            <ul class="nav-links">
+                <li><a href="index.html#programmes">Programmes</a></li>
+                <li><a href="why.html">Why Us</a></li>
+                <li><a href="safety.html">Safety</a></li>
+                <li><a href="contact.html" class="nav-cta">Get Info Pack</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            </button>
+        </div></div>
+        <div class="mobile-menu">
+            <a href="index.html#programmes">Programmes</a>
+            <a href="why.html">Why China Quest</a>
+            <a href="safety.html">Safety</a>
+            <a href="contact.html" style="background:var(--accent);color:white;border-radius:6px;text-align:center;padding:12px;">Get Info Pack</a>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero" style="background-image:url('images/hero-banner2.jpg')">
+        <div class="page-hero-overlay"></div>
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="breadcrumb-sep">/</span>
+                <span>Contact</span>
+            </nav>
+            <h1 class="page-hero-title">Contact &amp; TY Show</h1>
+        </div>
+    </section>
+
+    <!-- Section: Enquiry Form -->
+    <section class="section cta-section" style="background:var(--ink);">
+        <div class="container">
+            <div class="cta-layout" style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;">
+
+                <!-- Left: CTA content -->
+                <div class="cta-left">
+                    <span class="section-label" style="color:var(--accent);">TY Show 2026</span>
+                    <h2 class="section-title" style="color:#fff;">Interested? Let's Talk.</h2>
+                    <p style="color:rgba(255,255,255,0.7);margin-bottom:36px;line-height:1.7;">Leave your details and we'll send you everything your school needs — programme outlines, curriculum mappings, safety documentation, and pricing.</p>
+
+                    <ol class="cta-steps" style="list-style:none;padding:0;margin:0 0 40px;">
+                        <li class="cta-step">
+                            <span class="cta-step-num">1</span>
+                            <div>
+                                <strong style="color:#fff;">Leave your details</strong>
+                                <span style="color:rgba(255,255,255,0.5);font-size:0.9rem;display:block;">30 seconds</span>
+                            </div>
+                        </li>
+                        <li class="cta-step">
+                            <span class="cta-step-num">2</span>
+                            <div>
+                                <strong style="color:#fff;">We send you the full info pack</strong>
+                                <span style="color:rgba(255,255,255,0.5);font-size:0.9rem;display:block;">Within 24 hours</span>
+                            </div>
+                        </li>
+                        <li class="cta-step">
+                            <span class="cta-step-num">3</span>
+                            <div>
+                                <strong style="color:#fff;">Share it with your school &amp; parents</strong>
+                                <span style="color:rgba(255,255,255,0.5);font-size:0.9rem;display:block;">All the docs they need</span>
+                            </div>
+                        </li>
+                        <li class="cta-step">
+                            <span class="cta-step-num">4</span>
+                            <div>
+                                <strong style="color:#fff;">We set up a call to plan your trip</strong>
+                                <span style="color:rgba(255,255,255,0.5);font-size:0.9rem;display:block;">On your timeline</span>
+                            </div>
+                        </li>
+                    </ol>
+
+                    <div class="ty-show-card">
+                        <div class="ty-show-card-inner">
+                            <div class="ty-show-badge">TY Show</div>
+                            <h4 style="color:#fff;margin:0 0 4px;font-size:1.15rem;">TY Show — 28 April 2026</h4>
+                            <p style="color:rgba(255,255,255,0.65);margin:0;font-size:0.9rem;">Visit our stand to meet the team, see the programme materials, and get your info pack in person. We'll have everything ready for you.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Form -->
+                <div class="enquiry-form">
+                    <div class="enquiry-form-inner">
+                        <h3 class="enquiry-form-title">Get the Info Pack</h3>
+                        <p class="enquiry-form-sub">Free, no obligation. We reply within 24 hours.</p>
+                        <form action="#" method="post" novalidate>
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" name="name" placeholder="First and last name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="role">I Am a...</label>
+                                <select id="role" name="role" required>
+                                    <option value="" disabled selected>Select your role</option>
+                                    <option value="ty-student">TY Student</option>
+                                    <option value="parent">Parent</option>
+                                    <option value="ty-coordinator">TY Coordinator</option>
+                                    <option value="principal">Principal</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="school">School</label>
+                                <input type="text" id="school" name="school" placeholder="School name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="you@school.ie" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone <span style="font-weight:400;opacity:0.6;">(optional)</span></label>
+                                <input type="tel" id="phone" name="phone" placeholder="+353 ...">
+                            </div>
+                            <div class="form-group">
+                                <label for="programme">Programme Interest</label>
+                                <select id="programme" name="programme">
+                                    <option value="" disabled selected>Select a programme</option>
+                                    <option value="roots">Roots — History &amp; Culture</option>
+                                    <option value="pulse">Pulse — STEM &amp; Innovation</option>
+                                    <option value="horizon">Horizon — Nature &amp; Landscapes</option>
+                                    <option value="tailored">Custom / Tailored Programme</option>
+                                    <option value="undecided">Not sure yet</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="form-submit">Send Me the Info Pack</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Direct Contact -->
+    <section class="section" style="background:var(--gray-50);text-align:center;">
+        <div class="container" style="max-width:560px;">
+            <span class="section-label">Direct Contact</span>
+            <h2 class="section-title" style="margin-bottom:40px;">Prefer to reach out directly?</h2>
+            <div class="direct-contact-grid" style="display:flex;flex-direction:column;gap:20px;align-items:center;">
+                <a href="mailto:info@milesminds.com" class="direct-contact-item">
+                    <span class="direct-contact-icon">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="12" rx="2" stroke="var(--primary)" stroke-width="1.5"/><path d="M2 7l8 5 8-5" stroke="var(--primary)" stroke-width="1.5"/></svg>
+                    </span>
+                    <span>info@milesminds.com</span>
+                </a>
+                <a href="tel:+353873752491" class="direct-contact-item">
+                    <span class="direct-contact-icon">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3a2 2 0 00-2 2c0 7.18 5.82 13 13 13a2 2 0 002-2v-2.5a1 1 0 00-1-1l-3-.75a1 1 0 00-1.1.5l-.75 1.25A11.05 11.05 0 016.5 9.85L7.75 9.1a1 1 0 00.5-1.1L7.5 5a1 1 0 00-1-1H5z" stroke="var(--primary)" stroke-width="1.5"/></svg>
+                    </span>
+                    <span>+353 87 375 2491</span>
+                </a>
+                <div class="direct-contact-item" style="cursor:default;border-style:dashed;">
+                    <span class="direct-contact-icon">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="14" height="14" rx="2" stroke="var(--primary)" stroke-width="1.5"/><path d="M7 7h6M7 10h4" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    </span>
+                    <span style="color:var(--text-muted);">Miles Minds Limited, Ireland &nbsp;·&nbsp; Company No. 802673</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">China Quest</div>
+                    <p>A structured educational journey across modern China. Designed for Irish and international schools by Miles Minds Limited, Ireland. Founded 2005.</p>
+                </div>
+                <div><h5>Programmes</h5><ul>
+                    <li><a href="roots.html">Roots — History &amp; Culture</a></li>
+                    <li><a href="pulse.html">Pulse — STEM &amp; Innovation</a></li>
+                    <li><a href="horizon.html">Horizon — Nature &amp; Landscapes</a></li>
+                    <li><a href="tailored.html">Custom Programmes</a></li>
+                </ul></div>
+                <div><h5>For Schools</h5><ul>
+                    <li><a href="why.html">Why China Quest</a></li>
+                    <li><a href="safety.html">Safety &amp; Support</a></li>
+                    <li><a href="contact.html">Contact / TY Show</a></li>
+                    <li><a href="#">Download Brochure</a></li>
+                </ul></div>
+                <div><h5>Contact</h5><ul>
+                    <li><a href="mailto:info@milesminds.com">info@milesminds.com</a></li>
+                    <li><a href="tel:+353873752491">+353 87 375 2491</a></li>
+                    <li style="margin-top:16px;font-size:0.82rem;color:rgba(255,255,255,0.35);">Miles Minds Limited<br>Company No. 802673<br>Ireland</li>
+                </ul></div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 China Quest / Miles Minds Limited. All rights reserved.</span>
+                <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms</a><a href="#">Cookie Policy</a></div>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js" defer></script>
+
+</body>
+</html>
