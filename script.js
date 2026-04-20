@@ -165,3 +165,57 @@ if (heroStats) {
     }, { threshold: 0.5 });
     statsObserver.observe(heroStats);
 }
+
+
+// ---- Interest form: role-based field toggling ----
+const interestForm = document.getElementById('interestForm');
+if (interestForm) {
+    const formFields = document.getElementById('formFields');
+    const schoolField = document.getElementById('schoolField');
+    const parentConsent = document.getElementById('parentConsent');
+    const guardianCheckbox = interestForm.querySelector('[name="consent_guardian"]');
+    const radios = interestForm.querySelectorAll('[name="role"]');
+
+    radios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            formFields.style.display = 'block';
+            const role = radio.value;
+
+            // Teacher: show school field
+            schoolField.style.display = role === 'teacher' ? 'block' : 'none';
+
+            // Parent: show guardian checkbox and make it required
+            const isParent = role === 'parent';
+            parentConsent.style.display = isParent ? 'block' : 'none';
+            guardianCheckbox.required = isParent;
+        });
+    });
+
+    interestForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Basic validation
+        const email = interestForm.querySelector('[name="email"]');
+        const consentEmail = interestForm.querySelector('[name="consent_email"]');
+        const consentPrivacy = interestForm.querySelector('[name="consent_privacy"]');
+        const role = interestForm.querySelector('[name="role"]:checked');
+
+        if (!role || !email.value || !email.validity.valid || !consentEmail.checked || !consentPrivacy.checked) {
+            // Trigger native validation UI
+            interestForm.reportValidity();
+            return;
+        }
+
+        if (role.value === 'parent' && !guardianCheckbox.checked) {
+            guardianCheckbox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            interestForm.reportValidity();
+            return;
+        }
+
+        // TODO: Replace with actual form submission (Tally / Brevo endpoint)
+        // For now, show success state
+        interestForm.querySelector('fieldset').style.display = 'none';
+        formFields.style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+    });
+}
