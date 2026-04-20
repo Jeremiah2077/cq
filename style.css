@@ -1737,6 +1737,13 @@ details.day-item[open] .day-chevron { transform: rotate(180deg); color: var(--pr
    FOOTER
    ======================================== */
 
+/* Safety trust cards hover */
+#safety-trust a:hover {
+    background: rgba(255,255,255,0.1) !important;
+    border-color: var(--accent) !important;
+    transform: translateY(-4px);
+}
+
 .footer {
     background: var(--ink);
     color: rgba(255,255,255,0.65);
