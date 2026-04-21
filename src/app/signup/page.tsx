@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { AuthShell } from "@/components/AuthShell";
-import { signUp } from "@/app/auth/actions";
+import { GoogleButton } from "@/components/GoogleButton";
+import { signUp, signInWithGoogle } from "@/app/auth/actions";
 
 export default async function SignupPage({
   searchParams,
@@ -31,6 +32,16 @@ export default async function SignupPage({
           {error}
         </div>
       )}
+
+      <form action={signInWithGoogle}>
+        <GoogleButton label="Sign up with Google" />
+      </form>
+
+      <div className="my-6 flex items-center gap-3 text-[0.72rem] tracking-[2px] uppercase text-[var(--gray-400)]">
+        <span className="flex-1 h-px bg-[var(--gray-200)]" />
+        or
+        <span className="flex-1 h-px bg-[var(--gray-200)]" />
+      </div>
 
       <form action={signUp} className="space-y-5">
         <Field label="Full name" name="full_name" required />
