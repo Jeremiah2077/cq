@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xi'an — China Quest</title>
+    <meta name="description" content="Explore Xi'an with China Quest — Terracotta Warriors, City Wall cycling, Muslim Quarter food walks, Silk Road heritage. Designed for school groups.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .dest-intro { max-width: 720px; }
+        .dest-intro p { font-size: 0.95rem; color: var(--gray-600); line-height: 1.85; margin-bottom: 16px; }
+        .highlight-card {
+            background: var(--white);
+            border: 1px solid var(--gray-100);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+        }
+        .highlight-card-img { overflow: hidden; }
+        .highlight-card-img img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .highlight-card:hover .highlight-card-img img { transform: scale(1.05); }
+        .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .info-card {
+            padding: 28px 24px;
+            background: var(--white);
+            border: 1px solid var(--gray-100);
+            border-radius: var(--radius-md);
+        }
+        .info-card h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .info-card p {
+            font-size: 0.88rem;
+            color: var(--gray-500);
+            line-height: 1.7;
+        }
+        @media (max-width: 768px) {
+            .info-grid { grid-template-columns: 1fr; }
+            .highlight-card[style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+            }
+            .highlight-card[style*="grid-template-columns"] > div:last-child {
+                padding: 28px 24px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===================== NAVIGATION ===================== -->
+<nav class="nav" id="nav">
+    <div class="nav-top"><div class="container"><div class="nav-top-left"><a href="mailto:info@milesminds.com">info@milesminds.com</a><a href="tel:+353873752491">+353 87 375 2491</a></div><div class="nav-top-right"><span>Ireland-based since 2005</span><a href="#">Download Brochure</a></div></div></div>
+    <div class="nav-main"><div class="container">
+        <a href="index.html" class="logo">China Quest</a>
+        <ul class="nav-links">
+            <li><a href="index.html#programmes">Programmes</a></li>
+            <li class="nav-dropdown">
+                <a href="#" class="nav-dropdown-trigger">Destinations <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-left:4px;vertical-align:middle;"><path d="M1 1l4 4 4-4"/></svg></a>
+                <div class="nav-dropdown-menu">
+                    <a href="beijing.html">Beijing</a>
+                    <a href="shanghai.html">Shanghai</a>
+                    <a href="xian.html">Xi'an</a>
+                </div>
+            </li>
+            <li><a href="why.html">Why Us</a></li>
+            <li><a href="safety.html">Safety</a></li>
+            <li><a href="contact.html" class="nav-cta">Get Info Pack</a></li>
+        </ul>
+        <button class="mobile-menu-btn" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+    </div></div>
+    <div class="mobile-menu">
+        <a href="index.html#programmes">Programmes</a>
+        <div class="mobile-dropdown">
+            <a href="#" onclick="event.preventDefault();this.parentElement.classList.toggle('open');">Destinations <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-left:4px;vertical-align:middle;"><path d="M1 1l4 4 4-4"/></svg></a>
+            <div class="mobile-dropdown-menu">
+                <a href="beijing.html">Beijing</a>
+                <a href="shanghai.html">Shanghai</a>
+                <a href="xian.html">Xi'an</a>
+            </div>
+        </div>
+        <a href="why.html">Why China Quest</a>
+        <a href="safety.html">Safety</a>
+        <a href="contact.html" style="background:var(--accent);color:white;border-radius:6px;text-align:center;padding:12px;">Get Info Pack</a>
+    </div>
+</nav>
+
+
+<!-- ===================== PAGE HERO ===================== -->
+<section class="page-hero" style="background-image:url('images/xian/hero.jpg');">
+    <div class="page-hero-overlay"></div>
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="breadcrumb-sep">/</span>
+            <a href="#">Destinations</a>
+            <span class="breadcrumb-sep">/</span>
+            <span>Xi'an</span>
+        </nav>
+        <h1 class="page-hero-title">Xi'an</h1>
+        <p style="font-size:1.05rem;color:rgba(255,255,255,0.75);max-width:520px;margin-top:12px;line-height:1.7;">Ancient capital of 13 dynasties. Where the Silk Road began and the Terracotta Army still stands guard.</p>
+    </div>
+</section>
+
+
+<!-- ===================== INTRO ===================== -->
+<section style="padding:72px 0;background:var(--white);">
+    <div class="container">
+        <div class="dest-intro">
+            <div style="font-size:0.72rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;">About Xi'an</div>
+            <h2 style="font-family:var(--font-display);font-size:2rem;color:var(--ink);margin-bottom:20px;">Where China's story begins</h2>
+            <p>Xi'an was the starting point of the Silk Road and the capital of China for over a thousand years. This is where Emperor Qin Shi Huang unified China, built the Terracotta Army, and set the blueprint for every dynasty that followed.</p>
+            <p>Today the city is a living crossroads of cultures. The Muslim Quarter buzzes with Hui street food vendors whose families have been here for centuries. The ancient City Wall — one of the best-preserved in the world — still circles the old town, and you can cycle the full 13.7 km on top of it at sunset.</p>
+            <p>For students studying history, religion, or geography, Xi'an makes abstract concepts physical. The Silk Road isn't a line on a map — it's a dumpling recipe, a mosque built in Chinese style, a puppet show that's survived a thousand years.</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===================== TOP ATTRACTIONS ===================== -->
+<section style="padding:72px 0;background:var(--gray-50);border-top:1px solid var(--gray-100);">
+    <div class="container">
+        <div style="margin-bottom:40px;">
+            <div style="font-size:0.72rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;">What You'll Experience</div>
+            <h2 style="font-family:var(--font-display);font-size:2rem;color:var(--ink);">Top Attractions</h2>
+        </div>
+
+        <!-- Terracotta Warriors -->
+        <div class="highlight-card" style="display:grid;grid-template-columns:1fr 1fr;margin-bottom:32px;">
+            <div class="highlight-card-img" style="aspect-ratio:auto;min-height:400px;">
+                <img src="images/xian/terracotta.jpg" alt="Terracotta Warriors" style="height:100%;">
+            </div>
+            <div style="padding:48px 40px;display:flex;flex-direction:column;justify-content:center;">
+                <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--ink);margin-bottom:14px;">Terracotta Warriors</h3>
+                <p style="font-size:0.95rem;color:var(--gray-500);line-height:1.8;margin-bottom:20px;">One of the greatest archaeological discoveries in history. Over 8,000 life-sized warriors guard Emperor Qin's tomb — each with a unique face. Students analyse Qin dynasty mass production, archaeological method, and the mystery of an emperor who tried to conquer death.</p>
+                <div style="font-size:0.78rem;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;">Featured in Roots Programme</div>
+            </div>
+        </div>
+
+        <!-- City Wall -->
+        <div class="highlight-card" style="display:grid;grid-template-columns:1fr 1fr;margin-bottom:32px;">
+            <div class="highlight-card-img" style="aspect-ratio:auto;min-height:400px;">
+                <img src="images/xian/city-wall.jpg" alt="Xi'an City Wall" style="height:100%;">
+            </div>
+            <div style="padding:48px 40px;display:flex;flex-direction:column;justify-content:center;">
+                <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--ink);margin-bottom:14px;">City Wall Cycling</h3>
+                <p style="font-size:0.95rem;color:var(--gray-500);line-height:1.8;margin-bottom:20px;">Sunset cycling on one of the world's best-preserved city walls. The 13.7 km circuit atop the ancient Ming-dynasty ramparts gives you a panoramic view of old Xi'an on one side and the modern city on the other.</p>
+                <div style="font-size:0.78rem;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;">Featured in Roots Programme</div>
+            </div>
+        </div>
+
+        <!-- Muslim Quarter -->
+        <div class="highlight-card" style="display:grid;grid-template-columns:1fr 1fr;margin-bottom:32px;">
+            <div class="highlight-card-img" style="aspect-ratio:auto;min-height:400px;">
+                <img src="images/xian/muslim-quarter.jpg" alt="Muslim Quarter Food Walk" style="height:100%;">
+            </div>
+            <div style="padding:48px 40px;display:flex;flex-direction:column;justify-content:center;">
+                <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--ink);margin-bottom:14px;">Muslim Quarter Food Walk</h3>
+                <p style="font-size:0.95rem;color:var(--gray-500);line-height:1.8;margin-bottom:20px;">A guided walk through Xi'an's Hui community — Silk Road culinary heritage alive in every stall. Students taste their way through centuries of cultural exchange, then make dumplings with a local chef in a hands-on jiaozi class.</p>
+                <div style="font-size:0.78rem;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;">Featured in Roots Programme</div>
+            </div>
+        </div>
+
+        <!-- Shadow Puppets -->
+        <div class="highlight-card" style="display:grid;grid-template-columns:1fr 1fr;margin-bottom:32px;">
+            <div class="highlight-card-img" style="aspect-ratio:auto;min-height:400px;">
+                <img src="images/xian/shadow-puppet.jpg" alt="Shadow Puppet Theatre" style="height:100%;">
+            </div>
+            <div style="padding:48px 40px;display:flex;flex-direction:column;justify-content:center;">
+                <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--ink);margin-bottom:14px;">Shadow Puppet Theatre</h3>
+                <p style="font-size:0.95rem;color:var(--gray-500);line-height:1.8;margin-bottom:20px;">A traditional performance followed by a hands-on craft workshop. Students learn to carve and operate shadow puppets — intangible cultural heritage that dates back over 2,000 years to the Han dynasty.</p>
+                <div style="font-size:0.78rem;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;">Featured in Roots Programme</div>
+            </div>
+        </div>
+
+        <!-- Great Mosque -->
+        <div class="highlight-card" style="display:grid;grid-template-columns:1fr 1fr;margin-bottom:32px;">
+            <div class="highlight-card-img" style="aspect-ratio:auto;min-height:400px;">
+                <img src="images/xian/wild-goose-pagoda.jpg" alt="Great Mosque and Wild Goose Pagoda" style="height:100%;">
+            </div>
+            <div style="padding:48px 40px;display:flex;flex-direction:column;justify-content:center;">
+                <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--ink);margin-bottom:14px;">Great Mosque & Wild Goose Pagoda</h3>
+                <p style="font-size:0.95rem;color:var(--gray-500);line-height:1.8;margin-bottom:20px;">Islamic architecture built in a Chinese style — a physical record of Silk Road cultural fusion. Paired with the Big Wild Goose Pagoda, a Tang-dynasty Buddhist monument that tells the story of Xuanzang's pilgrimage to India.</p>
+                <div style="font-size:0.78rem;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;">Featured in Roots Programme</div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ===================== PRACTICAL INFO ===================== -->
+<section style="padding:72px 0;background:var(--white);">
+    <div class="container">
+        <div style="margin-bottom:40px;">
+            <div style="font-size:0.72rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;">Plan Your Visit</div>
+            <h2 style="font-family:var(--font-display);font-size:2rem;color:var(--ink);">Good to Know</h2>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>Best Time to Visit</h4>
+                <p>Spring (March–May) and Autumn (September–November) are ideal. Summers are hot; winters are cold but uncrowded. The Terracotta Warriors site is open year-round.</p>
+            </div>
+            <div class="info-card">
+                <h4>Getting There</h4>
+                <p>High-speed rail from Beijing takes about 4.5 hours. From Shanghai, a 2.5-hour flight. All internal transfers are arranged by China Quest with private coaches.</p>
+            </div>
+            <div class="info-card">
+                <h4>Local Flavour</h4>
+                <p>Xi'an is one of China's great food cities. Don't miss biangbiang noodles, roujiamo (Chinese "burger"), and the lamb skewers of the Muslim Quarter. We include a dumpling-making class.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===================== FEATURED PROGRAMME ===================== -->
+<section style="padding:72px 0;background:var(--ink);color:white;">
+    <div class="container" style="text-align:center;max-width:640px;">
+        <div style="font-size:0.72rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;">Featured Programme</div>
+        <h2 style="font-family:var(--font-display);font-size:2rem;color:white;margin-bottom:16px;">Xi'an features in Roots</h2>
+        <p style="font-size:0.95rem;color:rgba(255,255,255,0.6);line-height:1.8;margin-bottom:32px;">3 nights in Xi'an as part of our 12-day History & Culture programme. Beijing &rarr; Xi'an &rarr; Shanghai. From &euro;3,190pp all-inclusive from Dublin.</p>
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+            <a href="roots.html" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:var(--accent);color:white;border-radius:6px;font-size:0.88rem;font-weight:600;transition:background 0.2s;">View Roots Programme <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h8M8 3l4 4-4 4"/></svg></a>
+            <a href="index.html#register" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border:1px solid rgba(255,255,255,0.25);color:white;border-radius:6px;font-size:0.88rem;font-weight:600;transition:border-color 0.2s;">Register Interest</a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo">China Quest</div>
+                <p>A structured educational journey across modern China. Designed for Irish and international schools by Miles Minds Limited, Ireland. Founded 2005.</p>
+            </div>
+            <div><h5>Programmes</h5><ul>
+                <li><a href="roots.html">Roots — History &amp; Culture</a></li>
+                <li><a href="pulse.html">Pulse — STEM &amp; Innovation</a></li>
+                <li><a href="horizon.html">Horizon — Nature &amp; Landscapes</a></li>
+                <li><a href="tailored.html">Custom Programmes</a></li>
+            </ul></div>
+            <div><h5>For Schools</h5><ul>
+                <li><a href="why.html">Why China Quest</a></li>
+                <li><a href="safety.html">Safety &amp; Support</a></li>
+                <li><a href="contact.html">Contact / TY Show</a></li>
+                <li><a href="#">Download Brochure</a></li>
+            </ul></div>
+            <div><h5>Contact</h5><ul>
+                <li><a href="mailto:info@milesminds.com">info@milesminds.com</a></li>
+                <li><a href="tel:+353873752491">+353 87 375 2491</a></li>
+                <li style="margin-top:16px;font-size:0.82rem;color:rgba(255,255,255,0.35);">Miles Minds Limited<br>Company No. 802673<br>Ireland</li>
+            </ul></div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 China Quest / Miles Minds Limited. All rights reserved.</span>
+            <div class="footer-legal"><a href="privacy.html">Privacy Notice</a><a href="#">Terms</a><a href="#">Cookie Policy</a></div>
+        </div>
+    </div>
+</footer>
+<script src="script.js" defer></script>
+
+</body>
+</html>
