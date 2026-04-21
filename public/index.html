@@ -20,7 +20,7 @@
             </div>
             <div class="nav-top-right">
                 <span>Ireland-based since 2005</span>
-                <a href="#">Download Brochure</a>
+                <a href="#">Download Brochure</a><a href="/login" style="color:#c4683c;font-weight:600;">Pioneer Portal →</a>
             </div>
         </div>
     </div>
@@ -30,7 +30,7 @@
                 China Quest
             </a>
             <ul class="nav-links">
-                <li><a href="#programmes">Programmes</a></li>
+                <li><a href="#programmes">Programmes</a></li><li><a href="/pioneer" class="nav-pioneer"><span class="nav-pulse"></span>Pioneer Programme</a></li>
                 <li><a href="why.html">Why Us</a></li>
                 <li><a href="safety.html">Safety</a></li>
                 <li><a href="contact.html" class="nav-cta">Get Info Pack</a></li>
@@ -41,7 +41,7 @@
         </div>
     </div>
     <div class="mobile-menu">
-        <a href="#programmes">Programmes</a>
+        <a href="#programmes">Programmes</a><a href="/pioneer" class="nav-pioneer"><span class="nav-pulse"></span>Pioneer Programme</a>
         <a href="why.html">Why China Quest</a>
         <a href="safety.html">Safety</a>
         <a href="contact.html" style="background:var(--accent);color:white;border-radius:6px;text-align:center;padding:12px;">Get Info Pack</a>
@@ -348,52 +348,44 @@
 </section>
 
 
-<!-- ===================== QUICK NAV (Performance Edition) ===================== -->
-<section id="quick-nav" class="qn-perf" style="padding:120px 0 110px;background:var(--ink);color:white;position:relative;overflow:hidden;">
-
-    <!-- One-shot "boost" flash fired on scroll-in -->
-    <div class="qn-boost" aria-hidden="true"></div>
-
-    <div class="container" style="position:relative;z-index:2;">
-        <div class="qn-header" style="text-align:center;margin-bottom:60px;">
-            <div class="qn-eyebrow" style="font-size:0.7rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:18px;">Explore &bull; 0–4 in 0.8s</div>
-            <h2 class="qn-title" style="font-family:var(--font-display);font-size:2.6rem;font-weight:400;color:white;margin:0;letter-spacing:-0.015em;line-height:1.05;">Pick your lane.</h2>
-            <div class="qn-rule" style="width:60px;height:2px;background:var(--accent);margin:22px auto 18px;"></div>
-            <p class="qn-sub" style="font-size:0.9rem;color:rgba(255,255,255,0.55);max-width:500px;margin:0 auto;letter-spacing:0.2px;">Four destinations. One click to accelerate.</p>
+<!-- ===================== QUICK NAV ===================== -->
+<section id="quick-nav" style="padding:96px 0;background:var(--ink);color:white;">
+    <div class="container">
+        <div style="text-align:center;margin-bottom:56px;">
+            <div style="font-size:0.7rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;">Explore</div>
+            <h2 style="font-family:var(--font-display);font-size:2.25rem;font-weight:400;color:white;margin:0 0 12px;letter-spacing:-0.01em;">Find your path</h2>
+            <div style="width:40px;height:1px;background:var(--accent);margin:18px auto 16px;opacity:0.7;"></div>
+            <p style="font-size:0.88rem;color:rgba(255,255,255,0.55);max-width:480px;margin:0 auto;font-style:italic;">Four doors into China Quest.</p>
         </div>
 
-        <div class="quick-nav-grid" style="display:grid;grid-template-columns:repeat(4,1fr);max-width:1080px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.12);border-bottom:1px solid rgba(255,255,255,0.12);">
+        <div class="quick-nav-grid" style="display:grid;grid-template-columns:repeat(4,1fr);max-width:1040px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.1);border-bottom:1px solid rgba(255,255,255,0.1);">
 
-            <a href="#programmes" class="qn-card" style="--i:0;">
-                <div class="qn-num" data-target="01">00</div>
-                <div class="qn-label">Destinations</div>
-                <div class="qn-desc">Three flagship programmes across China.</div>
-                <div class="qn-arrow">Enter &rarr;</div>
-                <span class="qn-underline"></span>
+            <a href="#programmes" class="qn-card" style="display:flex;flex-direction:column;padding:36px 28px;text-decoration:none;color:inherit;transition:background 0.3s ease;">
+                <div class="qn-number" style="font-family:var(--font-display);font-size:0.85rem;color:var(--accent);letter-spacing:1px;margin-bottom:28px;">01</div>
+                <div style="font-family:var(--font-display);font-size:1.25rem;font-weight:400;color:white;margin-bottom:10px;letter-spacing:-0.005em;">Destinations</div>
+                <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);line-height:1.55;">Our three flagship programmes across China.</div>
+                <div class="qn-arrow" style="margin-top:24px;font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);transition:color 0.3s ease;">View &rarr;</div>
             </a>
 
-            <a href="why.html" class="qn-card" style="--i:1;">
-                <div class="qn-num" data-target="02">00</div>
-                <div class="qn-label">About Us</div>
-                <div class="qn-desc">Our story, our team, and why this matters.</div>
-                <div class="qn-arrow">Read &rarr;</div>
-                <span class="qn-underline"></span>
+            <a href="why.html" class="qn-card" style="display:flex;flex-direction:column;padding:36px 28px;text-decoration:none;color:inherit;border-left:1px solid rgba(255,255,255,0.1);transition:background 0.3s ease;">
+                <div class="qn-number" style="font-family:var(--font-display);font-size:0.85rem;color:var(--accent);letter-spacing:1px;margin-bottom:28px;">02</div>
+                <div style="font-family:var(--font-display);font-size:1.25rem;font-weight:400;color:white;margin-bottom:10px;letter-spacing:-0.005em;">About Us</div>
+                <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);line-height:1.55;">Our story, our team, and why this matters.</div>
+                <div class="qn-arrow" style="margin-top:24px;font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);transition:color 0.3s ease;">Read &rarr;</div>
             </a>
 
-            <a href="safety.html" class="qn-card" style="--i:2;">
-                <div class="qn-num" data-target="03">00</div>
-                <div class="qn-label">Safety</div>
-                <div class="qn-desc">Garda-vetted leaders, insurance, 24/7 support.</div>
-                <div class="qn-arrow">Review &rarr;</div>
-                <span class="qn-underline"></span>
+            <a href="safety.html" class="qn-card" style="display:flex;flex-direction:column;padding:36px 28px;text-decoration:none;color:inherit;border-left:1px solid rgba(255,255,255,0.1);transition:background 0.3s ease;">
+                <div class="qn-number" style="font-family:var(--font-display);font-size:0.85rem;color:var(--accent);letter-spacing:1px;margin-bottom:28px;">03</div>
+                <div style="font-family:var(--font-display);font-size:1.25rem;font-weight:400;color:white;margin-bottom:10px;letter-spacing:-0.005em;">Safety</div>
+                <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);line-height:1.55;">Garda-vetted leaders, insurance, 24/7 support.</div>
+                <div class="qn-arrow" style="margin-top:24px;font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);transition:color 0.3s ease;">Review &rarr;</div>
             </a>
 
-            <a href="pioneer.html" class="qn-card" style="--i:3;">
-                <div class="qn-num" data-target="04">00</div>
-                <div class="qn-label">Pioneer Program</div>
-                <div class="qn-desc">Join the founding cohort. Limited places.</div>
-                <div class="qn-arrow">Learn more &rarr;</div>
-                <span class="qn-underline"></span>
+            <a href="pioneer.html" class="qn-card" style="display:flex;flex-direction:column;padding:36px 28px;text-decoration:none;color:inherit;border-left:1px solid rgba(255,255,255,0.1);transition:background 0.3s ease;">
+                <div class="qn-number" style="font-family:var(--font-display);font-size:0.85rem;color:var(--accent);letter-spacing:1px;margin-bottom:28px;">04</div>
+                <div style="font-family:var(--font-display);font-size:1.25rem;font-weight:400;color:white;margin-bottom:10px;letter-spacing:-0.005em;">Pioneer Program</div>
+                <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);line-height:1.55;">Join the founding cohort. Limited places.</div>
+                <div class="qn-arrow" style="margin-top:24px;font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);transition:color 0.3s ease;">Learn more &rarr;</div>
             </a>
 
         </div>
@@ -401,99 +393,10 @@
 </section>
 
 <style>
-/* =====================  PERFORMANCE EDITION  ===================== */
-.qn-perf { background: radial-gradient(ellipse at 50% 50%, #152232 0%, #0f1923 60%, #0a1119 100%); }
-
-/* --- Boost flash (one-shot on reveal) --- */
-.qn-boost {
-    position: absolute; inset: 0;
-    background: linear-gradient(90deg, transparent 0%, rgba(196,104,60,0.18) 45%, rgba(196,104,60,0.35) 50%, rgba(196,104,60,0.18) 55%, transparent 100%);
-    transform: translateX(-110%);
-    pointer-events: none;
-    z-index: 1;
-}
-.qn-perf.is-armed .qn-boost { animation: qn-boost 1.1s cubic-bezier(0.19, 1, 0.22, 1) forwards; }
-@keyframes qn-boost {
-    to { transform: translateX(110%); }
-}
-
-/* --- Header reveal --- */
-.qn-eyebrow, .qn-title, .qn-rule, .qn-sub {
-    opacity: 0;
-    transform: translateY(14px);
-    transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
-}
-.qn-rule { transform: scaleX(0); transform-origin: center; transition: transform 0.55s cubic-bezier(0.19,1,0.22,1) 0.45s, opacity 0.4s ease 0.45s; }
-.qn-perf.is-armed .qn-eyebrow { opacity: 1; transform: translateY(0); transition-delay: 0.05s; }
-.qn-perf.is-armed .qn-title   { opacity: 1; transform: translateY(0); transition-delay: 0.18s; }
-.qn-perf.is-armed .qn-rule    { opacity: 0.9; transform: scaleX(1); }
-.qn-perf.is-armed .qn-sub     { opacity: 1; transform: translateY(0); transition-delay: 0.55s; }
-
-/* --- Cards --- */
-.qn-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    padding: 40px 30px 38px;
-    text-decoration: none;
-    color: inherit;
-    border-left: 1px solid rgba(255,255,255,0.1);
-    overflow: hidden;
-    opacity: 0;
-    transform: translateX(60px);
-    transition: transform 0.85s cubic-bezier(0.19, 1, 0.22, 1),
-                opacity 0.6s ease-out,
-                background 0.35s ease;
-    transition-delay: calc(var(--i) * 90ms + 0.25s);
-}
-.qn-card:first-child { border-left: none; }
-.qn-perf.is-armed .qn-card { opacity: 1; transform: translateX(0); }
-
-.qn-num {
-    font-family: var(--font-display);
-    font-size: 0.9rem;
-    letter-spacing: 1.5px;
-    color: var(--accent);
-    margin-bottom: 30px;
-    font-variant-numeric: tabular-nums;
-    filter: blur(0);
-    transition: filter 0.3s ease, color 0.3s ease;
-}
-.qn-perf.is-armed .qn-num {
-    animation: qn-tick 0.7s steps(1) forwards;
-    animation-delay: calc(var(--i) * 90ms + 0.5s);
-}
-@keyframes qn-tick {
-    0%   { filter: blur(2px); opacity: 0.3; }
-    60%  { filter: blur(1px); opacity: 0.7; }
-    100% { filter: blur(0); opacity: 1; }
-}
-
-.qn-label {
-    font-family: var(--font-display);
-    font-size: 1.3rem;
-    font-weight: 400;
-    color: white;
-    margin-bottom: 10px;
-    letter-spacing: -0.005em;
-}
-.qn-desc {
-    font-size: 0.78rem;
-    color: rgba(255,255,255,0.48);
-    line-height: 1.6;
-}
-.qn-arrow {
-    margin-top: auto;
-    padding-top: 28px;
-    font-size: 0.7rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
-    transition: color 0.3s ease, transform 0.3s ease, letter-spacing 0.3s ease;
-}
-
-/* Underline that swipes in on reveal */
-.qn-underline {
+/* ===== Quick-nav spotlight: auto-cycles across 4 cards ===== */
+.qn-card { position: relative; overflow: hidden; }
+.qn-card::after {
+    content: "";
     position: absolute;
     left: 0; bottom: 0;
     height: 2px;
@@ -501,122 +404,88 @@
     background: var(--accent);
     transform: scaleX(0);
     transform-origin: left center;
-    transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    animation: qn-line 8s linear infinite;
 }
-.qn-perf.is-armed .qn-underline {
-    transition-delay: calc(var(--i) * 90ms + 0.4s);
+.qn-card .qn-arrow {
+    display: inline-block;
+    animation: qn-arrow-sweep 8s linear infinite;
+}
+.qn-card .qn-number {
+    animation: qn-number-sweep 8s linear infinite;
+}
+.qn-card {
+    animation: qn-bg 8s linear infinite;
+}
+
+/* Stagger: each card runs the same 8s cycle, 2s apart → continuous sweep */
+.qn-card:nth-child(1), .qn-card:nth-child(1)::after,
+.qn-card:nth-child(1) .qn-arrow, .qn-card:nth-child(1) .qn-number { animation-delay: 0s; }
+.qn-card:nth-child(2), .qn-card:nth-child(2)::after,
+.qn-card:nth-child(2) .qn-arrow, .qn-card:nth-child(2) .qn-number { animation-delay: -6s; }
+.qn-card:nth-child(3), .qn-card:nth-child(3)::after,
+.qn-card:nth-child(3) .qn-arrow, .qn-card:nth-child(3) .qn-number { animation-delay: -4s; }
+.qn-card:nth-child(4), .qn-card:nth-child(4)::after,
+.qn-card:nth-child(4) .qn-arrow, .qn-card:nth-child(4) .qn-number { animation-delay: -2s; }
+
+/* Hover pauses the cycle and locks the hovered card in its "active" look */
+.quick-nav-grid:hover .qn-card,
+.quick-nav-grid:hover .qn-card::after,
+.quick-nav-grid:hover .qn-arrow,
+.quick-nav-grid:hover .qn-number {
+    animation-play-state: paused;
+}
+.qn-card:hover {
+    background: rgba(255,255,255,0.05) !important;
+    animation: none;
+}
+.qn-card:hover::after {
+    animation: none;
     transform: scaleX(1);
-    transform-origin: left center;
-    animation: qn-settle 1.6s cubic-bezier(0.19,1,0.22,1) forwards;
-    animation-delay: calc(var(--i) * 90ms + 1.0s);
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
 }
-@keyframes qn-settle {
-    to { transform: scaleX(0); transform-origin: right center; }
+.qn-card:hover .qn-arrow {
+    animation: none;
+    color: var(--accent);
+    transform: translateX(6px);
+    transition: color 0.35s ease, transform 0.35s ease;
+}
+.qn-card:hover .qn-number {
+    animation: none;
+    color: white;
+    letter-spacing: 2px;
+    transition: color 0.35s ease, letter-spacing 0.35s ease;
 }
 
-/* =====  CRUISING: spotlight cycle kicks in after entrance  ===== */
-.qn-perf.is-cruising .qn-card      { animation: qn-cruise-bg 8s linear infinite; }
-.qn-perf.is-cruising .qn-underline { animation: qn-cruise-line 8s linear infinite; }
-.qn-perf.is-cruising .qn-arrow     { animation: qn-cruise-arrow 8s linear infinite; }
-.qn-perf.is-cruising .qn-num       { animation: qn-cruise-num 8s linear infinite; }
-
-/* Stagger: 4 cards, 2s apart (negative delays pre-offset the cycle) */
-.qn-perf.is-cruising .qn-card:nth-child(1),
-.qn-perf.is-cruising .qn-card:nth-child(1) .qn-underline,
-.qn-perf.is-cruising .qn-card:nth-child(1) .qn-num,
-.qn-perf.is-cruising .qn-card:nth-child(1) .qn-arrow { animation-delay: 0s; }
-.qn-perf.is-cruising .qn-card:nth-child(2),
-.qn-perf.is-cruising .qn-card:nth-child(2) .qn-underline,
-.qn-perf.is-cruising .qn-card:nth-child(2) .qn-num,
-.qn-perf.is-cruising .qn-card:nth-child(2) .qn-arrow { animation-delay: -6s; }
-.qn-perf.is-cruising .qn-card:nth-child(3),
-.qn-perf.is-cruising .qn-card:nth-child(3) .qn-underline,
-.qn-perf.is-cruising .qn-card:nth-child(3) .qn-num,
-.qn-perf.is-cruising .qn-card:nth-child(3) .qn-arrow { animation-delay: -4s; }
-.qn-perf.is-cruising .qn-card:nth-child(4),
-.qn-perf.is-cruising .qn-card:nth-child(4) .qn-underline,
-.qn-perf.is-cruising .qn-card:nth-child(4) .qn-num,
-.qn-perf.is-cruising .qn-card:nth-child(4) .qn-arrow { animation-delay: -2s; }
-
-@keyframes qn-cruise-line {
-    0%        { transform: scaleX(0); transform-origin: left; }
-    12%       { transform: scaleX(1); transform-origin: left; }
-    13%       { transform: scaleX(1); transform-origin: right; }
-    25%       { transform: scaleX(0); transform-origin: right; }
+/* === Keyframes === Active window: 0%–25% of the 8s loop (2s) */
+@keyframes qn-line {
+    0%   { transform: scaleX(0); transform-origin: left; }
+    12%  { transform: scaleX(1); transform-origin: left; }
+    13%  { transform: scaleX(1); transform-origin: right; }
+    25%  { transform: scaleX(0); transform-origin: right; }
     26%, 100% { transform: scaleX(0); transform-origin: left; }
 }
-@keyframes qn-cruise-bg {
+@keyframes qn-bg {
     0%, 25%, 100% { background: transparent; }
-    8%, 18%       { background: rgba(255,255,255,0.04); }
+    8%, 18% { background: rgba(255,255,255,0.04); }
 }
-@keyframes qn-cruise-arrow {
-    0%, 25%, 100% { color: rgba(255,255,255,0.4); transform: translateX(0); letter-spacing: 2px; }
-    10%, 18%      { color: var(--accent); transform: translateX(6px); letter-spacing: 2.5px; }
+@keyframes qn-arrow-sweep {
+    0%, 25%, 100% { color: rgba(255,255,255,0.35); transform: translateX(0); }
+    10%, 18% { color: var(--accent); transform: translateX(6px); }
 }
-@keyframes qn-cruise-num {
-    0%, 25%, 100% { color: var(--accent); letter-spacing: 1.5px; }
-    10%, 18%      { color: white; letter-spacing: 3px; }
-}
-
-/* Hover — post-reveal "pick your lane" feel (overrides cruising) */
-.qn-card:hover              { background: rgba(255,255,255,0.05); animation: none !important; }
-.qn-card:hover .qn-arrow    { color: var(--accent); transform: translateX(8px); letter-spacing: 3px; animation: none !important; }
-.qn-card:hover .qn-num      { color: white; letter-spacing: 3px; animation: none !important; }
-.qn-card:hover .qn-underline {
-    animation: none !important;
-    transform: scaleX(1);
-    transform-origin: left center;
-    transition-delay: 0s;
+@keyframes qn-number-sweep {
+    0%, 25%, 100% { color: var(--accent); letter-spacing: 1px; }
+    10%, 18% { color: white; letter-spacing: 2.5px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .qn-boost { display: none; }
-    .qn-eyebrow, .qn-title, .qn-rule, .qn-sub, .qn-card, .qn-num, .qn-underline {
-        opacity: 1 !important; transform: none !important; animation: none !important;
-    }
+    .qn-card, .qn-card::after, .qn-arrow, .qn-number { animation: none !important; }
 }
 @media (max-width: 768px) {
     .quick-nav-grid { grid-template-columns: repeat(2, 1fr) !important; }
-    .qn-card { border-left: none !important; }
-    .qn-card:nth-child(even) { border-left: 1px solid rgba(255,255,255,0.1) !important; }
-    .qn-card:nth-child(n+3) { border-top: 1px solid rgba(255,255,255,0.1); }
+    .quick-nav-grid a:nth-child(2n+1) { border-left: none !important; }
+    .quick-nav-grid a:nth-child(n+3) { border-top: 1px solid rgba(255,255,255,0.1); }
 }
 </style>
-
-<script>
-(function () {
-    var section = document.getElementById('quick-nav');
-    if (!section) return;
-    var armed = false;
-    var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-            if (!e.isIntersecting || armed) return;
-            armed = true;
-            section.classList.add('is-armed');
-            // Tick numbers up quickly
-            section.querySelectorAll('.qn-num').forEach(function (el, i) {
-                var target = parseInt(el.getAttribute('data-target'), 10) || 0;
-                var dur = 550;
-                var delay = 500 + i * 90;
-                setTimeout(function () {
-                    var startTs = performance.now();
-                    function step(now) {
-                        var t = Math.min(1, (now - startTs) / dur);
-                        var eased = 1 - Math.pow(1 - t, 3);
-                        var v = Math.round(eased * target);
-                        el.textContent = v.toString().padStart(2, '0');
-                        if (t < 1) requestAnimationFrame(step);
-                    }
-                    requestAnimationFrame(step);
-                }, delay);
-            });
-            // Hand off to the continuous spotlight cycle after entrance settles
-            setTimeout(function () { section.classList.add('is-cruising'); }, 2900);
-        });
-    }, { threshold: 0.35 });
-    io.observe(section);
-})();
-</script>
 
 
 <!-- ===================== FOOTER ===================== -->
@@ -642,7 +511,7 @@
                     <li><a href="why.html">Why China Quest</a></li>
                     <li><a href="safety.html">Safety &amp; Support</a></li>
                     <li><a href="contact.html">Contact / TY Show</a></li>
-                    <li><a href="#">Download Brochure</a></li>
+                    <li><a href="/login">Pioneer Portal</a></li><li><a href="#">Download Brochure</a></li>
                 </ul>
             </div>
             <div>

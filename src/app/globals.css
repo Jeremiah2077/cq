@@ -1,0 +1,177 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #0f1923;
+  --ink-light: #1e2d3d;
+  --primary: #1b3a5c;
+  --primary-light: #2a5580;
+  --primary-subtle: #e9eff5;
+  --accent: #c4683c;
+  --accent-hover: #a8562f;
+  --gold-light: #faf0e8;
+
+  --bg: #fafaf8;
+  --white: #ffffff;
+  --gray-50: #f8f7f5;
+  --gray-100: #f0eeeb;
+  --gray-200: #e2dfda;
+  --gray-300: #c8c4bd;
+  --gray-400: #9e9a93;
+  --gray-500: #6b6760;
+  --gray-600: #4a4640;
+  --gray-700: #2d2a26;
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  --background: var(--bg);
+  --foreground: var(--gray-700);
+}
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--gray-700);
+  --color-ink: var(--ink);
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-primary-subtle: var(--primary-subtle);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-gold-light: var(--gold-light);
+  --color-gray-100: var(--gray-100);
+  --color-gray-200: var(--gray-200);
+  --color-gray-300: var(--gray-300);
+  --color-gray-400: var(--gray-400);
+  --color-gray-500: var(--gray-500);
+  --color-gray-600: var(--gray-600);
+  --color-gray-700: var(--gray-700);
+  --font-body: var(--font-body);
+  --font-display: var(--font-display);
+  --font-cn: var(--font-cn);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body), -apple-system, "PingFang SC",
+    "Noto Serif SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--gray-700);
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.font-display {
+  font-family: var(--font-display), "DM Serif Display", Georgia, serif;
+}
+
+.font-cn {
+  font-family: var(--font-cn), "Noto Serif SC", "PingFang SC",
+    "Microsoft YaHei", serif;
+}
+
+/* Section label — matches the real site's eyebrow style */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 32px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--accent),
+    var(--accent) 60%,
+    transparent
+  );
+  border-radius: 1px;
+}
+
+.eyebrow-accent {
+  color: var(--accent);
+}
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: white;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 14px 28px;
+  border-radius: var(--radius-sm);
+  transition: background 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+  border: 0;
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--gray-300);
+  color: var(--gray-700);
+  background: white;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  transition: border-color 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+}
+.btn-outline:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Input */
+.field-input {
+  width: 100%;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  color: var(--gray-700);
+  font-family: var(--font-body);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.field-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(27, 58, 92, 0.1);
+}
+
+.field-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  margin-bottom: 6px;
+}

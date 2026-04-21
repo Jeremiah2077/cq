@@ -2876,3 +2876,150 @@ details.day-item[open] summary::before {
         font-size: 0.88rem;
     }
 }
+
+/* ========================================
+   PIONEER NAV — rainbow shimmer flagship
+   (only .nav-pioneer gets motion)
+   ======================================== */
+.nav-pioneer {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 9px;
+    font-weight: 700 !important;
+    letter-spacing: 0.3px;
+    position: relative;
+    padding: 2px 2px;
+    /* warm silk gradient — deep red → terracotta → gold → back
+       (on-brand with the rest of the site, no blue/purple) */
+    background: linear-gradient(
+        90deg,
+        #a8562f 0%,
+        #c4683c 18%,
+        #d4af37 35%,
+        #e8b659 50%,
+        #d4af37 65%,
+        #c4683c 82%,
+        #a8562f 100%
+    );
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
+            color: transparent !important;
+    animation: nav-pioneer-rainbow 5s linear infinite;
+    transition: transform 0.25s ease;
+}
+.nav-pioneer:hover { transform: translateY(-1px); }
+
+/* warm glow sweep underneath the text (right → left) */
+.nav-pioneer::before {
+    content: '';
+    position: absolute;
+    inset: -4px -6px;
+    border-radius: 8px;
+    background: linear-gradient(
+        90deg,
+        rgba(196,104,60,0)    0%,
+        rgba(212,175,55,0.12) 30%,
+        rgba(232,182,89,0.18) 50%,
+        rgba(212,175,55,0.12) 70%,
+        rgba(196,104,60,0)  100%
+    );
+    background-size: 200% 100%;
+    animation: nav-pioneer-sweep 3.6s linear infinite;
+    z-index: -1;
+    opacity: 0.75;
+    pointer-events: none;
+}
+
+/* animated rainbow underline (always visible, brighter on hover) */
+.nav-pioneer::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -7px;
+    height: 2px;
+    border-radius: 1px;
+    background: linear-gradient(
+        90deg,
+        #a8562f,
+        #c4683c,
+        #d4af37,
+        #e8b659,
+        #d4af37,
+        #c4683c,
+        #a8562f
+    );
+    background-size: 300% 100%;
+    animation: nav-pioneer-rainbow 5s linear infinite;
+    opacity: 0.55;
+    transform: scaleX(0.6);
+    transform-origin: right center;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+}
+.nav-pioneer:hover::after { transform: scaleX(1); opacity: 1; }
+
+/* right → left flow */
+@keyframes nav-pioneer-rainbow {
+    0%   { background-position: 300% 50%; }
+    100% { background-position: 0%   50%; }
+}
+@keyframes nav-pioneer-sweep {
+    0%   { background-position: -200% 0; }
+    100% { background-position:  200% 0; }
+}
+
+/* pulsing dot, hue-shifted so it harmonises with the rainbow */
+.nav-pioneer .nav-pulse {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #c4683c;
+    box-shadow: 0 0 0 0 rgba(196, 104, 60, 0.55);
+    animation: nav-pulse-dot 1.8s ease-out infinite,
+               nav-pulse-hue 5s linear infinite;
+    flex-shrink: 0;
+}
+.nav-pioneer .nav-pulse::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1px solid currentColor;
+    color: #c4683c;
+    opacity: 0.55;
+    animation: nav-pulse-ring 1.8s ease-out infinite,
+               nav-pulse-hue 5s linear infinite;
+}
+@keyframes nav-pulse-dot {
+    0%   { box-shadow: 0 0 0 0 rgba(196, 104, 60, 0.55); }
+    70%  { box-shadow: 0 0 0 12px rgba(196, 104, 60, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(196, 104, 60, 0); }
+}
+@keyframes nav-pulse-ring {
+    0%   { transform: scale(0.6); opacity: 0.8; }
+    70%  { transform: scale(2.4); opacity: 0; }
+    100% { transform: scale(2.4); opacity: 0; }
+}
+@keyframes nav-pulse-hue {
+    0%   { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+/* Mobile menu variant — same shimmer, simpler layout */
+.mobile-menu .nav-pioneer {
+    padding-left: 0;
+}
+.mobile-menu .nav-pioneer::after { display: none; }
+.mobile-menu .nav-pioneer::before { inset: -2px -4px; }
+
+@media (prefers-reduced-motion: reduce) {
+    .nav-pioneer,
+    .nav-pioneer::before,
+    .nav-pioneer::after,
+    .nav-pioneer .nav-pulse,
+    .nav-pioneer .nav-pulse::before { animation: none; }
+    .nav-pioneer { background-position: 0% 50%; }
+}
