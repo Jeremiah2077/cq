@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shanghai — China Quest</title>
+    <meta name="description" content="Explore Shanghai with China Quest — The Bund, Pudong skyline, EV revolution, Maglev train, school exchange, French Concession. Designed for school groups.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .dest-intro { max-width: 720px; }
+        .dest-intro p { font-size: 0.95rem; color: var(--gray-600); line-height: 1.85; margin-bottom: 16px; }
+        .highlight-card {
+            background: var(--white);
+            border: 1px solid var(--gray-100);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+        }
+        .highlight-card-img { overflow: hidden; }
+        .highlight-card-img img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .highlight-card:hover .highlight-card-img img { transform: scale(1.05); }
+        .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .info-card {
+            padding: 28px 24px;
+            background: var(--white);
+            border: 1px solid var(--gray-100);
+            border-radius: var(--radius-md);
+        }
+        .info-card h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .info-card p {
+            font-size: 0.88rem;
+            color: var(--gray-500);
+            line-height: 1.7;
+        }
+        @media (max-width: 768px) {
+            .info-grid { grid-template-columns: 1fr; }
+            .highlight-card[style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+            }
+            .highlight-card[style*="grid-template-columns"] > div:last-child {
+                padding: 28px 24px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===================== NAVIGATION ===================== -->
+<nav class="nav" id="nav">
+    <div class="nav-top"><div class="container"><div class="nav-top-left"><a href="mailto:info@milesminds.com">info@milesminds.com</a><a href="tel:+353873752491">+353 87 375 2491</a></div><div class="nav-top-right"><span>Ireland-based since 2005</span><a href="#">Download Brochure</a><a href="/login" style="color:#c4683c;font-weight:600;">Pioneer Portal →</a></div></div></div>
+    <div class="nav-main"><div class="container">
+        <a href="index.html" class="logo">China Quest</a>
+        <ul class="nav-links">
+            <li><a href="index.html#programmes">Programmes</a></li><li><a href="/pioneer" class="nav-pioneer"><span class="nav-pulse"></span>Pioneer Programme</a></li>
+            <li class="nav-dropdown">
+                <a href="#" class="nav-dropdown-trigger">Destinations <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-left:4px;vertical-align:middle;"><path d="M1 1l4 4 4-4"/></svg></a>
+                <div class="nav-dropdown-menu">
+                    <a href="beijing.html">Beijing</a>
+                    <a href="shanghai.html">Shanghai</a>
+                    <a href="xian.html">Xi'an</a>
+                </div>
+            </li>
+            <li><a href="why.html">Why Us</a></li>
+            <li><a href="safety.html">Safety</a></li>
+            <li><a href="contact.html" class="nav-cta">Get Info Pack</a></li>
+        </ul>
+        <button class="mobile-menu-btn" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+    </div></div>
+    <div class="mobile-menu">
+        <a href="index.html#programmes">Programmes</a>
+        <a href="/pioneer" class="nav-pioneer"><span class="nav-pulse"></span>Pioneer Programme</a>
+        <div class="mobile-dropdown">
+            <a href="#" onclick="event.preventDefault();this.parentElement.classList.toggle('open');">Destinations <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-left:4px;vertical-align:middle;"><path d="M1 1l4 4 4-4"/></svg></a>
+            <div class="mobile-dropdown-menu">
+                <a href="beijing.html">Beijing</a>
+                <a href="shanghai.html">Shanghai</a>
+                <a href="xian.html">Xi'an</a>
+            </div>
+        </div>
+        <a href="why.html">Why China Quest</a>
+        <a href="safety.html">Safety</a>
+        <a href="contact.html" style="background:var(--accent);color:white;border-radius:6px;text-align:center;padding:12px;">Get Info Pack</a>
+    </div>
+</nav>
+
+
+<!-- ===================== PAGE HERO ===================== -->
+<section class="page-hero" style="background-image:url('images/shanghai.jpg');">
+    <div class="page-hero-overlay"></div>
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="breadcrumb-sep">/</span>
+            <a href="#">Destinations</a>
+            <span class="breadcrumb-sep">/</span>
+            <span>Shanghai</span>
+        </nav>
+        <h1 class="page-hero-title">Shanghai</h1>
+        <p style="font-size:1.05rem;color:rgba(255,255,255,0.75);max-width:520px;margin-top:12px;line-height:1.7;">China's global megacity. Where colonial history meets the world's fastest train.</p>
+    </div>
+</section>
+
+
+<!-- ===================== INTRO ===================== -->
+<section style="padding:72px 0;background:var(--white);">
+    <div class="container">
+        <div class="dest-intro">
+            <div style="font-size:0.72rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;">About Shanghai</div>
+            <h2 style="font-family:var(--font-display);font-size:2rem;color:var(--ink);margin-bottom:20px;">150 years of transformation in a single skyline</h2>
+            <p>Stand on the Bund and you see two centuries at once: European colonial banks on one side, the Pudong ultra-modern skyline on the other. No city on earth compresses this much history into a single view.</p>
+            <p>Shanghai is where China meets the world. It's the country's commercial engine, its fashion capital, and the testing ground for everything from cashless payments to autonomous vehicles. For students on the Pulse programme, it's a live case study in how technology reshapes a society. For Roots students, it's the final chapter — a chance to compare imperial Beijing, Silk Road Xi'an, and global Shanghai.</p>
+            <p>It's fast, polished, and relentlessly modern — but duck into the French Concession or a longtang alleyway and you'll find the old Shanghai still breathing.</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===================== TOP ATTRACTIONS ===================== -->
+<section style="padding:72px 0;background:var(--gray-50);border-top:1px solid var(--gray-100);">
+    <div class="container">
+        <div style="margin-bottom:40px;">
+            <div style="font-size:0.72rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;">What You'll Experience</div>
+            <h2 style="font-family:var(--font-display);font-size:2rem;color:var(--ink);">Top Attractions</h2>
+        </div>
+
+        <!-- The Bund -->
+        <div class="highlight-card" style="display:grid;grid-template-columns:1fr 1fr;margin-bottom:32px;">
+            <div class="highlight-card-img" style="aspect-ratio:auto;min-height:400px;">
+                <img src="images/shanghai/bund.jpg" alt="The Bund and Pudong Skyline" style="height:100%;">
+            </div>
+            <div style="padding:48px 40px;display:flex;flex-direction:column;justify-content:center;">
+                <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--ink);margin-bottom:14px;">The Bund & Pudong Skyline</h3>
+                <p style="font-size:0.95rem;color:var(--gray-500);line-height:1.8;margin-bottom:20px;">Colonial-era European architecture facing the ultra-modern Pudong skyline — a single vantage point spanning 150 years of China's transformation. The evening LED light show across the river is urban spectacle at its finest.</p>
+                <div style="font-size:0.78rem;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;">Featured in Roots & Pulse Programmes</div>
+            </div>
+        </div>
+
+        <!-- EV Revolution -->
+        <div class="highlight-card" style="display:grid;grid-template-columns:1fr 1fr;margin-bottom:32px;">
+            <div class="highlight-card-img" style="aspect-ratio:auto;min-height:400px;">
+                <img src="images/shanghai/ev.jpg" alt="EV Revolution" style="height:100%;">
+            </div>
+            <div style="padding:48px 40px;display:flex;flex-direction:column;justify-content:center;">
+                <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--ink);margin-bottom:14px;">EV Revolution</h3>
+                <p style="font-size:0.95rem;color:var(--gray-500);line-height:1.8;margin-bottom:20px;">Tesla, NIO, and BYD showroom tours and the Auto Museum. Compare China's EV industry with global competitors, explore supply chain economics, and see why Shanghai is the epicentre of the electric vehicle revolution.</p>
+                <div style="font-size:0.78rem;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;">Featured in Pulse Programme</div>
+            </div>
+        </div>
+
+        <!-- Maglev -->
+        <div class="highlight-card" style="display:grid;grid-template-columns:1fr 1fr;margin-bottom:32px;">
+            <div class="highlight-card-img" style="aspect-ratio:auto;min-height:400px;">
+                <img src="images/shanghai/maglev.jpg" alt="Maglev Train" style="height:100%;">
+            </div>
+            <div style="padding:48px 40px;display:flex;flex-direction:column;justify-content:center;">
+                <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--ink);margin-bottom:14px;">Maglev Train — 430 km/h</h3>
+                <p style="font-size:0.95rem;color:var(--gray-500);line-height:1.8;margin-bottom:20px;">A physics lesson at speed. Electromagnetic propulsion, Lenz's Law, and China's transit infrastructure — experienced at 430 km/h on the world's fastest commercial train. Airport to city in 7 minutes.</p>
+                <div style="font-size:0.78rem;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;">Featured in Pulse Programme</div>
+            </div>
+        </div>
+
+        <!-- School Exchange -->
+        <div class="highlight-card" style="display:grid;grid-template-columns:1fr 1fr;margin-bottom:32px;">
+            <div class="highlight-card-img" style="aspect-ratio:auto;min-height:400px;">
+                <img src="images/shanghai/school-exchange.jpg" alt="School Exchange" style="height:100%;">
+            </div>
+            <div style="padding:48px 40px;display:flex;flex-direction:column;justify-content:center;">
+                <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--ink);margin-bottom:14px;">School Exchange</h3>
+                <p style="font-size:0.95rem;color:var(--gray-500);line-height:1.8;margin-bottom:20px;">A structured exchange with a Shanghai secondary school. Peer dialogue on education systems, technology habits, career aspirations, and daily life. Often cited by students as the most memorable day of the entire trip.</p>
+                <div style="font-size:0.78rem;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;">Featured in Roots & Pulse Programmes</div>
+            </div>
+        </div>
+
+        <!-- Yu Garden -->
+        <div class="highlight-card" style="display:grid;grid-template-columns:1fr 1fr;margin-bottom:32px;">
+            <div class="highlight-card-img" style="aspect-ratio:auto;min-height:400px;">
+                <img src="images/shanghai/yu-garden.jpg" alt="Yu Garden" style="height:100%;">
+            </div>
+            <div style="padding:48px 40px;display:flex;flex-direction:column;justify-content:center;">
+                <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--ink);margin-bottom:14px;">Yu Garden & Old Town</h3>
+                <p style="font-size:0.95rem;color:var(--gray-500);line-height:1.8;margin-bottom:20px;">A classical Chinese garden from the Ming dynasty, tucked inside Shanghai's oldest neighbourhood. Rockeries, pavilions, and koi ponds surrounded by the Old Town bazaar — a pocket of calm in the middle of a megacity.</p>
+                <div style="font-size:0.78rem;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;">Featured in Roots Programme</div>
+            </div>
+        </div>
+
+        <!-- French Concession -->
+        <div class="highlight-card" style="display:grid;grid-template-columns:1fr 1fr;">
+            <div class="highlight-card-img" style="aspect-ratio:auto;min-height:400px;">
+                <img src="images/shanghai/french-concession.jpg" alt="French Concession" style="height:100%;">
+            </div>
+            <div style="padding:48px 40px;display:flex;flex-direction:column;justify-content:center;">
+                <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--ink);margin-bottom:14px;">French Concession</h3>
+                <p style="font-size:0.95rem;color:var(--gray-500);line-height:1.8;margin-bottom:20px;">A walking tour through Shanghai's colonial legacy. Tree-lined boulevards, art deco architecture, and the creative quarter where independent cafes and galleries occupy century-old lane houses.</p>
+                <div style="font-size:0.78rem;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;">Featured in Roots Programme</div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ===================== PRACTICAL INFO ===================== -->
+<section style="padding:72px 0;background:var(--white);">
+    <div class="container">
+        <div style="margin-bottom:40px;">
+            <div style="font-size:0.72rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;">Plan Your Visit</div>
+            <h2 style="font-family:var(--font-display);font-size:2rem;color:var(--ink);">Good to Know</h2>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>Best Time to Visit</h4>
+                <p>Autumn (October–November) is perfect — crisp skies and comfortable temperatures. Spring is also good. Summers are hot and humid; winters are mild but grey.</p>
+            </div>
+            <div class="info-card">
+                <h4>Getting Around</h4>
+                <p>Shanghai has one of the world's largest metro networks. For school groups, we arrange private coaches. The Maglev connects the airport to the city in 7 minutes.</p>
+            </div>
+            <div class="info-card">
+                <h4>The Cashless City</h4>
+                <p>Shanghai runs almost entirely on mobile payments. Students experience a cashless society firsthand — a live lesson in fintech and digital economics.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===================== FEATURED PROGRAMMES ===================== -->
+<section style="padding:72px 0;background:var(--ink);color:white;">
+    <div class="container" style="text-align:center;max-width:640px;">
+        <div style="font-size:0.72rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;">Featured Programmes</div>
+        <h2 style="font-family:var(--font-display);font-size:2rem;color:white;margin-bottom:16px;">Shanghai features in two programmes</h2>
+        <p style="font-size:0.95rem;color:rgba(255,255,255,0.6);line-height:1.8;margin-bottom:32px;"><strong style="color:rgba(255,255,255,0.85);">Roots</strong> — 2 nights in Shanghai. History & Culture. Beijing &rarr; Xi'an &rarr; Shanghai. From &euro;3,190pp.<br><strong style="color:rgba(255,255,255,0.85);">Pulse</strong> — 4 nights in Shanghai. STEM & Innovation. Shanghai &rarr; Hangzhou &rarr; Shenzhen. From &euro;3,390pp.</p>
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+            <a href="roots.html" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:var(--accent);color:white;border-radius:6px;font-size:0.88rem;font-weight:600;transition:background 0.2s;">View Roots <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h8M8 3l4 4-4 4"/></svg></a>
+            <a href="pulse.html" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:var(--accent);color:white;border-radius:6px;font-size:0.88rem;font-weight:600;transition:background 0.2s;">View Pulse <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h8M8 3l4 4-4 4"/></svg></a>
+            <a href="index.html#register" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border:1px solid rgba(255,255,255,0.25);color:white;border-radius:6px;font-size:0.88rem;font-weight:600;transition:border-color 0.2s;">Register Interest</a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo">China Quest</div>
+                <p>A structured educational journey across modern China. Designed for Irish and international schools by Miles Minds Limited, Ireland. Founded 2005.</p>
+            </div>
+            <div><h5>Programmes</h5><ul>
+                <li><a href="roots.html">Roots — History &amp; Culture</a></li>
+                <li><a href="pulse.html">Pulse — STEM &amp; Innovation</a></li>
+                <li><a href="horizon.html">Horizon — Nature &amp; Landscapes</a></li>
+                <li><a href="tailored.html">Custom Programmes</a></li>
+            </ul></div>
+            <div><h5>For Schools</h5><ul>
+                <li><a href="why.html">Why China Quest</a></li>
+                <li><a href="safety.html">Safety &amp; Support</a></li>
+                <li><a href="contact.html">Contact / TY Show</a></li>
+                <li><a href="/login">Pioneer Portal</a></li><li><a href="#">Download Brochure</a></li>
+            </ul></div>
+            <div><h5>Contact</h5><ul>
+                <li><a href="mailto:info@milesminds.com">info@milesminds.com</a></li>
+                <li><a href="tel:+353873752491">+353 87 375 2491</a></li>
+                <li style="margin-top:16px;font-size:0.82rem;color:rgba(255,255,255,0.35);">Miles Minds Limited<br>Company No. 802673<br>Ireland</li>
+            </ul></div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 China Quest / Miles Minds Limited. All rights reserved.</span>
+            <div class="footer-legal"><a href="privacy.html">Privacy Notice</a><a href="#">Terms</a><a href="#">Cookie Policy</a></div>
+        </div>
+    </div>
+</footer>
+<script src="script.js" defer></script>
+
+</body>
+</html>

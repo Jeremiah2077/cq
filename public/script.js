@@ -165,3 +165,75 @@ if (heroStats) {
     }, { threshold: 0.5 });
     statsObserver.observe(heroStats);
 }
+
+
+// ---- Interest form: role-based field toggling + Tally submission ----
+const interestForm = document.getElementById('interestForm');
+if (interestForm) {
+    const formFields = document.getElementById('formFields');
+    const schoolField = document.getElementById('schoolField');
+    const parentConsent = document.getElementById('parentConsent');
+    const guardianCheckbox = interestForm.querySelector('[name="consent_guardian"]');
+    const radios = interestForm.querySelectorAll('[name="role"]');
+
+    radios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            formFields.style.display = 'block';
+            const role = radio.value;
+            schoolField.style.display = role === 'teacher' ? 'block' : 'none';
+            const isParent = role === 'parent';
+            parentConsent.style.display = isParent ? 'block' : 'none';
+            guardianCheckbox.required = isParent;
+        });
+    });
+
+    interestForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const email = interestForm.querySelector('[name="email"]');
+        const consentEmail = interestForm.querySelector('[name="consent_email"]');
+        const consentPrivacy = interestForm.querySelector('[name="consent_privacy"]');
+        const role = interestForm.querySelector('[name="role"]:checked');
+
+        if (!role || !email.value || !email.validity.valid || !consentEmail.checked || !consentPrivacy.checked) {
+            interestForm.reportValidity();
+            return;
+        }
+        if (role.value === 'parent' && !guardianCheckbox.checked) {
+            guardianCheckbox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            interestForm.reportValidity();
+            return;
+        }
+
+        // Submit to Supabase
+        const payload = {
+            role: role.value,
+            email: email.value,
+            school: interestForm.querySelector('[name="school"]')?.value || null,
+            consent_email: consentEmail.checked,
+            consent_privacy: consentPrivacy.checked,
+            consent_guardian: guardianCheckbox.checked
+        };
+
+        fetch('https://eetjeyfyrwwoeeujxvmo.supabase.co/rest/v1/registrations', {
+            method: 'POST',
+            headers: {
+                'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldGpleWZ5cnd3b2VldWp4dm1vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3ODQwMjQsImV4cCI6MjA5MjM2MDAyNH0.VZIxzI0X1g7p1GgV-AyMTRRTaGpT1mxb_kwP91lfcEs',
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldGpleWZ5cnd3b2VldWp4dm1vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3ODQwMjQsImV4cCI6MjA5MjM2MDAyNH0.VZIxzI0X1g7p1GgV-AyMTRRTaGpT1mxb_kwP91lfcEs',
+                'Content-Type': 'application/json',
+                'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify(payload)
+        }).then(response => {
+            if (response.ok) {
+                interestForm.querySelector('fieldset').style.display = 'none';
+                formFields.style.display = 'none';
+                document.getElementById('formSuccess').style.display = 'block';
+            } else {
+                alert('Something went wrong. Please try again.');
+            }
+        }).catch(() => {
+            alert('Network error. Please try again.');
+        });
+    });
+}

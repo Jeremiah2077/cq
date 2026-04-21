@@ -10,6 +10,10 @@ const STATIC_PAGES = [
   "why",
   "safety",
   "contact",
+  "privacy",
+  "beijing",
+  "shanghai",
+  "xian",
   "index-b",
 ];
 
