@@ -113,9 +113,9 @@ a { text-decoration: none; color: inherit; }
     display: flex;
     align-items: baseline;
     gap: 8px;
-    font-family: var(--font-brand);
-    font-weight: 700;
-    font-size: 1.35rem;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.6rem;
     color: var(--ink);
     transition: color 0.3s ease;
     letter-spacing: 0.5px;
