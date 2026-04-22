@@ -1908,7 +1908,7 @@ details.day-item[open] .day-chevron { transform: rotate(180deg); color: var(--pr
     .nav-links { display: none; }
 
     /* Hero */
-    .hero { min-height: 100svh; }
+    .hero { min-height: 75svh; height: 75svh; }
     .hero h1 { font-size: 1.8rem !important; }
     .hero-content {
         left: 20px !important;
@@ -1919,11 +1919,14 @@ details.day-item[open] .day-chevron { transform: rotate(180deg); color: var(--pr
     }
     .hero .hero-actions { justify-content: center; }
     .hero-scroll { display: none; }
+    .hero-video-wrap video {
+        object-position: center center;
+    }
     .hero-overlay {
         background: linear-gradient(180deg,
-            rgba(15,25,35,0.15) 0%,
-            rgba(15,25,35,0.4) 40%,
-            rgba(15,25,35,0.6) 100%) !important;
+            rgba(15,25,35,0.2) 0%,
+            rgba(15,25,35,0.45) 40%,
+            rgba(15,25,35,0.65) 100%) !important;
     }
 
     /* Trust / Stats */
