@@ -182,9 +182,9 @@ if (authNav) {
 const authNavMobile = document.getElementById('auth-nav-mobile');
 if (authNavMobile) {
     if (hasSession) {
-        authNavMobile.innerHTML = '<a href="/dashboard" style="display:block;padding:12px 0;font-weight:600;color:var(--accent);">My Account</a>';
+        authNavMobile.innerHTML = '<a href="/dashboard" style="display:block;background:var(--accent);color:white;border-radius:6px;text-align:center;padding:12px;font-weight:600;">My Account</a>';
     } else {
-        authNavMobile.innerHTML = '<a href="/login" style="display:block;padding:12px 0;font-weight:600;color:var(--accent);">Sign In</a>';
+        authNavMobile.innerHTML = '<a href="/login" style="display:block;background:var(--accent);color:white;border-radius:6px;text-align:center;padding:12px;font-weight:600;">Sign In</a>';
     }
 }
 
