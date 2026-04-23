@@ -167,6 +167,20 @@ if (heroStats) {
 }
 
 
+// ---- Auth nav: show Sign In or My Account based on Supabase cookie ----
+const authNav = document.getElementById('auth-nav');
+if (authNav) {
+    const hasSession = document.cookie.split(';').some(function(c) {
+        return c.trim().indexOf('sb-') === 0 && c.indexOf('auth-token') > -1;
+    });
+    if (hasSession) {
+        authNav.innerHTML = '<a href="/dashboard" style="color:#c4683c;font-weight:600;">My Account</a>';
+    } else {
+        authNav.innerHTML = '<a href="/login" style="color:#c4683c;font-weight:600;">Sign In</a>';
+    }
+}
+
+
 // ---- Interest form: role-based field toggling + Tally submission ----
 const interestForm = document.getElementById('interestForm');
 if (interestForm) {
