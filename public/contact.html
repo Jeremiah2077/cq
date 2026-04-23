@@ -216,20 +216,16 @@
         </div>
     </footer>
     <script src="script.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script>
-        (async function() {
-            try {
-                const sb = supabase.createClient(
-                    'https://eetjeyfyrwwoeeujxvmo.supabase.co',
-                    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldGpleWZ5cnd3b2VldWp4dm1vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3ODQwMjQsImV4cCI6MjA5MjM2MDAyNH0.VZIxzI0X1g7p1GgV-AyMTRRTaGpT1mxb_kwP91lfcEs'
-                );
-                const { data: { session } } = await sb.auth.getSession();
-                if (session) {
-                    document.getElementById('contact-guest').style.display = 'none';
-                    document.getElementById('contact-user').style.display = 'block';
-                }
-            } catch(e) {}
+        (function() {
+            // Supabase SSR stores session in cookies — check for auth token cookie
+            var hasSession = document.cookie.split(';').some(function(c) {
+                return c.trim().indexOf('sb-') === 0 && c.indexOf('auth-token') > -1;
+            });
+            if (hasSession) {
+                document.getElementById('contact-guest').style.display = 'none';
+                document.getElementById('contact-user').style.display = 'block';
+            }
         })();
     </script>
 </body>
