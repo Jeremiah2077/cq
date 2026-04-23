@@ -31,7 +31,6 @@ export function SiteNav({
             China Quest
           </Link>
           <div className="flex items-center gap-6 text-[0.9rem] text-[var(--gray-600)]">
-            <span className="eyebrow">Pioneer Portal</span>
             {rightSlot}
           </div>
         </div>
