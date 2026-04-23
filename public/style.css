@@ -1738,31 +1738,57 @@ details.day-item[open] .day-chevron { transform: rotate(180deg); color: var(--pr
     letter-spacing: 2px;
     color: var(--accent);
     margin-bottom: 6px;
+    min-height: 1.1rem;
+    line-height: 1.1;
 }
 .cross-sell-title {
     font-family: var(--font-display);
     font-size: 1.6rem;
     margin-bottom: 4px;
+    line-height: 1.2;
+    min-height: 1.9rem;
 }
 .cross-sell-sub {
     font-size: 0.85rem;
     opacity: 0.7;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
+    line-height: 1.4;
+    min-height: 2.4em;
 }
 .cross-sell-link {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 9px 20px;
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 6px;
-    font-size: 0.82rem;
+    gap: 8px;
+    padding: 10px 18px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.45);
+    border-radius: 999px;
+    font-size: 0.74rem;
     font-weight: 600;
-    transition: background 0.2s;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: white;
     width: fit-content;
+    max-width: 100%;
+    white-space: nowrap;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
-.cross-sell-link:hover { background: var(--accent); border-color: var(--accent); }
+.cross-sell-link svg {
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+.cross-sell-card:hover .cross-sell-link,
+.cross-sell-link:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+}
+.cross-sell-card:hover .cross-sell-link svg,
+.cross-sell-link:hover svg {
+    transform: translateX(4px);
+}
 
 
 /* ========================================
@@ -3117,4 +3143,100 @@ details.day-item[open] summary::before {
     .nav-pioneer .nav-pulse,
     .nav-pioneer .nav-pulse::before { animation: none; }
     .nav-pioneer { background-position: 0% 50%; }
+}
+
+/* ========================================
+   ROUTE STRIP (roots-style) — mobile fixes
+   keeps the connector on desktop, hides it
+   on phones so 3 Nights pill doesn't overlap
+   ======================================== */
+@media (max-width: 720px) {
+    .route-strip {
+        flex-direction: column !important;
+        gap: 20px !important;
+    }
+    .route-strip .route-city {
+        padding: 0;
+        margin: 0 !important;
+    }
+    .route-strip .route-connector {
+        display: none !important;
+    }
+}
+
+@media (min-width: 721px) and (max-width: 960px) {
+    .route-strip .route-connector {
+        width: 32px !important;
+    }
+    .route-strip .route-city {
+        padding: 0 8px;
+    }
+}
+
+/* ========================================
+   CROSS-SELL — mobile overflow fix
+   (pill was nowrap, 2-col grid squeezed it
+   below pill width on phones; stack to 1 col)
+   ======================================== */
+@media (max-width: 720px) {
+    .cross-sell {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+    .cross-sell-card {
+        min-height: 260px;
+    }
+    .cross-sell-overlay {
+        padding: 24px !important;
+    }
+    .cross-sell-title {
+        font-size: 1.4rem !important;
+    }
+    .cross-sell-link {
+        padding: 9px 14px !important;
+        font-size: 0.7rem !important;
+    }
+}
+
+/* Mobile: no card, no full-screen overlay — only a soft dark halo
+   hugging each letter's outline so text reads against any video frame */
+@media (max-width: 720px) {
+    .hero-overlay { background: transparent !important; }
+    .hero-content {
+        background: transparent !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+    .hero-content > div:first-child,
+    .hero-content h1,
+    .hero-content h1 span {
+        text-shadow:
+            0 0 14px rgba(0,0,0,0.75),
+            0 0 28px rgba(0,0,0,0.55),
+            0 1px 3px rgba(0,0,0,0.85);
+    }
+}
+
+/* Mobile hero typography — bump a size for visual proportion */
+@media (max-width: 720px) {
+    .hero-content > div:first-child {
+        font-size: 0.82rem !important;
+        letter-spacing: 3.5px !important;
+        margin-bottom: 24px !important;
+    }
+    .hero-content h1 {
+        font-size: 3.4rem !important;
+        line-height: 1.1 !important;
+    }
+    .hero-content h1 + div {
+        width: 48px !important;
+        margin: 26px auto !important;
+    }
+}
+
+@media (max-width: 400px) {
+    .hero-content h1 { font-size: 3rem !important; }
 }

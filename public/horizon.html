@@ -88,46 +88,46 @@
 
 
 <!-- ===================== ROUTE STRIP ===================== -->
-<div class="route-strip-wrap">
+<div style="background: var(--white); border-bottom: 1px solid var(--gray-200); padding: 48px 0;">
     <div class="container">
-        <div class="route-label">12-Day Route — Chengdu → Guilin → Zhangjiajie</div>
-        <div class="route-strip">
+        <div style="text-align:center; font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:2px; color:var(--gray-400); margin-bottom:36px;">Route Overview</div>
+        <div class="route-strip" style="display:flex; align-items:center; justify-content:center; gap:0; flex-wrap:wrap;">
+
             <div class="route-city">
-                <div class="route-city-name">Dublin</div>
-                <div class="route-city-nights">Depart</div>
+                <div class="route-city-img" style="width:80px; height:80px; border-radius:50%; overflow:hidden; border:3px solid var(--gray-200); background: var(--gray-100);">
+                    <img src="images/chengdu/hero.jpg" alt="Chengdu" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.parentNode.style.background='var(--primary-subtle)';">
+                </div>
+                <div class="route-city-name" style="font-weight:700; font-size:0.95rem; color:var(--ink); margin-top:8px;">Chengdu</div>
+                <div class="route-city-cn" style="font-family:var(--font-cn); font-size:0.8rem; color:var(--gray-400);">成都</div>
+                <div class="route-city-nights" style="font-size:0.72rem; color:var(--primary); font-weight:600; background:var(--primary-subtle); padding:2px 10px; border-radius:20px; margin-top:4px;">3 Nights</div>
             </div>
-            <div class="route-arrow">
-                <span></span>
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8h8M10 5l3 3-3 3"/></svg>
+
+            <div class="route-connector" style="width:60px; height:2px; background:repeating-linear-gradient(90deg,var(--gray-300) 0,var(--gray-300) 6px,transparent 6px,transparent 12px); flex-shrink:0; position:relative; margin-top:-40px;">
+                <span style="position:absolute; right:-6px; top:-4px; width:0; height:0; border-left:8px solid var(--gray-300); border-top:5px solid transparent; border-bottom:5px solid transparent;"></span>
             </div>
+
             <div class="route-city">
-                <div class="route-city-name">Chengdu</div>
-                <div class="route-city-nights">3 Nights</div>
+                <div class="route-city-img" style="width:80px; height:80px; border-radius:50%; overflow:hidden; border:3px solid var(--gray-200); background: var(--gray-100);">
+                    <img src="images/guilin/hero.jpg" alt="Guilin / Yangshuo" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.parentNode.style.background='var(--primary-subtle)';">
+                </div>
+                <div class="route-city-name" style="font-weight:700; font-size:0.95rem; color:var(--ink); margin-top:8px;">Guilin / Yangshuo</div>
+                <div class="route-city-cn" style="font-family:var(--font-cn); font-size:0.8rem; color:var(--gray-400);">桂林 · 阳朔</div>
+                <div class="route-city-nights" style="font-size:0.72rem; color:var(--primary); font-weight:600; background:var(--primary-subtle); padding:2px 10px; border-radius:20px; margin-top:4px;">4 Nights</div>
             </div>
-            <div class="route-arrow">
-                <span></span>
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8h8M10 5l3 3-3 3"/></svg>
+
+            <div class="route-connector" style="width:60px; height:2px; background:repeating-linear-gradient(90deg,var(--gray-300) 0,var(--gray-300) 6px,transparent 6px,transparent 12px); flex-shrink:0; position:relative; margin-top:-40px;">
+                <span style="position:absolute; right:-6px; top:-4px; width:0; height:0; border-left:8px solid var(--gray-300); border-top:5px solid transparent; border-bottom:5px solid transparent;"></span>
             </div>
+
             <div class="route-city">
-                <div class="route-city-name">Guilin / Yangshuo</div>
-                <div class="route-city-nights">4 Nights</div>
+                <div class="route-city-img" style="width:80px; height:80px; border-radius:50%; overflow:hidden; border:3px solid var(--gray-200); background: var(--gray-100);">
+                    <img src="images/zhangjiajie/hero.jpg" alt="Zhangjiajie" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.parentNode.style.background='var(--primary-subtle)';">
+                </div>
+                <div class="route-city-name" style="font-weight:700; font-size:0.95rem; color:var(--ink); margin-top:8px;">Zhangjiajie</div>
+                <div class="route-city-cn" style="font-family:var(--font-cn); font-size:0.8rem; color:var(--gray-400);">张家界</div>
+                <div class="route-city-nights" style="font-size:0.72rem; color:var(--primary); font-weight:600; background:var(--primary-subtle); padding:2px 10px; border-radius:20px; margin-top:4px;">2 Nights</div>
             </div>
-            <div class="route-arrow">
-                <span></span>
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8h8M10 5l3 3-3 3"/></svg>
-            </div>
-            <div class="route-city">
-                <div class="route-city-name">Zhangjiajie</div>
-                <div class="route-city-nights">2 Nights</div>
-            </div>
-            <div class="route-arrow">
-                <span></span>
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8h8M10 5l3 3-3 3"/></svg>
-            </div>
-            <div class="route-city">
-                <div class="route-city-name">Dublin</div>
-                <div class="route-city-nights">Arrive</div>
-            </div>
+
         </div>
     </div>
 </div>
@@ -143,7 +143,7 @@
         </div>
         <div class="dest-grid">
             <div class="dest-card">
-                <img src="images/xdf-scene4.jpg" alt="Chengdu — Pandas &amp; Ancient Irrigation">
+                <img src="images/chengdu/panda.jpg" alt="Chengdu — Pandas &amp; Ancient Irrigation">
                 <div class="dest-overlay">
                     <div class="dest-name">Chengdu</div>
                     <div class="dest-cn">成都</div>
@@ -515,34 +515,37 @@
             <h2 class="section-title">What's Included</h2>
         </div>
         <div class="included-grid">
-            <div class="included-block">
-                <h3>&#9989; What's Included</h3>
-                <ul class="included-list">
-                    <li><span class="icon-yes">✓</span>Garda-vetted Irish leader travels with every group</li>
-                    <li><span class="icon-yes">✓</span>English/Chinese bilingual education leader (China-side)</li>
-                    <li><span class="icon-yes">✓</span>Full safeguarding policy (Irish DES compliant)</li>
-                    <li><span class="icon-yes">✓</span>Comprehensive travel insurance (TOPP-compliant)</li>
-                    <li><span class="icon-yes">✓</span>China Quest Taskbook (pre-trip prep, in-trip, post-trip reflection)</li>
-                    <li><span class="icon-yes">✓</span>Curriculum Mapping document tied to LC/JC specifications</li>
-                    <li><span class="icon-yes">✓</span>All accommodation (4-star group hotels)</li>
-                    <li><span class="icon-yes">✓</span>All meals (breakfast + lunch + dinner daily)</li>
-                    <li><span class="icon-yes">✓</span>All internal transport (flights, coaches, boats, metro)</li>
-                    <li><span class="icon-yes">✓</span>All entrance fees and activity costs</li>
-                    <li><span class="icon-yes">✓</span>24/7 emergency contact line</li>
-                    <li><span class="icon-yes">✓</span>Pre-trip parent information evening (virtual)</li>
-                    <li><span class="icon-yes">✓</span>Post-trip impact report for school records</li>
-                    <li><span class="icon-yes">✓</span>2 free teacher places per 15 students</li>
+
+            <div class="included-list" style="background: var(--white); border:1px solid var(--gray-200); border-radius:var(--radius-md); padding:36px;">
+                <h4>Included in Your Package</h4>
+                <ul>
+                    <li>Garda-vetted Irish leader travels with every group</li>
+                    <li>English/Chinese bilingual education leader (China-side)</li>
+                    <li>Full safeguarding policy (Irish DES compliant)</li>
+                    <li>Comprehensive travel insurance (TOPP-compliant)</li>
+                    <li>China Quest Taskbook (pre-trip prep, in-trip, post-trip reflection)</li>
+                    <li>Curriculum Mapping document tied to LC/JC specifications</li>
+                    <li>All accommodation (4-star group hotels)</li>
+                    <li>All meals (breakfast + lunch + dinner daily)</li>
+                    <li>All internal transport (flights, coaches, boats, metro)</li>
+                    <li>All entrance fees and activity costs</li>
+                    <li>24/7 emergency contact line</li>
+                    <li>Pre-trip parent information evening (virtual)</li>
+                    <li>Post-trip impact report for school records</li>
+                    <li>2 free teacher places per 15 students</li>
                 </ul>
             </div>
-            <div class="included-block not-included">
-                <h3>&#10060; Not Included</h3>
-                <ul class="included-list">
-                    <li><span class="icon-no">✗</span>International flights (Dublin ↔ China — quoted separately or available as all-in)</li>
-                    <li><span class="icon-no">✗</span>Chinese visa fees (~€125 — we provide full visa support documentation)</li>
-                    <li><span class="icon-no">✗</span>Personal spending money (suggested: €150–200 for souvenirs)</li>
-                    <li><span class="icon-no">✗</span>Travel to/from Dublin Airport</li>
+
+            <div class="excluded-list" style="background: var(--gray-50); border:1px solid var(--gray-200); border-radius:var(--radius-md); padding:36px;">
+                <h4>Not Included</h4>
+                <ul>
+                    <li>International flights (Dublin ↔ China — quoted separately or available as all-in)</li>
+                    <li>Chinese visa fees (we provide full visa support documentation)</li>
+                    <li>Personal spending money (suggested: €150–200 for souvenirs)</li>
+                    <li>Travel to/from Dublin Airport</li>
                 </ul>
             </div>
+
         </div>
     </div>
 </section>
