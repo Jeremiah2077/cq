@@ -168,15 +168,23 @@ if (heroStats) {
 
 
 // ---- Auth nav: show Sign In or My Account based on Supabase cookie ----
+const hasSession = document.cookie.split(';').some(function(c) {
+    return c.trim().indexOf('sb-') === 0 && c.indexOf('auth-token') > -1;
+});
 const authNav = document.getElementById('auth-nav');
 if (authNav) {
-    const hasSession = document.cookie.split(';').some(function(c) {
-        return c.trim().indexOf('sb-') === 0 && c.indexOf('auth-token') > -1;
-    });
     if (hasSession) {
         authNav.innerHTML = '<a href="/dashboard" style="color:#c4683c;font-weight:600;">My Account</a>';
     } else {
         authNav.innerHTML = '<a href="/login" style="color:#c4683c;font-weight:600;">Sign In</a>';
+    }
+}
+const authNavMobile = document.getElementById('auth-nav-mobile');
+if (authNavMobile) {
+    if (hasSession) {
+        authNavMobile.innerHTML = '<a href="/dashboard" style="display:block;padding:12px 0;font-weight:600;color:var(--accent);">My Account</a>';
+    } else {
+        authNavMobile.innerHTML = '<a href="/login" style="display:block;padding:12px 0;font-weight:600;color:var(--accent);">Sign In</a>';
     }
 }
 
