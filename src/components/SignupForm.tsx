@@ -56,7 +56,7 @@ export function SignupForm({
       {/* Role Selection */}
       {!role && (
         <div className="space-y-4">
-          <p className="field-label text-center" style={{ marginBottom: 0 }}>I am a…</p>
+          <p className="field-label text-center" style={{ marginBottom: 12 }}>I am a…</p>
           <div className="flex gap-3">
             <button
               type="button"
