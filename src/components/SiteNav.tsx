@@ -224,6 +224,7 @@ export function SiteNav({
             <a href="/why.html" className="py-3 text-[0.92rem] text-[var(--gray-600)] border-b border-[var(--gray-100)]">Why China Quest</a>
             <a href="/safety.html" className="py-3 text-[0.92rem] text-[var(--gray-600)] border-b border-[var(--gray-100)]">Safety</a>
             <a href="/contact.html" className="py-3 text-[0.92rem] text-[var(--gray-600)] border-b border-[var(--gray-100)]">Contact</a>
+            {rightSlot && <div className="pt-3">{rightSlot}</div>}
           </div>
         )}
       </nav>
