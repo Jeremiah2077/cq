@@ -29,13 +29,14 @@ export async function GET(request: NextRequest) {
         const meta = user.user_metadata || {};
         const role = (meta.role as string) || "";
 
-        // Email signup user (has role in metadata) → create profile and go to dashboard
-        if (role && !profile) {
+        // Has role (email signup or returning Google user) → create/update profile
+        if (role) {
           const fullName = (meta.full_name as string) || (meta.name as string) || "";
           const school = (meta.school as string) || "";
           const yearGroup = (meta.year_group as string) || "";
           const phone = (meta.phone as string) || "";
 
+          // Update existing or insert new
           await supabase.from("profiles").upsert({
             id: user.id,
             full_name: fullName,
