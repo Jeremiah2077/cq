@@ -19,10 +19,12 @@
         .cookie-body li { margin-bottom: 6px; }
         .cookie-body a { color: var(--accent); text-decoration: underline; }
         .cookie-body strong { color: var(--ink); }
-        .cookie-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 16px 0; }
-        .cookie-table th, .cookie-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--gray-100); }
+        .cookie-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 16px 0; }
+        .cookie-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 480px; }
+        .cookie-table th, .cookie-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--gray-100); white-space: nowrap; }
         .cookie-table th { font-weight: 600; color: var(--ink); background: var(--gray-50); }
         .cookie-table td { color: var(--gray-600); }
+        .cookie-table td:nth-child(2) { white-space: normal; }
     </style>
 </head>
 <body>
@@ -96,6 +98,7 @@
 
     <p>We only use <strong>strictly necessary cookies</strong> that are essential for our website to function. We do not use advertising, marketing, or tracking cookies.</p>
 
+    <div class="cookie-table-wrap">
     <table class="cookie-table">
         <thead>
             <tr>
@@ -120,6 +123,7 @@
             </tr>
         </tbody>
     </table>
+    </div>
 
     <p>These cookies are required for the website to work properly. They cannot be disabled without breaking core functionality such as signing in to your account.</p>
 
