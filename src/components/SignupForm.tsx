@@ -175,10 +175,6 @@ export function SignupForm({
               </div>
             )}
 
-            {role === "student" && !isMinor && ageGroup !== "" && (
-              <Field label="Parent / Guardian Email" name="parent_email" type="email" required />
-            )}
-
             <Field label="Password" name="password" type="password" required minLength={8} />
 
             {/* Consent */}
