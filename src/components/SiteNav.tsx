@@ -64,7 +64,7 @@ export function SiteFooter() {
           <span>© {new Date().getFullYear()} China Quest / Miles Minds Limited. All rights reserved.</span>
           <div className="flex gap-6">
             <a href="/privacy.html" className="hover:text-white/70 transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white/70 transition-colors">Terms</a>
+            <a href="/terms.html" className="hover:text-white/70 transition-colors">Terms</a>
             <a href="#" className="hover:text-white/70 transition-colors">Cookie Policy</a>
           </div>
         </div>
