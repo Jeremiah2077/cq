@@ -16,6 +16,11 @@ export function SiteNav({
             China Quest
           </Link>
           <div className="flex items-center gap-6 text-[0.9rem] text-[var(--gray-600)]">
+            <a href="/pioneer" className="hidden md:inline hover:text-[var(--ink)] transition-colors">Pioneer Programme</a>
+            <a href="/index.html#programmes" className="hidden md:inline hover:text-[var(--ink)] transition-colors">Programmes</a>
+            <a href="/why.html" className="hidden md:inline hover:text-[var(--ink)] transition-colors">Why Us</a>
+            <a href="/safety.html" className="hidden md:inline hover:text-[var(--ink)] transition-colors">Safety</a>
+            <a href="/contact.html" className="hidden md:inline hover:text-[var(--ink)] transition-colors">Contact</a>
             {rightSlot}
           </div>
         </div>
