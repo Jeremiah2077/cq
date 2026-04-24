@@ -21,17 +21,21 @@ export async function GET(request: NextRequest) {
           .eq("id", user.id)
           .maybeSingle();
 
+        // Already onboarded → go to dashboard
+        if (profile?.onboarding_complete) {
+          return NextResponse.redirect(`${origin}${next}`);
+        }
+
         const meta = user.user_metadata || {};
         const role = (meta.role as string) || "";
 
-        // If no profile exists yet, create from user metadata
-        if (!profile) {
+        // Email signup user (has role in metadata) → create profile and go to dashboard
+        if (role && !profile) {
           const fullName = (meta.full_name as string) || (meta.name as string) || "";
           const school = (meta.school as string) || "";
           const yearGroup = (meta.year_group as string) || "";
           const phone = (meta.phone as string) || "";
 
-          // Write profiles table
           await supabase.from("profiles").upsert({
             id: user.id,
             full_name: fullName,
@@ -39,10 +43,9 @@ export async function GET(request: NextRequest) {
             role,
             phone: role === "teacher" ? phone : null,
             year_group: role === "student" ? yearGroup : null,
-            onboarding_complete: !!role,
+            onboarding_complete: true,
           });
 
-          // Write role-specific table
           if (role === "student") {
             const ageGroup = (meta.age_group as string) || "";
             const isMinor = (meta.is_minor as boolean) || false;
@@ -64,12 +67,12 @@ export async function GET(request: NextRequest) {
               role_title: roleTitle,
             });
           }
+
+          return NextResponse.redirect(`${origin}/dashboard`);
         }
 
-        // Google users without role → onboarding
-        if (!profile?.onboarding_complete && !role) {
-          return NextResponse.redirect(`${origin}/onboarding`);
-        }
+        // Google user (no role) → onboarding
+        return NextResponse.redirect(`${origin}/onboarding`);
       }
 
       return NextResponse.redirect(`${origin}${next}`);
