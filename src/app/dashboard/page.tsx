@@ -69,8 +69,8 @@ export default async function DashboardPage() {
       <SiteNav
         rightSlot={
           <form action={signOut}>
-            <button type="submit" className="btn-outline">
-              Sign out
+            <button type="submit" style={{ background: "none", border: "none", color: "#c4683c", fontWeight: 600, cursor: "pointer", fontSize: "inherit", fontFamily: "inherit" }}>
+              Sign Out
             </button>
           </form>
         }
