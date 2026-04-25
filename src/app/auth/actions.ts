@@ -105,3 +105,66 @@ export async function signOut() {
   revalidatePath("/", "layout");
   redirect("/login");
 }
+
+export async function resetPassword(formData: FormData) {
+  const email = String(formData.get("email") ?? "").trim();
+
+  const hdrs = await headers();
+  const host = hdrs.get("x-forwarded-host") ?? hdrs.get("host") ?? "localhost:3000";
+  const proto = hdrs.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
+  const origin = `${proto}://${host}`;
+
+  const supabase = await createClient();
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${origin}/reset-password`,
+  });
+
+  if (error) {
+    redirect(`/forgot-password?error=${encodeURIComponent(error.message)}`);
+  }
+
+  redirect("/forgot-password?success=true");
+}
+
+export async function updatePassword(formData: FormData) {
+  const password = String(formData.get("password") ?? "");
+
+  const supabase = await createClient();
+  const { error } = await supabase.auth.updateUser({ password });
+
+  if (error) {
+    redirect(`/reset-password?error=${encodeURIComponent(error.message)}`);
+  }
+
+  revalidatePath("/", "layout");
+  redirect("/dashboard");
+}
+
+export async function deleteAccount() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) redirect("/login");
+
+  // Use service_role key to delete user (users can't delete themselves)
+  const { createClient: createAdminClient } = await import("@supabase/supabase-js");
+  const adminSupabase = createAdminClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+  );
+
+  // Delete profile data (CASCADE should handle student/teacher_profiles)
+  await adminSupabase.from("profiles").delete().eq("id", user.id);
+  await adminSupabase.from("student_profiles").delete().eq("id", user.id);
+  await adminSupabase.from("teacher_profiles").delete().eq("id", user.id);
+
+  // Delete auth user
+  await adminSupabase.auth.admin.deleteUser(user.id);
+
+  // Sign out locally
+  await supabase.auth.signOut();
+  revalidatePath("/", "layout");
+  redirect("/");
+}

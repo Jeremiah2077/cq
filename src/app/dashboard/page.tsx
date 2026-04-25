@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { signOut } from "@/app/auth/actions";
+import { signOut, deleteAccount } from "@/app/auth/actions";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
 import {
   PIONEER_MILESTONES,
@@ -208,6 +208,27 @@ export default async function DashboardPage() {
               </li>
             ))}
           </ol>
+        </section>
+
+        {/* Delete account */}
+        <section className="border-t border-[var(--gray-200)] pt-12">
+          <div className="eyebrow mb-3" style={{ color: "var(--gray-400)" }}>Account</div>
+          <p className="text-[0.92rem] text-[var(--gray-500)] mb-4">
+            Permanently delete your account and all associated data. This action cannot be undone.
+          </p>
+          <form action={deleteAccount}>
+            <button
+              type="submit"
+              onClick={(e) => {
+                if (!confirm("Are you sure you want to delete your account? This cannot be undone.")) {
+                  e.preventDefault();
+                }
+              }}
+              style={{ background: "none", border: "1px solid var(--gray-300)", color: "var(--gray-500)", padding: "10px 20px", borderRadius: "6px", fontSize: "0.85rem", cursor: "pointer", fontFamily: "inherit" }}
+            >
+              Delete my account
+            </button>
+          </form>
         </section>
       </main>
 

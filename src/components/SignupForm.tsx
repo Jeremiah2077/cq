@@ -17,6 +17,9 @@ export function SignupForm({
   const [role, setRole] = useState<"student" | "teacher" | null>(null);
   const [ageGroup, setAgeGroup] = useState("");
   const [parentEmailError, setParentEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const isMinor = ageGroup !== "" && parseInt(ageGroup) < 16;
 
@@ -116,6 +119,10 @@ export function SignupForm({
             onSubmit={(e) => {
               if (!checkConsent()) { e.preventDefault(); return; }
               if (!validateParentEmail(e.currentTarget)) { e.preventDefault(); return; }
+              const pw = (e.currentTarget.elements.namedItem("password") as HTMLInputElement)?.value;
+              const cpw = (e.currentTarget.elements.namedItem("confirm_password") as HTMLInputElement)?.value;
+              if (pw !== cpw) { setPasswordError("Passwords do not match."); e.preventDefault(); return; }
+              setPasswordError("");
             }}
             className="space-y-5"
           >
@@ -175,7 +182,9 @@ export function SignupForm({
               </div>
             )}
 
-            <Field label="Password" name="password" type="password" required minLength={8} />
+            <PasswordField label="Password" name="password" required minLength={8} show={showPassword} onToggle={() => setShowPassword(!showPassword)} />
+            <PasswordField label="Confirm Password" name="confirm_password" required minLength={8} show={showConfirm} onToggle={() => setShowConfirm(!showConfirm)} />
+            {passwordError && <p className="text-[0.82rem] text-red-500 -mt-2">{passwordError}</p>}
 
             {/* Consent */}
             <div
@@ -268,6 +277,48 @@ function Field({
         placeholder={placeholder}
         className="field-input"
       />
+    </label>
+  );
+}
+
+function PasswordField({
+  label,
+  name,
+  required,
+  minLength,
+  show,
+  onToggle,
+}: {
+  label: string;
+  name: string;
+  required?: boolean;
+  minLength?: number;
+  show: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <label className="block">
+      <span className="field-label">{label}</span>
+      <div className="relative">
+        <input
+          name={name}
+          type={show ? "text" : "password"}
+          required={required}
+          minLength={minLength}
+          className="field-input pr-10"
+        />
+        <button
+          type="button"
+          onClick={onToggle}
+          className="absolute right-3 top-1/2 -translate-y-1/2 bg-transparent border-none cursor-pointer p-0 text-[var(--gray-400)] hover:text-[var(--ink)]"
+        >
+          {show ? (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+          ) : (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          )}
+        </button>
+      </div>
     </label>
   );
 }

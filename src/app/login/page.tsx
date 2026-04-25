@@ -51,6 +51,11 @@ export default async function LoginPage({
       <form action={signIn} className="space-y-5">
         <Field label="Email" name="email" type="email" required />
         <Field label="Password" name="password" type="password" required />
+        <div className="flex justify-end -mt-2">
+          <Link href="/forgot-password" className="text-[0.82rem] text-[var(--accent)] hover:text-[var(--accent-hover)]">
+            Forgot password?
+          </Link>
+        </div>
         <button type="submit" className="btn-primary w-full">
           Sign in
         </button>
