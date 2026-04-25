@@ -326,7 +326,7 @@ function nextSteps(status: ApplicationStatus): string[] {
 }
 
 function computeMilestoneStatuses(ms: Milestone[]) {
-  const today = new Date("2026-04-21");
+  const today = new Date();
   let firstUpcomingAssigned = false;
   return ms.map((m) => {
     const d = parseTarget(m.target);
