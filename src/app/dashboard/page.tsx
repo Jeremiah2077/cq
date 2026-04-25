@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { signOut, deleteAccount } from "@/app/auth/actions";
+import { signOut, requestAccountDeletion } from "@/app/auth/actions";
 import { DeleteAccountButton } from "@/components/DeleteAccountButton";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
 import {
@@ -217,7 +217,7 @@ export default async function DashboardPage() {
           <p className="text-[0.92rem] text-[var(--gray-500)] mb-4">
             Permanently delete your account and all associated data. This action cannot be undone.
           </p>
-          <DeleteAccountButton action={deleteAccount} />
+          <DeleteAccountButton action={requestAccountDeletion} />
         </section>
       </main>
 

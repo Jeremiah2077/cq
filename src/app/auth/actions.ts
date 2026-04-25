@@ -140,7 +140,7 @@ export async function updatePassword(formData: FormData) {
   redirect("/dashboard");
 }
 
-export async function deleteAccount() {
+export async function requestAccountDeletion() {
   const supabase = await createClient();
   const {
     data: { user },
@@ -148,23 +148,82 @@ export async function deleteAccount() {
 
   if (!user) redirect("/login");
 
-  // Use service_role key to delete user (users can't delete themselves)
+  const hdrs = await headers();
+  const host = hdrs.get("x-forwarded-host") ?? hdrs.get("host") ?? "localhost:3000";
+  const proto = hdrs.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
+  const origin = `${proto}://${host}`;
+
+  // Create deletion request with token
+  const { data, error } = await supabase
+    .from("account_deletion_requests")
+    .insert({ user_id: user.id })
+    .select("token")
+    .single();
+
+  if (error || !data) {
+    redirect("/dashboard?error=deletion-request-failed");
+  }
+
+  // Send confirmation email
+  const { sendEmail } = await import("@/lib/email");
+  await sendEmail({
+    to: user.email!,
+    subject: "Confirm account deletion — China Quest",
+    html: `
+      <h2>Account Deletion Request</h2>
+      <p>Hi there,</p>
+      <p>We received a request to permanently delete your China Quest account. This will remove all your data and cannot be undone.</p>
+      <p style="margin: 32px 0;">
+        <a href="${origin}/delete-confirm?token=${data.token}" style="background-color: #c4683c; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px;">
+          Confirm deletion
+        </a>
+      </p>
+      <p>This link expires in 24 hours. If you didn't request this, you can safely ignore this email.</p>
+      <p style="margin-top: 32px; color: #9e9a93; font-size: 14px;">
+        China Quest — Miles Minds Limited, Ireland<br>
+        info@milesminds.com
+      </p>
+    `,
+  });
+
+  redirect("/dashboard?notice=deletion-email-sent");
+}
+
+export async function confirmAccountDeletion(token: string) {
   const { createClient: createAdminClient } = await import("@supabase/supabase-js");
   const adminSupabase = createAdminClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
   );
 
-  // Delete profile data (CASCADE should handle student/teacher_profiles)
-  await adminSupabase.from("profiles").delete().eq("id", user.id);
-  await adminSupabase.from("student_profiles").delete().eq("id", user.id);
-  await adminSupabase.from("teacher_profiles").delete().eq("id", user.id);
+  // Find the deletion request
+  const { data: request } = await adminSupabase
+    .from("account_deletion_requests")
+    .select("*")
+    .eq("token", token)
+    .eq("used", false)
+    .single();
+
+  if (!request) return { error: "Invalid or expired link." };
+
+  // Check expiry
+  if (new Date(request.expires_at) < new Date()) {
+    return { error: "This link has expired. Please request deletion again." };
+  }
+
+  // Mark token as used
+  await adminSupabase
+    .from("account_deletion_requests")
+    .update({ used: true })
+    .eq("id", request.id);
+
+  // Delete profile data
+  await adminSupabase.from("student_profiles").delete().eq("id", request.user_id);
+  await adminSupabase.from("teacher_profiles").delete().eq("id", request.user_id);
+  await adminSupabase.from("profiles").delete().eq("id", request.user_id);
 
   // Delete auth user
-  await adminSupabase.auth.admin.deleteUser(user.id);
+  await adminSupabase.auth.admin.deleteUser(request.user_id);
 
-  // Sign out locally
-  await supabase.auth.signOut();
-  revalidatePath("/", "layout");
-  redirect("/");
+  return { success: true };
 }

@@ -5,7 +5,7 @@ export function DeleteAccountButton({ action }: { action: () => void }) {
     <form
       action={action}
       onSubmit={(e) => {
-        if (!confirm("Are you sure you want to delete your account? This cannot be undone.")) {
+        if (!confirm("We will send a confirmation email to your registered email address. Click the link in the email to permanently delete your account.")) {
           e.preventDefault();
         }
       }}
