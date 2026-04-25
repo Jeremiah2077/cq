@@ -3212,31 +3212,152 @@ details.day-item[open] summary::before {
     }
     .hero-content > div:first-child,
     .hero-content h1,
-    .hero-content h1 span {
+    .hero-content h1 span,
+    .hero-pioneer-cta .hero-pioneer-eyebrow {
         text-shadow:
             0 0 14px rgba(0,0,0,0.75),
             0 0 28px rgba(0,0,0,0.55),
             0 1px 3px rgba(0,0,0,0.85);
     }
+    /* button has solid bg — drop the heavy shadow */
+    .hero-pioneer-cta .hero-pioneer-line { text-shadow: none !important; }
 }
 
-/* Mobile hero typography — bump a size for visual proportion */
+/* Mobile hero typography — fit "Not a Study Trip." on one line */
 @media (max-width: 720px) {
     .hero-content > div:first-child {
-        font-size: 0.82rem !important;
-        letter-spacing: 3.5px !important;
-        margin-bottom: 24px !important;
+        font-size: 0.78rem !important;
+        letter-spacing: 3px !important;
+        margin-bottom: 20px !important;
     }
     .hero-content h1 {
-        font-size: 3.4rem !important;
-        line-height: 1.1 !important;
+        font-size: 2.5rem !important;
+        line-height: 1.15 !important;
     }
     .hero-content h1 + div {
-        width: 48px !important;
-        margin: 26px auto !important;
+        width: 40px !important;
+        margin: 22px auto !important;
+    }
+    .hero-pioneer-cta .hero-pioneer-eyebrow {
+        font-size: 0.95rem !important;
+        letter-spacing: 3.5px !important;
     }
 }
 
 @media (max-width: 400px) {
-    .hero-content h1 { font-size: 3rem !important; }
+    .hero-content h1 { font-size: 2.2rem !important; }
+    .hero-pioneer-cta .hero-pioneer-eyebrow { font-size: 0.85rem !important; }
+}
+
+/* ========================================
+   HOMEPAGE HERO — Pioneer CTA (two lines)
+   Line 1: rainbow .nav-pioneer (already
+   animated). Line 2: serif tagline + gently
+   floating arrow, hover bumps it further.
+   ======================================== */
+.hero-pioneer-cta {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    margin-top: 4px;
+}
+.hero-pioneer-cta .hero-pioneer-eyebrow {
+    font-family: var(--font-brand);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: white;
+    text-shadow: 0 2px 14px rgba(0,0,0,0.65), 0 1px 3px rgba(0,0,0,0.75);
+    transition: color 0.3s ease;
+}
+.hero-pioneer-cta:hover .hero-pioneer-eyebrow { color: #ffb98b; }
+.hero-pioneer-cta .hero-pioneer-line {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 28px;
+    background: rgba(15, 25, 35, 0.35);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    color: white;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.92rem;
+    letter-spacing: 0.6px;
+    line-height: 1;
+    border: 1.5px solid white;
+    border-radius: 2px;
+    /* outer offset (bottom + right brand-color edge) +
+       inner shadow for subtle depth inside the button */
+    box-shadow:
+        6px 6px 0 0 var(--accent),
+        inset 0 0 16px rgba(0, 0, 0, 0.25),
+        inset 0 -10px 24px -10px rgba(0, 0, 0, 0.4);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.25s ease, color 0.25s ease;
+}
+.hero-pioneer-arrow {
+    flex-shrink: 0;
+    color: white;
+    animation: hero-arrow-float 2.4s ease-in-out infinite;
+    transition: transform 0.3s ease;
+}
+@keyframes hero-arrow-float {
+    0%, 100% { transform: translateX(0); }
+    50%      { transform: translateX(4px); }
+}
+.hero-pioneer-cta:hover .hero-pioneer-arrow {
+    transform: translateX(8px);
+    animation: none;
+}
+.hero-pioneer-cta:hover .hero-pioneer-line {
+    transform: translate(3px, 3px);
+    box-shadow:
+        3px 3px 0 0 var(--accent),
+        inset 0 0 16px rgba(0, 0, 0, 0.18);
+    background: var(--accent);
+    border-color: var(--accent);
+}
+@media (max-width: 720px) {
+    .hero-pioneer-cta .hero-pioneer-line {
+        font-size: 0.82rem;
+        padding: 12px 22px;
+        box-shadow:
+            5px 5px 0 0 var(--accent),
+            inset 0 0 14px rgba(0, 0, 0, 0.25),
+            inset 0 -8px 20px -8px rgba(0, 0, 0, 0.4);
+    }
+    .hero-pioneer-cta:hover .hero-pioneer-line {
+        box-shadow:
+            2px 2px 0 0 var(--accent),
+            inset 0 0 14px rgba(0, 0, 0, 0.18);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .hero-pioneer-arrow { animation: none; }
+}
+
+/* ========================================
+   Mobile hero entrance — slide whole block
+   from sky area down to center over 5s.
+   The first 5s of the video has bright sky
+   on top + darker bottom, so we anchor text
+   to the readable top first, then drift down.
+   Children keep their own fade-in stagger.
+   ======================================== */
+@media (max-width: 720px) {
+    .hero-content {
+        animation: heroSlideDown 5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s forwards;
+    }
+}
+@keyframes heroSlideDown {
+    0%   { top: 12%; }
+    100% { top: 50%; }
+}
+@media (prefers-reduced-motion: reduce) {
+    @media (max-width: 720px) {
+        .hero-content { animation: none; top: 50%; }
+    }
 }
