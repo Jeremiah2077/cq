@@ -11,10 +11,16 @@ const STATIC_PAGES = [
   "safety",
   "contact",
   "privacy",
+  "terms",
+  "cookies",
   "beijing",
   "shanghai",
   "xian",
-  "index-b",
+  "hangzhou",
+  "shenzhen",
+  "chengdu",
+  "guilin",
+  "zhangjiajie",
 ];
 
 const nextConfig: NextConfig = {
