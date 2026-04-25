@@ -148,7 +148,7 @@ export function SiteNav({
           <div className="max-w-[1200px] mx-auto px-8 py-1.5 flex justify-between items-center">
             <div className="flex gap-5 items-center">
               <a href="mailto:info@milesminds.com" className="hover:text-white transition-colors">info@milesminds.com</a>
-              <a href="tel:+353873752491" className="hover:text-white transition-colors">+353 87 375 2491</a>
+              <a href="tel:+353894841019" className="hover:text-white transition-colors">+353 89 484 1019</a>
             </div>
             <div className="flex gap-4 items-center">
               <span>Ireland-based since 2005</span>
@@ -262,7 +262,7 @@ export function SiteFooter() {
             <h5 className="text-white text-[0.85rem] font-semibold uppercase tracking-[1.5px] mb-5">Contact</h5>
             <ul className="space-y-2.5 text-[0.88rem]">
               <li><a href="mailto:info@milesminds.com" className="hover:text-white transition-colors">info@milesminds.com</a></li>
-              <li><a href="tel:+353873752491" className="hover:text-white transition-colors">+353 87 375 2491</a></li>
+              <li><a href="tel:+353894841019" className="hover:text-white transition-colors">+353 89 484 1019</a></li>
               <li className="mt-4 text-[0.82rem] text-white/35">Miles Minds Limited<br />Company No. 802673<br />Ireland</li>
             </ul>
           </div>
