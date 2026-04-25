@@ -23,6 +23,9 @@ const notoSerifSc = Noto_Serif_SC({
 export const metadata: Metadata = {
   title: "China Quest · Pioneer Portal",
   description: "Pioneer Programme applicant portal — Miles Minds / China Quest",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
