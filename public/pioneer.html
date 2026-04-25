@@ -38,14 +38,6 @@
             align-items: center;
             min-height: 680px;
         }
-        /* On wide screens match image aspect ratio so full image is shown */
-        @media (min-width: 901px) {
-            .pio-hero-bg {
-                aspect-ratio: 3840 / 1808;
-                min-height: 0;
-                padding: 0 !important;
-            }
-        }
         @media (max-width: 900px) {
             .pio-hero-bg { padding: 140px 0 120px !important; }
         }
@@ -153,7 +145,7 @@
 </nav>
 
 <!-- ===================== HERO ===================== -->
-<section class="pio-hero-bg" style="color:white;padding:180px 0 160px;position:relative;overflow:hidden;">
+<section id="hero" class="pio-hero-bg" style="color:white;padding:180px 0 160px;position:relative;overflow:hidden;">
     <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,17,25,0.25) 0%,rgba(15,25,35,0.4) 55%,rgba(15,25,35,0.75) 100%),url('images/hero-students.jpg') center/cover no-repeat;z-index:0;"></div>
     <div class="container" style="position:relative;z-index:2;">
         <div style="max-width:820px;">
