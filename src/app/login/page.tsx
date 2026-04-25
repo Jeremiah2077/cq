@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { AuthShell } from "@/components/AuthShell";
 import { GoogleButton } from "@/components/GoogleButton";
+import { PasswordInput } from "@/components/PasswordInput";
 import { signIn, signInWithGoogle } from "@/app/auth/actions";
 
 export default async function LoginPage({
@@ -50,7 +51,7 @@ export default async function LoginPage({
 
       <form action={signIn} className="space-y-5">
         <Field label="Email" name="email" type="email" required />
-        <Field label="Password" name="password" type="password" required />
+        <PasswordInput label="Password" name="password" required />
         <div className="flex justify-end -mt-2">
           <Link href="/forgot-password" className="text-[0.82rem] text-[var(--accent)] hover:text-[var(--accent-hover)]">
             Forgot password?
