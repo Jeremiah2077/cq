@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { AuthShell } from "@/components/AuthShell";
 import { updatePassword } from "@/app/auth/actions";
 
@@ -8,6 +8,24 @@ export default function ResetPasswordPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [error, setError] = useState("");
+  const formRef = useRef<HTMLFormElement>(null);
+
+  function handleSubmit() {
+    const form = formRef.current;
+    if (!form) return;
+    const pw = (form.elements.namedItem("password") as HTMLInputElement)?.value;
+    const cpw = (form.elements.namedItem("confirm_password") as HTMLInputElement)?.value;
+    if (!pw || pw.length < 8) {
+      setError("Password must be at least 8 characters.");
+      return;
+    }
+    if (pw !== cpw) {
+      setError("Passwords do not match.");
+      return;
+    }
+    setError("");
+    form.requestSubmit();
+  }
 
   return (
     <AuthShell
@@ -21,21 +39,7 @@ export default function ResetPasswordPage() {
         </div>
       )}
 
-      <form
-        action={updatePassword}
-        onSubmit={(e) => {
-          const form = e.currentTarget;
-          const pw = (form.elements.namedItem("password") as HTMLInputElement)?.value;
-          const cpw = (form.elements.namedItem("confirm_password") as HTMLInputElement)?.value;
-          if (pw !== cpw) {
-            setError("Passwords do not match.");
-            e.preventDefault();
-            return;
-          }
-          setError("");
-        }}
-        className="space-y-5"
-      >
+      <form ref={formRef} action={updatePassword} className="space-y-5">
         <label className="block">
           <span className="field-label">New password</span>
           <div className="relative">
@@ -84,7 +88,7 @@ export default function ResetPasswordPage() {
           </div>
         </label>
 
-        <button type="submit" className="btn-primary w-full">
+        <button type="button" onClick={handleSubmit} className="btn-primary w-full">
           Update password
         </button>
       </form>
