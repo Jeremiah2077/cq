@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { AuthShell } from "@/components/AuthShell";
 import { confirmAccountDeletion } from "@/app/auth/actions";
-import { createClient } from "@/lib/supabase/server";
+import { ClearSessionAndRedirect } from "@/components/ClearSession";
 
 export default async function DeleteConfirmPage({
   searchParams,
@@ -32,15 +32,9 @@ export default async function DeleteConfirmPage({
     );
   }
 
-  // Clear session cookie
-  const supabase = await createClient();
-  await supabase.auth.signOut();
-
   return (
     <AuthShell title="Account deleted." subtitle="Your account and all associated data have been permanently removed.">
-      <Link href="/" className="btn-primary w-full text-center block">
-        Go to homepage
-      </Link>
+      <ClearSessionAndRedirect />
     </AuthShell>
   );
 }
