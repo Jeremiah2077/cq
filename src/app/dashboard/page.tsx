@@ -313,9 +313,9 @@ function progressHint(status: ApplicationStatus): string {
     case "submitted":
       return "Application received. The selection committee is scoring submissions. If you're on the edge we may invite you for a short video interview.";
     case "shortlisted":
-      return "You're shortlisted. Final picks will be made by Richard and the committee — watch your inbox.";
+      return "You're shortlisted. Final picks will be made by Richard and the committee. Watch your inbox.";
     case "selected":
-      return "Congratulations — you're in. Next up: sign the Pioneer agreement and prepare your passport for visa processing.";
+      return "Congratulations, you're in. Next up: sign the Pioneer agreement and prepare your passport for visa processing.";
     case "waitlist":
       return "You're on the waitlist. If a selected Pioneer drops out, you'll be called up in order. Keep your contact details current.";
     case "rejected":
@@ -327,7 +327,7 @@ function nextSteps(status: ApplicationStatus): string[] {
   switch (status) {
     case "interest":
       return [
-        "Keep your email and phone reachable — we'll contact you first when applications open.",
+        "Keep your email and phone reachable. We'll contact you first when applications open.",
         "Start thinking about your 60–90 second video: why you want to go to China.",
         "Mention the programme to your principal or a teacher — early support helps.",
       ];
