@@ -84,7 +84,7 @@ function DeleteConfirmContent() {
                 />
               </label>
 
-              <button type="submit" disabled={loading || code.length !== 8} className="btn-primary w-full" style={{ opacity: loading || code.length !== 8 ? 0.6 : 1, background: "#c41e3a" }}>
+              <button type="submit" disabled={loading || code.length !== 8} className="btn-primary w-full" style={{ opacity: loading || code.length !== 8 ? 0.6 : 1 }}>
                 {loading ? "Deleting..." : "Delete my account permanently"}
               </button>
             </form>
