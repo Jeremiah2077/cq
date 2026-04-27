@@ -23,6 +23,7 @@ type ProfileRow = {
   full_name: string | null;
   school: string | null;
   year_group: string | null;
+  role: string | null;
 };
 
 export default async function DashboardPage() {
@@ -36,7 +37,7 @@ export default async function DashboardPage() {
   const [{ data: profile }, { data: application }] = await Promise.all([
     supabase
       .from("profiles")
-      .select("full_name, school, year_group")
+      .select("full_name, school, year_group, role")
       .eq("id", user.id)
       .maybeSingle<ProfileRow>(),
     supabase
@@ -58,6 +59,11 @@ export default async function DashboardPage() {
     profile?.year_group ??
     (user.user_metadata?.year_group as string | undefined) ??
     "—";
+  const role =
+    profile?.role ??
+    (user.user_metadata?.role as string | undefined) ??
+    "—";
+  const roleLabel = role === "student" ? "Student" : role === "teacher" ? "Teacher / Coordinator" : role;
 
   const status: ApplicationStatus = application?.status ?? "interest";
   const completion = completionPercent(status);
@@ -116,9 +122,10 @@ export default async function DashboardPage() {
         {/* Profile cards */}
         <section>
           <div className="eyebrow mb-6">Your profile</div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <ProfileCard label="Role" value={roleLabel} />
             <ProfileCard label="School" value={school} />
-            <ProfileCard label="Year group" value={yearGroup} />
+            <ProfileCard label="Year group" value={role === "student" ? yearGroup : "—"} />
             <ProfileCard
               label="Status"
               value={APPLICATION_STATUS_LABEL[status]}
