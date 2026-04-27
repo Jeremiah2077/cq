@@ -66,8 +66,13 @@ export async function signUp(formData: FormData) {
     redirect(`/signup?error=${encodeURIComponent(error.message)}`);
   }
 
+  // If user already exists (identities is empty), redirect to login
+  if (data.user && data.user.identities && data.user.identities.length === 0) {
+    redirect(`/login?error=${encodeURIComponent("This email is already registered. Please sign in instead.")}`);
+  }
+
   // If email confirmations are enabled, session will be null until the user confirms.
-  // Redirect to verify page where user enters the 6-digit code.
+  // Redirect to verify page where user enters the 8-digit code.
   if (!data.session) {
     redirect(`/verify?email=${encodeURIComponent(email)}`);
   }
