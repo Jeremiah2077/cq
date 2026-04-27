@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { headers } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
 
 export async function completeOnboarding(formData: FormData) {
@@ -47,6 +48,22 @@ export async function completeOnboarding(formData: FormData) {
       parent_email: parentEmail || null,
       parent_verified: false,
     });
+
+    // Send parent verification email for minors
+    if (isMinor && parentEmail) {
+      const hdrs = await headers();
+      const host = hdrs.get("x-forwarded-host") ?? hdrs.get("host") ?? "localhost:3000";
+      const proto = hdrs.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
+      const origin = `${proto}://${host}`;
+
+      const { sendParentVerificationEmail } = await import("@/lib/parent-verification");
+      await sendParentVerificationEmail({
+        userId: user.id,
+        parentEmail,
+        studentName: fullName || user.email || "Your child",
+        origin,
+      });
+    }
   } else if (role === "teacher") {
     await supabase.from("teacher_profiles").upsert({
       id: user.id,

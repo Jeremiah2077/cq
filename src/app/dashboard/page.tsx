@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { signOut, requestAccountDeletion } from "@/app/auth/actions";
+import { signOut, requestAccountDeletion, resendParentVerification } from "@/app/auth/actions";
 import { DeleteAccountButton } from "@/components/DeleteAccountButton";
+import { ParentVerificationBanner } from "@/components/ParentVerificationBanner";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
 import {
   PIONEER_MILESTONES,
@@ -26,6 +27,12 @@ type ProfileRow = {
   role: string | null;
 };
 
+type StudentProfileRow = {
+  is_minor: boolean;
+  parent_email: string | null;
+  parent_verified: boolean;
+};
+
 export default async function DashboardPage() {
   const supabase = await createClient();
   const {
@@ -34,7 +41,7 @@ export default async function DashboardPage() {
 
   if (!user) redirect("/login");
 
-  const [{ data: profile }, { data: application }] = await Promise.all([
+  const [{ data: profile }, { data: application }, { data: studentProfile }] = await Promise.all([
     supabase
       .from("profiles")
       .select("full_name, school, year_group, role")
@@ -45,6 +52,11 @@ export default async function DashboardPage() {
       .select("status, video_url, statement, updated_at")
       .eq("user_id", user.id)
       .maybeSingle<ApplicationRow>(),
+    supabase
+      .from("student_profiles")
+      .select("is_minor, parent_email, parent_verified")
+      .eq("id", user.id)
+      .maybeSingle<StudentProfileRow>(),
   ]);
 
   const displayName =
@@ -70,6 +82,11 @@ export default async function DashboardPage() {
   const milestones = computeMilestoneStatuses(PIONEER_MILESTONES);
   const activeMilestone =
     milestones.find((m) => m.status === "active") ?? milestones[milestones.length - 1];
+
+  const needsParentVerification =
+    studentProfile?.is_minor === true &&
+    studentProfile.parent_verified === false &&
+    !!studentProfile.parent_email;
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--bg)]">
@@ -117,6 +134,13 @@ export default async function DashboardPage() {
           </div>
         </div>
       </section>
+
+      {needsParentVerification && (
+        <ParentVerificationBanner
+          parentEmail={studentProfile!.parent_email!}
+          resendAction={resendParentVerification}
+        />
+      )}
 
       <main className="flex-1 max-w-[1200px] w-full mx-auto px-8 py-16 space-y-20">
         {/* Profile cards */}

@@ -61,6 +61,17 @@ export async function GET(request: NextRequest) {
               parent_email: parentEmail || null,
               parent_verified: false,
             });
+
+            // Send parent verification email for minors
+            if (isMinor && parentEmail) {
+              const { sendParentVerificationEmail } = await import("@/lib/parent-verification");
+              await sendParentVerificationEmail({
+                userId: user.id,
+                parentEmail,
+                studentName: fullName || user.email || "Your child",
+                origin,
+              });
+            }
           } else if (role === "teacher") {
             const roleTitle = (meta.role_title as string) || "";
 

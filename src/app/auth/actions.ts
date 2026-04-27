@@ -169,6 +169,21 @@ export async function verifyOtp(formData: FormData) {
             parent_email: parentEmail || null,
             parent_verified: false,
           });
+          // Send parent verification email for minors
+          if (isMinor && parentEmail) {
+            const hdrs = await headers();
+            const host = hdrs.get("x-forwarded-host") ?? hdrs.get("host") ?? "localhost:3000";
+            const proto = hdrs.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
+            const origin = `${proto}://${host}`;
+
+            const { sendParentVerificationEmail } = await import("@/lib/parent-verification");
+            await sendParentVerificationEmail({
+              userId: user.id,
+              parentEmail,
+              studentName: fullName || email,
+              origin,
+            });
+          }
         } else if (role === "teacher") {
           const roleTitle = (meta.role_title as string) || "";
 
@@ -183,6 +198,87 @@ export async function verifyOtp(formData: FormData) {
 
   revalidatePath("/", "layout");
   redirect("/dashboard");
+}
+
+export async function resendParentVerification() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) redirect("/login");
+
+  const { data: studentProfile } = await supabase
+    .from("student_profiles")
+    .select("is_minor, parent_email, parent_verified")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  if (!studentProfile?.is_minor || studentProfile.parent_verified || !studentProfile.parent_email) {
+    redirect("/dashboard");
+  }
+
+  const hdrs = await headers();
+  const host = hdrs.get("x-forwarded-host") ?? hdrs.get("host") ?? "localhost:3000";
+  const proto = hdrs.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
+  const origin = `${proto}://${host}`;
+
+  const fullName =
+    (user.user_metadata?.full_name as string) ||
+    (user.user_metadata?.name as string) ||
+    user.email ||
+    "Your child";
+
+  const { sendParentVerificationEmail } = await import("@/lib/parent-verification");
+  await sendParentVerificationEmail({
+    userId: user.id,
+    parentEmail: studentProfile.parent_email,
+    studentName: fullName,
+    origin,
+  });
+
+  redirect("/dashboard?parent_resent=true");
+}
+
+export async function parentVerify(formData: FormData) {
+  const code = String(formData.get("code") ?? "").trim();
+
+  const { createClient: createAdminClient } = await import("@supabase/supabase-js");
+  const adminSupabase = createAdminClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+  );
+
+  // Find the verification request
+  const { data: request } = await adminSupabase
+    .from("parent_verification_requests")
+    .select("*")
+    .eq("token", code)
+    .eq("used", false)
+    .single();
+
+  if (!request) {
+    redirect("/parent-verify?error=Invalid+or+expired+code");
+  }
+
+  // Check expiry
+  if (new Date(request.expires_at) < new Date()) {
+    redirect("/parent-verify?error=Code+has+expired.+Please+ask+your+child+to+resend+from+their+dashboard");
+  }
+
+  // Mark token as used
+  await adminSupabase
+    .from("parent_verification_requests")
+    .update({ used: true })
+    .eq("id", request.id);
+
+  // Update student_profiles — set parent_verified to true
+  await adminSupabase
+    .from("student_profiles")
+    .update({ parent_verified: true })
+    .eq("id", request.user_id);
+
+  redirect("/parent-verify?success=true");
 }
 
 export async function signOut() {

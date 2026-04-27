@@ -1,0 +1,126 @@
+"use client";
+
+import { useState, Suspense } from "react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { SiteNav, SiteFooter } from "@/components/SiteNav";
+import { parentVerify } from "@/app/auth/actions";
+
+export default function ParentVerifyPage() {
+  return (
+    <Suspense>
+      <ParentVerifyContent />
+    </Suspense>
+  );
+}
+
+function ParentVerifyContent() {
+  const searchParams = useSearchParams();
+  const success = searchParams.get("success");
+  const urlError = searchParams.get("error") || "";
+  const [code, setCode] = useState("");
+  const [error, setError] = useState(urlError);
+  const [loading, setLoading] = useState(false);
+
+  if (success) {
+    return (
+      <div className="min-h-screen flex flex-col bg-[var(--bg)]">
+        <SiteNav />
+        <main className="flex-1 flex items-center justify-center px-6 py-16">
+          <div className="w-full max-w-[520px] text-center">
+            <div className="mb-6 flex justify-center">
+              <span className="eyebrow eyebrow-accent">Pioneer Programme</span>
+            </div>
+            <div className="mb-6">
+              <svg width="56" height="56" viewBox="0 0 56 56" fill="none" className="mx-auto">
+                <circle cx="28" cy="28" r="28" fill="#e8f5e9" />
+                <path d="M18 28l7 7 13-13" stroke="#2d8a4e" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+            <h1 className="font-display text-[2.2rem] leading-[1.15] text-[var(--ink)] mb-3">
+              Consent confirmed.
+            </h1>
+            <p className="text-[var(--gray-500)] text-[0.95rem] leading-[1.7] mb-4 max-w-sm mx-auto">
+              Thank you for verifying your consent. Your child&apos;s China Quest account is now fully activated.
+            </p>
+            <p className="text-[var(--gray-400)] text-[0.85rem] leading-[1.7] max-w-sm mx-auto">
+              If you have any questions about the Pioneer Programme or your child&apos;s participation, please contact us at{" "}
+              <Link href="mailto:info@milesminds.com" className="text-[var(--accent)] font-semibold">
+                info@milesminds.com
+              </Link>
+            </p>
+          </div>
+        </main>
+        <SiteFooter />
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen flex flex-col bg-[var(--bg)]">
+      <SiteNav />
+      <main className="flex-1 flex items-center justify-center px-6 py-16">
+        <div className="w-full max-w-[460px]">
+          <div className="mb-6 flex justify-center">
+            <span className="eyebrow eyebrow-accent">Pioneer Programme</span>
+          </div>
+          <h1 className="font-display text-[2.2rem] leading-[1.15] text-[var(--ink)] text-center mb-3">
+            Parent/Guardian consent.
+          </h1>
+          <p className="text-center text-[var(--gray-500)] text-[0.95rem] leading-[1.7] mb-8 max-w-sm mx-auto">
+            Enter the 8-digit code sent to your email to confirm consent for your child&apos;s China Quest account.
+          </p>
+
+          <div className="bg-white border border-[var(--gray-200)] rounded-[var(--radius-md)] p-8 shadow-[0_4px_30px_rgba(15,25,35,0.04)]">
+            {error && (
+              <div className="mb-5 rounded-[var(--radius-sm)] border border-[var(--accent)]/20 bg-[var(--accent)]/5 px-4 py-3 text-[0.85rem] text-[var(--accent-hover)]">
+                {error}
+              </div>
+            )}
+
+            <div className="mb-6 rounded-[var(--radius-sm)] bg-[var(--primary-subtle)] px-4 py-3 text-[0.85rem] text-[var(--gray-600)] leading-[1.6]">
+              <strong>Why is this needed?</strong> Under GDPR (Article 8), children under 16 in Ireland require parental consent before their personal data can be processed. Your verification confirms you are aware of and consent to your child&apos;s registration.
+            </div>
+
+            <form action={parentVerify} className="space-y-5">
+              <label className="block">
+                <span className="field-label">Verification code</span>
+                <input
+                  name="code"
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={8}
+                  value={code}
+                  onChange={(e) => {
+                    setCode(e.target.value.replace(/\D/g, ""));
+                    setError("");
+                  }}
+                  placeholder="00000000"
+                  className="field-input text-center text-[1.8rem] font-bold tracking-[8px]"
+                  autoFocus
+                />
+              </label>
+
+              <button
+                type="submit"
+                disabled={loading || code.length !== 8}
+                className="btn-primary w-full"
+                style={{ opacity: loading || code.length !== 8 ? 0.6 : 1 }}
+              >
+                {loading ? "Verifying..." : "Confirm consent"}
+              </button>
+            </form>
+
+            <p className="mt-5 text-center text-[0.82rem] text-[var(--gray-400)]">
+              Didn&apos;t receive the code? Ask your child to resend it from their dashboard, or contact{" "}
+              <Link href="mailto:info@milesminds.com" className="text-[var(--accent)] underline">
+                info@milesminds.com
+              </Link>
+            </p>
+          </div>
+        </div>
+      </main>
+      <SiteFooter />
+    </div>
+  );
+}
