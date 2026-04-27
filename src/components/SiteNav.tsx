@@ -151,7 +151,7 @@ export function SiteNav({
               <a href="tel:+353894841019" className="hover:text-white transition-colors">+353 89 484 1019</a>
             </div>
             <div className="flex gap-4 items-center">
-              <span>Ireland-based since 2025</span>
+              
               {rightSlot}
             </div>
           </div>
