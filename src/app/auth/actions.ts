@@ -67,9 +67,9 @@ export async function signUp(formData: FormData) {
   }
 
   // If email confirmations are enabled, session will be null until the user confirms.
-  // Profiles will be created in /auth/callback after email confirmation.
+  // Redirect to verify page where user enters the 6-digit code.
   if (!data.session) {
-    redirect("/login?notice=check-email");
+    redirect(`/verify?email=${encodeURIComponent(email)}`);
   }
 
   revalidatePath("/", "layout");
@@ -97,6 +97,82 @@ export async function signInWithGoogle() {
   }
   if (data?.url) redirect(data.url);
   redirect("/login?error=google-oauth-failed");
+}
+
+export async function verifyOtp(formData: FormData) {
+  const email = String(formData.get("email") ?? "").trim();
+  const token = String(formData.get("token") ?? "").trim();
+
+  const supabase = await createClient();
+  const { error } = await supabase.auth.verifyOtp({
+    email,
+    token,
+    type: "email",
+  });
+
+  if (error) {
+    redirect(`/verify?email=${encodeURIComponent(email)}&error=${encodeURIComponent(error.message)}`);
+  }
+
+  // After verification, check/create profile (same as callback logic)
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (user) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("onboarding_complete")
+      .eq("id", user.id)
+      .maybeSingle();
+
+    if (!profile?.onboarding_complete) {
+      const meta = user.user_metadata || {};
+      const role = (meta.role as string) || "";
+
+      if (role) {
+        const fullName = (meta.full_name as string) || (meta.name as string) || "";
+        const school = (meta.school as string) || "";
+        const yearGroup = (meta.year_group as string) || "";
+        const phone = (meta.phone as string) || "";
+
+        await supabase.from("profiles").upsert({
+          id: user.id,
+          full_name: fullName,
+          school,
+          role,
+          phone: role === "teacher" ? phone : null,
+          year_group: role === "student" ? yearGroup : null,
+          onboarding_complete: true,
+        });
+
+        if (role === "student") {
+          const ageGroup = (meta.age_group as string) || "";
+          const isMinor = (meta.is_minor as boolean) || false;
+          const parentEmail = (meta.parent_email as string) || "";
+
+          await supabase.from("student_profiles").upsert({
+            id: user.id,
+            year_group: yearGroup,
+            age_group: ageGroup,
+            is_minor: isMinor,
+            parent_email: parentEmail || null,
+            parent_verified: false,
+          });
+        } else if (role === "teacher") {
+          const roleTitle = (meta.role_title as string) || "";
+
+          await supabase.from("teacher_profiles").upsert({
+            id: user.id,
+            role_title: roleTitle,
+          });
+        }
+      }
+    }
+  }
+
+  revalidatePath("/", "layout");
+  redirect("/dashboard");
 }
 
 export async function signOut() {
