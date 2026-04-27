@@ -52,6 +52,68 @@ export async function signUp(formData: FormData) {
   const origin = `${proto}://${host}`;
 
   const supabase = await createClient();
+
+  // Minors: use admin.createUser() so Supabase does NOT send confirmation email to student
+  if (isMinor && parentEmail) {
+    const { createClient: createAdminClient } = await import("@supabase/supabase-js");
+    const adminSupabase = createAdminClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    );
+
+    const { data: adminData, error: adminError } = await adminSupabase.auth.admin.createUser({
+      email,
+      password,
+      email_confirm: true,
+      user_metadata: {
+        full_name: fullName,
+        school,
+        role,
+        year_group: yearGroup,
+        age_group: ageGroup,
+        is_minor: true,
+        parent_email: parentEmail,
+      },
+    });
+
+    if (adminError) {
+      const msg = adminError.message.includes("already been registered")
+        ? "This email is already registered. Please sign in instead."
+        : adminError.message;
+      redirect(`/signup?error=${encodeURIComponent(msg)}`);
+    }
+
+    const { sendParentVerificationEmail } = await import("@/lib/parent-verification");
+    await Promise.all([
+      sendParentVerificationEmail({
+        userId: adminData.user.id,
+        parentEmail,
+        studentName: fullName || email,
+        origin,
+      }),
+      adminSupabase.from("profiles").upsert({
+        id: adminData.user.id,
+        full_name: fullName,
+        school,
+        role,
+        year_group: yearGroup,
+        onboarding_complete: true,
+      }),
+      adminSupabase.from("student_profiles").upsert({
+        id: adminData.user.id,
+        year_group: yearGroup,
+        age_group: ageGroup,
+        is_minor: true,
+        parent_email: parentEmail,
+        parent_verified: false,
+      }),
+      supabase.auth.signInWithPassword({ email, password }),
+    ]);
+    revalidatePath("/", "layout");
+    redirect(`/parent-verify?parent_email=${encodeURIComponent(parentEmail)}`);
+  }
+
+  // Non-minor flow: normal signUp (Supabase sends confirmation email to student)
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
@@ -63,8 +125,7 @@ export async function signUp(formData: FormData) {
         role,
         year_group: role === "student" ? yearGroup : undefined,
         age_group: role === "student" ? ageGroup : undefined,
-        is_minor: role === "student" ? isMinor : undefined,
-        parent_email: role === "student" && isMinor ? parentEmail : undefined,
+        is_minor: false,
         role_title: role === "teacher" ? roleTitle : undefined,
         phone: role === "teacher" ? phone : undefined,
       },
@@ -80,50 +141,6 @@ export async function signUp(formData: FormData) {
     redirect(`/login?error=${encodeURIComponent("This email is already registered. Please sign in instead.")}`);
   }
 
-  // For minors: skip student email verification, only require parent consent (GDPR Art. 8)
-  if (data.user && isMinor && parentEmail) {
-    // Auto-confirm the student's email so they don't need to verify
-    const { createClient: createAdminClient } = await import("@supabase/supabase-js");
-    const adminSupabase = createAdminClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    );
-    // Auto-confirm email, then run everything else in parallel
-    await adminSupabase.auth.admin.updateUserById(data.user.id, {
-      email_confirm: true,
-    });
-
-    const { sendParentVerificationEmail } = await import("@/lib/parent-verification");
-    await Promise.all([
-      sendParentVerificationEmail({
-        userId: data.user.id,
-        parentEmail,
-        studentName: fullName || email,
-        origin,
-      }),
-      adminSupabase.from("profiles").upsert({
-        id: data.user.id,
-        full_name: fullName,
-        school,
-        role,
-        year_group: yearGroup,
-        onboarding_complete: true,
-      }),
-      adminSupabase.from("student_profiles").upsert({
-        id: data.user.id,
-        year_group: yearGroup,
-        age_group: ageGroup,
-        is_minor: true,
-        parent_email: parentEmail,
-        parent_verified: false,
-      }),
-      supabase.auth.signInWithPassword({ email, password }),
-    ]);
-    revalidatePath("/", "layout");
-    redirect(`/parent-verify?parent_email=${encodeURIComponent(parentEmail)}`);
-  }
-
-  // Non-minor flow: student verifies their own email as usual
   if (!data.session) {
     redirect(`/verify?email=${encodeURIComponent(email)}`);
   }
