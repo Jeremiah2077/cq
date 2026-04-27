@@ -101,8 +101,8 @@ export async function signUp(formData: FormData) {
       origin,
     });
 
-    // Create profiles immediately (since we're skipping the verify→callback flow)
-    await supabase.from("profiles").upsert({
+    // Create profiles using admin client to bypass RLS
+    await adminSupabase.from("profiles").upsert({
       id: data.user.id,
       full_name: fullName,
       school,
@@ -110,7 +110,7 @@ export async function signUp(formData: FormData) {
       year_group: yearGroup,
       onboarding_complete: true,
     });
-    await supabase.from("student_profiles").upsert({
+    await adminSupabase.from("student_profiles").upsert({
       id: data.user.id,
       year_group: yearGroup,
       age_group: ageGroup,
