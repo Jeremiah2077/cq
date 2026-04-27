@@ -58,6 +58,20 @@ export async function updateSession(request: NextRequest) {
       url.pathname = "/onboarding";
       return NextResponse.redirect(url);
     }
+
+    // Minor without parent verification → force to /parent-verify
+    const { data: studentProfile } = await supabase
+      .from("student_profiles")
+      .select("is_minor, parent_verified, parent_email")
+      .eq("id", user.id)
+      .maybeSingle();
+
+    if (studentProfile?.is_minor && !studentProfile.parent_verified && studentProfile.parent_email) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/parent-verify";
+      url.searchParams.set("parent_email", studentProfile.parent_email);
+      return NextResponse.redirect(url);
+    }
   }
 
   return supabaseResponse;
