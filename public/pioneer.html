@@ -90,6 +90,42 @@
             .pio-sectnum { display: block; margin-bottom: 4px; }
             .pio-city-img { aspect-ratio: 16 / 10; }
         }
+
+        /* ==== Mobile typography ==== */
+        @media (max-width: 720px) {
+            /* Hero H1: shrink so the 3-line headline fits without crowding */
+            .pio-hero-bg h1.pio-serif {
+                font-size: 2.4rem !important;
+                line-height: 1.08 !important;
+                margin-bottom: 24px !important;
+            }
+            /* Hero subhead paragraph */
+            .pio-hero-bg p {
+                font-size: 0.98rem !important;
+                line-height: 1.55 !important;
+                margin-bottom: 32px !important;
+            }
+            /* Live badge a touch smaller */
+            .pio-live-badge { font-size: 0.62rem !important; padding: 6px 11px !important; }
+            /* Section H2s in editorial sections */
+            .pio-section h2.pio-serif { font-size: 1.7rem !important; line-height: 1.18; }
+            /* City headers in The Journey */
+            #journey h3.pio-serif { font-size: 1.6rem !important; }
+            #journey .pio-eyebrow,
+            .pio-section .pio-eyebrow { font-size: 0.62rem; letter-spacing: 2.5px; }
+            /* Body copy in Invitation + Apply */
+            .pio-lead { font-size: 1rem; line-height: 1.7; }
+            /* CTA button slightly smaller padding on phones */
+            .pio-btn { padding: 14px 26px; font-size: 0.82rem; letter-spacing: 1.2px; }
+            /* Hero secondary nav links (#journey, /login) */
+            .pio-hero-bg a[href="#journey"],
+            .pio-hero-bg a[href="/login"] { font-size: 0.78rem !important; letter-spacing: 1.2px !important; }
+        }
+
+        @media (max-width: 400px) {
+            .pio-hero-bg h1.pio-serif { font-size: 2rem !important; }
+            .pio-section h2.pio-serif { font-size: 1.5rem !important; }
+        }
     </style>
 </head>
 <body>
@@ -157,10 +193,10 @@
             </div>
             <div class="pio-eyebrow" style="margin-bottom:24px;">The Pioneer Programme</div>
             <h1 class="pio-serif" style="font-size:clamp(2.6rem,7vw,5.2rem);margin:0 0 32px;color:white;">
-                Twenty places.<br><span class="pio-italic">One first journey.</span>
+                Eleven days.<br>Twenty spots.<br><span class="pio-italic">All free.</span>
             </h1>
             <p style="font-size:clamp(1rem,1.6vw,1.15rem);line-height:1.65;color:rgba(255,255,255,0.7);max-width:620px;font-weight:300;margin:0 0 44px;">
-                A founding cohort of Irish students and teachers — fully funded — travels to China this summer. You bring curiosity and a camera. We cover the rest. Someone has to be first.
+                This summer, a founding cohort of Irish students and teachers flies to China. Fully funded. You bring curiosity and a camera. We cover everything else. Someone has to be first.
             </p>
             <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:center;">
                 <a href="/signup" class="pio-btn">
@@ -184,10 +220,10 @@
         <div class="pio-eyebrow" style="color:var(--gray-400);">01 — The Invitation</div>
         <div class="pio-rule center"></div>
         <p class="pio-serif" style="font-size:clamp(1.5rem,2.8vw,2rem);color:var(--ink);margin:0 0 32px;line-height:1.4;">
-            This summer, we are sending a small group of Irish students and teachers on the very first China Quest journey. <span class="pio-italic">Somebody has to be first — why not you?</span>
+            This summer, we are sending a small group of Irish students and teachers on the very first China Quest journey. <span class="pio-italic">Somebody has to be first. Why not you?</span>
         </p>
         <p class="pio-lead">
-            The whole trip is covered. Flights, stays, meals, visas, insurance. In return, you travel with eyes open and a camera in your pocket — and you help us tell this story to the hundreds of Irish students who'll follow behind you.
+            The whole trip is covered. Flights, stays, meals, visas, insurance. In return, you travel with eyes open and a camera in your pocket, and you help us tell this story to the hundreds of Irish students who'll follow behind you.
         </p>
     </div>
 </section>
@@ -266,13 +302,13 @@
             <div>
                 <div style="font-family:var(--font-display);font-style:italic;font-size:1.1rem;color:var(--accent);margin-bottom:18px;">Teachers</div>
                 <p style="font-size:0.95rem;color:var(--gray-600);line-height:1.8;font-weight:300;margin:0;">
-                    Registered with the Teaching Council of Ireland and currently teaching in a participating school. History, Geography, CSPE, Art, Business, or Chinese Studies preferred — but we care more about temperament than timetable. You'll be a champion for future travel at your school.
+                    Registered with the Teaching Council of Ireland and currently teaching in a participating school. History, Geography, CSPE, Art, Business, or Chinese Studies preferred, but we care more about temperament than timetable. You'll be a champion for future travel at your school.
                 </p>
             </div>
         </div>
 
         <p style="text-align:center;margin-top:56px;font-size:0.85rem;color:var(--gray-500);max-width:620px;margin-left:auto;margin-right:auto;font-style:italic;font-weight:300;">
-            Selection is on merit — not family income. We balance the cohort across at least three of Ireland's four provinces.
+            Selection is on merit, not family income. We balance the cohort across at least three of Ireland's four provinces.
         </p>
     </div>
 </section>
@@ -283,13 +319,13 @@
         <div class="pio-eyebrow" style="color:var(--gray-400);">04 — Your Role</div>
         <div class="pio-rule center"></div>
         <h2 class="pio-serif" style="font-size:clamp(1.8rem,3.4vw,2.4rem);color:var(--ink);margin:0 0 64px;">
-            A Pioneer place is a gift — with a role attached.
+            A Pioneer place is a gift, with a role attached.
         </h2>
 
         <div class="pio-role-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:48px;text-align:left;">
             <div>
                 <div style="font-family:var(--font-display);font-style:italic;font-size:1.3rem;color:var(--accent);margin-bottom:14px;">Document it.</div>
-                <p style="font-size:0.9rem;color:var(--gray-500);line-height:1.7;font-weight:300;margin:0;">A short video or a handful of captioned photos each day. You capture — we help you tell the story.</p>
+                <p style="font-size:0.9rem;color:var(--gray-500);line-height:1.7;font-weight:300;margin:0;">A short video or a handful of captioned photos each day. You capture. We help you tell the story.</p>
             </div>
             <div>
                 <div style="font-family:var(--font-display);font-style:italic;font-size:1.3rem;color:var(--accent);margin-bottom:14px;">Bring it home.</div>
@@ -329,14 +365,14 @@
                 <div style="font-family:var(--font-display);font-style:italic;font-size:1.4rem;color:var(--accent);">ii.</div>
                 <div>
                     <h4 class="pio-serif" style="font-size:1.3rem;color:var(--ink);margin:0 0 6px;">Send us a 60–90 second video.</h4>
-                    <p style="font-size:0.9rem;color:var(--gray-500);line-height:1.6;font-weight:300;margin:0;">Filmed on your phone. The prompt: <em>why I want to go to China.</em> We're not looking for polish — we're looking for you.</p>
+                    <p style="font-size:0.9rem;color:var(--gray-500);line-height:1.6;font-weight:300;margin:0;">Filmed on your phone. The prompt: <em>why I want to go to China.</em> We're not looking for polish. We're looking for you.</p>
                 </div>
             </div>
             <div style="display:grid;grid-template-columns:60px 1fr;gap:32px;padding:28px 0;border-top:1px solid var(--gray-200);align-items:baseline;">
                 <div style="font-family:var(--font-display);font-style:italic;font-size:1.4rem;color:var(--accent);">iii.</div>
                 <div>
                     <h4 class="pio-serif" style="font-size:1.3rem;color:var(--ink);margin:0 0 6px;">Write 200 words.</h4>
-                    <p style="font-size:0.9rem;color:var(--gray-500);line-height:1.6;font-weight:300;margin:0;">What you'd bring back — to your classmates, your family, your community. Short is fine. Honest is better.</p>
+                    <p style="font-size:0.9rem;color:var(--gray-500);line-height:1.6;font-weight:300;margin:0;">What you'd bring back: to your classmates, your family, your community. Short is fine. Honest is better.</p>
                 </div>
             </div>
             <div style="display:grid;grid-template-columns:60px 1fr;gap:32px;padding:28px 0;border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200);align-items:baseline;">
@@ -420,7 +456,7 @@
             <a href="tel:+353894841019" style="color:rgba(255,255,255,0.75);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.2);padding-bottom:2px;">+353 89 484 1019</a>
         </div>
         <div style="margin-top:28px;font-size:0.72rem;color:rgba(255,255,255,0.4);letter-spacing:2px;text-transform:uppercase;">
-            Or find us at the TY Show — <span style="color:white;">28 April 2026</span>
+            Or find us at the TY Show on <span style="color:white;">28 April 2026</span>
         </div>
     </div>
 </section>
