@@ -86,7 +86,7 @@ function ParentVerifyContent() {
             )}
 
             <div className="mb-6 rounded-[var(--radius-sm)] bg-[var(--primary-subtle)] px-4 py-3 text-[0.85rem] text-[var(--gray-600)] leading-[1.6]">
-              <strong>Why is this needed?</strong> Under GDPR (Article 8), children under 16 in Ireland require parental consent before their personal data can be processed. Your verification confirms you are aware of and consent to your child&apos;s registration.
+              Under GDPR, parental consent is required for under-16s. Enter the code to confirm.
             </div>
 
             <form action={parentVerify} className="space-y-5">
