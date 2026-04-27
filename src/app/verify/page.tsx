@@ -23,8 +23,8 @@ function VerifyContent() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (code.length !== 6) {
-      setError("Please enter the 6-digit code.");
+    if (code.length !== 8) {
+      setError("Please enter the 8-digit code.");
       return;
     }
     setError("");
@@ -55,7 +55,7 @@ function VerifyContent() {
             Check your email.
           </h1>
           <p className="text-center text-[var(--gray-500)] text-[0.95rem] leading-[1.7] mb-8 max-w-sm mx-auto">
-            We sent a 6-digit verification code to <strong className="text-[var(--ink)]">{email}</strong>
+            We sent an 8-digit verification code to <strong className="text-[var(--ink)]">{email}</strong>
           </p>
 
           <div className="bg-white border border-[var(--gray-200)] rounded-[var(--radius-md)] p-8 shadow-[0_4px_30px_rgba(15,25,35,0.04)]">
@@ -71,10 +71,10 @@ function VerifyContent() {
                 <input
                   type="text"
                   inputMode="numeric"
-                  maxLength={6}
+                  maxLength={8}
                   value={code}
                   onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
-                  placeholder="000000"
+                  placeholder="00000000"
                   className="field-input text-center text-[1.8rem] font-bold tracking-[8px]"
                   autoFocus
                 />
