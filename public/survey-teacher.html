@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>China Quest · Teacher / Coordinator Survey</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #0f1923;
+      --primary: #1b3a5c;
+      --primary-light: #2a5580;
+      --primary-subtle: #e9eff5;
+      --accent: #c4683c;
+      --accent-hover: #a8562f;
+      --bg: #fafaf8;
+      --gray-100: #f0eeeb;
+      --gray-200: #e2dfda;
+      --gray-300: #c8c4bd;
+      --gray-400: #9e9a93;
+      --gray-500: #6b6760;
+      --gray-600: #4a4640;
+      --gray-700: #2d2a26;
+      --radius: 8px;
+      --input-h: 48px;
+    }
+    html, body { background: var(--bg); }
+    body {
+      font-family: 'DM Sans', -apple-system, "Helvetica Neue", Arial, sans-serif;
+      font-size: 15px;
+      color: var(--gray-700);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .survey-top {
+      background: linear-gradient(135deg, var(--ink) 0%, #1b2d3f 100%);
+      color: #fff;
+      text-align: center;
+      padding: 32px 24px 24px;
+      border-bottom: 3px solid var(--accent);
+    }
+    .survey-top .brand {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.04em;
+      color: #fff;
+      line-height: 1;
+    }
+    .survey-top .eyebrow {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .survey-top .event-tag {
+      display: inline-block;
+      margin-top: 8px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-left: 8px;
+    }
+
+    .section-divider {
+      text-align: center;
+      padding: 22px 24px 0;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .section-divider h2 {
+      display: inline-block;
+      padding: 8px 28px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      color: #fff;
+      background: var(--accent);
+    }
+
+    .survey-wrap {
+      max-width: 760px;
+      margin: 12px auto 32px;
+      background: #fff;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(15,25,35,0.06);
+      border: 1px solid var(--gray-200);
+    }
+    .survey-head {
+      padding: 32px 36px 22px;
+      background: #fff;
+      border-bottom: 2px solid var(--accent);
+    }
+    .survey-head h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-weight: 400;
+      font-size: 1.65rem;
+      color: var(--ink);
+      letter-spacing: -0.005em;
+      line-height: 1.18;
+    }
+    .survey-head .subtitle {
+      font-size: 0.95rem;
+      color: var(--gray-600);
+      margin-top: 8px;
+    }
+    .survey-body { padding: 30px 36px 36px; }
+
+    .question { margin-bottom: 26px; }
+    .q-label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--ink);
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    .q-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-right: 10px;
+      vertical-align: middle;
+      background: var(--accent);
+    }
+    .opt { font-size: 0.78rem; color: var(--gray-500); font-weight: 400; margin-left: 6px; }
+    .req { color: var(--accent); font-weight: 700; margin-left: 3px; }
+
+    input[type="text"], input[type="email"], input[type="tel"], select, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--gray-300);
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: var(--ink);
+      background: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      min-height: var(--input-h);
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(196,104,60,0.12);
+    }
+    textarea { min-height: 110px; resize: vertical; line-height: 1.55; }
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%231b3a5c' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+    .input-hint { font-size: 0.8rem; color: var(--gray-500); margin-top: 6px; }
+
+    .yes-no-group { display: flex; gap: 12px; flex-wrap: wrap; }
+    .yes-no-group label { flex: 1; min-width: 110px; max-width: 200px; }
+    .yes-no-group input[type="radio"] { display: none; }
+    .yes-no-group .btn-option {
+      display: block;
+      text-align: center;
+      padding: 13px 20px;
+      border: 1.5px solid var(--gray-300);
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.98rem;
+      background: #fff;
+      transition: all 0.15s;
+      min-height: var(--input-h);
+      line-height: 1.2;
+    }
+    .yes-no-group input[type="radio"]:checked + .btn-option {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .check-group { display: flex; flex-direction: column; gap: 10px; }
+    .check-group label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      padding: 12px 14px;
+      background: #fff;
+      border: 1.5px solid var(--gray-300);
+      border-radius: var(--radius);
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .check-group label:hover { border-color: var(--accent); }
+    .check-group input[type="checkbox"], .check-group input[type="radio"] {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    hr.sep { border: none; border-top: 1px dashed var(--gray-200); margin: 22px 0; }
+
+    .submit-row {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid var(--gray-200);
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 16px 24px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-submit:hover:not(:disabled) { background: var(--accent-hover); }
+    .btn-submit:active:not(:disabled) { transform: translateY(1px); }
+    .btn-submit:disabled { opacity: 0.55; cursor: not-allowed; }
+
+    .form-error {
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: var(--radius);
+      background: #fff5f3;
+      border: 1px solid #f0c4b3;
+      color: var(--accent-hover);
+      font-size: 0.88rem;
+      display: none;
+    }
+    .form-error.show { display: block; }
+
+    .privacy-note {
+      font-size: 0.78rem;
+      color: var(--gray-500);
+      border-top: 1px solid var(--gray-200);
+      margin-top: 24px;
+      padding-top: 14px;
+      line-height: 1.6;
+    }
+
+    .thanks-panel {
+      display: none;
+      text-align: center;
+      padding: 56px 36px;
+      background: #fff;
+    }
+    .thanks-panel.show { display: block; }
+    .thanks-panel .check-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    .thanks-panel h2 {
+      font-family: 'DM Serif Display', serif;
+      font-weight: 400;
+      font-size: 1.8rem;
+      color: var(--ink);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    .thanks-panel p {
+      color: var(--gray-600);
+      max-width: 460px;
+      margin: 0 auto;
+      font-size: 0.98rem;
+    }
+    .thanks-panel a {
+      display: inline-block;
+      margin-top: 22px;
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(196,104,60,0.3);
+      padding-bottom: 2px;
+    }
+
+    .survey-foot {
+      text-align: center;
+      padding: 18px 24px;
+      font-size: 0.78rem;
+      color: var(--gray-400);
+      max-width: 760px;
+      margin: 0 auto 32px;
+    }
+    .survey-foot strong { color: var(--ink); font-weight: 600; }
+
+    @media (max-width: 600px) {
+      .survey-head, .survey-body, .thanks-panel { padding-left: 22px; padding-right: 22px; }
+      .survey-head h1 { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="survey-top">
+    <div class="brand">China Quest</div>
+    <div>
+      <span class="eyebrow">Teacher Survey</span>
+      <span class="event-tag">TY Show · 28 Apr 2026</span>
+    </div>
+  </header>
+
+  <div class="section-divider"><h2>Teacher / Coordinator Survey</h2></div>
+
+  <form id="teacher-form" class="survey-wrap" novalidate>
+    <div class="survey-head">
+      <h1>School Trip to China — Expression of Interest</h1>
+      <div class="subtitle">Help us design the perfect programme for your school.</div>
+    </div>
+
+    <div class="survey-body">
+
+      <div class="question">
+        <label class="q-label" for="full_name"><span class="q-num">1</span> Your name</label>
+        <input type="text" id="full_name" name="full_name" placeholder="Full name" />
+      </div>
+
+      <div class="question">
+        <label class="q-label" for="school_name"><span class="q-num">2</span> School name</label>
+        <input type="text" id="school_name" name="school_name" placeholder="School name" />
+      </div>
+
+      <div class="question">
+        <label class="q-label" for="role"><span class="q-num">3</span> Your role</label>
+        <select id="role" name="role">
+          <option value="" disabled selected>Select your role…</option>
+          <option value="TY Coordinator">TY Coordinator</option>
+          <option value="Year Head">Year Head</option>
+          <option value="Principal">Principal</option>
+          <option value="Deputy Principal">Deputy Principal</option>
+          <option value="Teacher">Teacher</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <label class="q-label" for="email"><span class="q-num">4</span> Email address <span class="req">*</span></label>
+        <input type="email" id="email" name="email" placeholder="your@school.ie" required />
+      </div>
+
+      <div class="question">
+        <label class="q-label" for="phone"><span class="q-num">5</span> Phone number <span class="opt">(optional)</span></label>
+        <input type="tel" id="phone" name="phone" placeholder="+353 …" />
+      </div>
+
+      <hr class="sep" />
+
+      <div class="question">
+        <label class="q-label"><span class="q-num">6</span> Does your school currently run international trips?</label>
+        <div class="yes-no-group">
+          <label><input type="radio" name="runs_intl_trips" value="yes"><span class="btn-option">Yes</span></label>
+          <label><input type="radio" name="runs_intl_trips" value="no"><span class="btn-option">No</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <label class="q-label" for="typical_destinations"><span class="q-num">7</span> If yes, where do you typically go?</label>
+        <input type="text" id="typical_destinations" name="typical_destinations" placeholder="e.g. France, USA, Italy…" />
+      </div>
+
+      <div class="question">
+        <label class="q-label" for="typical_group_size"><span class="q-num">8</span> How many students would typically travel?</label>
+        <select id="typical_group_size" name="typical_group_size">
+          <option value="" disabled selected>Select group size…</option>
+          <option value="under15">Under 15</option>
+          <option value="15-25">15–25</option>
+          <option value="25-35">25–35</option>
+          <option value="35-50">35–50</option>
+          <option value="50+">50+</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <label class="q-label"><span class="q-num">9</span> What time of year do you usually travel? <span class="opt">(tick all that apply)</span></label>
+        <div class="check-group">
+          <label><input type="checkbox" name="travel_seasons" value="oct"> October mid-term</label>
+          <label><input type="checkbox" name="travel_seasons" value="feb"> February mid-term</label>
+          <label><input type="checkbox" name="travel_seasons" value="easter"> Easter break</label>
+          <label><input type="checkbox" name="travel_seasons" value="summer"> Summer (June–July)</label>
+          <label><input type="checkbox" name="travel_seasons" value="other"> Other</label>
+        </div>
+      </div>
+
+      <hr class="sep" />
+
+      <div class="question">
+        <label class="q-label"><span class="q-num">10</span> What would be your biggest concern about a trip to China? <span class="opt">(tick all that apply)</span></label>
+        <div class="check-group">
+          <label><input type="checkbox" name="concerns" value="safety"> Safety &amp; security</label>
+          <label><input type="checkbox" name="concerns" value="cost"> Cost</label>
+          <label><input type="checkbox" name="concerns" value="visa"> Visa process</label>
+          <label><input type="checkbox" name="concerns" value="parents"> Parent buy-in</label>
+          <label><input type="checkbox" name="concerns" value="distance"> Distance &amp; travel time</label>
+          <label><input type="checkbox" name="concerns" value="language"> Language barrier</label>
+          <label><input type="checkbox" name="concerns" value="dietary"> Dietary requirements</label>
+          <label><input type="checkbox" name="concerns" value="none"> None. I'd love to go.</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <label class="q-label"><span class="q-num">11</span> What aspects of China would most interest your students? <span class="opt">(tick all that apply)</span></label>
+        <div class="check-group">
+          <label><input type="checkbox" name="student_interests" value="history"> History &amp; Culture</label>
+          <label><input type="checkbox" name="student_interests" value="tech"> Technology &amp; Innovation</label>
+          <label><input type="checkbox" name="student_interests" value="nature"> Nature &amp; Environment</label>
+          <label><input type="checkbox" name="student_interests" value="language"> Language &amp; Communication</label>
+          <label><input type="checkbox" name="student_interests" value="business"> Business &amp; Economics</label>
+          <label><input type="checkbox" name="student_interests" value="art"> Art &amp; Performance</label>
+          <label><input type="checkbox" name="student_interests" value="sport"> Sport &amp; Martial Arts</label>
+        </div>
+      </div>
+
+      <hr class="sep" />
+
+      <div class="question">
+        <label class="q-label" for="budget_range"><span class="q-num">12</span> What is your school's approximate budget per student for an international trip?</label>
+        <select id="budget_range" name="budget_range">
+          <option value="" disabled selected>Select budget range…</option>
+          <option value="under1500">Under €1,500</option>
+          <option value="1500-2500">€1,500–2,500</option>
+          <option value="2500-3500">€2,500–3,500</option>
+          <option value="3500-4500">€3,500–4,500</option>
+          <option value="over4500">Over €4,500</option>
+          <option value="notsure">Not sure</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <label class="q-label"><span class="q-num">13</span> Would you like to receive more information when our programmes launch?</label>
+        <div class="check-group">
+          <label><input type="radio" name="contact_pref" value="email"> Yes, by email</label>
+          <label><input type="radio" name="contact_pref" value="phone"> Yes, by phone</label>
+          <label><input type="radio" name="contact_pref" value="both"> Yes, both</label>
+          <label><input type="radio" name="contact_pref" value="none"> Not right now</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <label class="q-label" for="comments"><span class="q-num">14</span> Any other comments or questions?</label>
+        <textarea id="comments" name="comments" placeholder="Your thoughts, questions, or anything else you'd like us to know…"></textarea>
+      </div>
+
+      <div class="privacy-note">
+        Your information will only be used to contact you about China Quest programmes. We will not share your details with third parties.
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="btn-submit" id="teacher-submit">Submit my answers</button>
+        <div class="form-error" id="teacher-error">Something went wrong. Please try again, or come find us at the booth.</div>
+      </div>
+    </div>
+  </form>
+
+  <div class="survey-wrap thanks-panel" id="teacher-thanks">
+    <div class="check-icon">✓</div>
+    <h2>Thank you.</h2>
+    <p>We've got your answers. We'll be in touch by email when the programme dates and pricing for your year are confirmed.</p>
+    <a href="/pioneer">Read about the Pioneer Programme →</a>
+  </div>
+
+  <footer class="survey-foot">
+    <strong>China Quest</strong> · by Miles Minds · chinaquest.ie
+  </footer>
+
+  <script>
+    const SUPABASE_URL = "https://eetjeyfyrwwoeeujxvmo.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_CfYxUmRrtijUNTxwSceTyQ_mA17jzYv";
+    const TABLE = "survey_teacher";
+
+    const form = document.getElementById("teacher-form");
+    const submitBtn = document.getElementById("teacher-submit");
+    const errBox = document.getElementById("teacher-error");
+    const thanks = document.getElementById("teacher-thanks");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      errBox.classList.remove("show");
+
+      const fd = new FormData(form);
+      const email = (fd.get("email") || "").trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errBox.textContent = "Please give us a valid email so we can follow up.";
+        errBox.classList.add("show");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting…";
+
+      const payload = {
+        full_name: (fd.get("full_name") || "").trim() || null,
+        school_name: (fd.get("school_name") || "").trim() || null,
+        role: fd.get("role") || null,
+        email,
+        phone: (fd.get("phone") || "").trim() || null,
+        runs_intl_trips:
+          fd.get("runs_intl_trips") === "yes" ? true :
+          fd.get("runs_intl_trips") === "no"  ? false : null,
+        typical_destinations: (fd.get("typical_destinations") || "").trim() || null,
+        typical_group_size: fd.get("typical_group_size") || null,
+        travel_seasons: fd.getAll("travel_seasons"),
+        concerns: fd.getAll("concerns"),
+        student_interests: fd.getAll("student_interests"),
+        budget_range: fd.get("budget_range") || null,
+        contact_pref: fd.get("contact_pref") || null,
+        comments: (fd.get("comments") || "").trim() || null,
+        user_agent: navigator.userAgent,
+      };
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/${TABLE}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+            Prefer: "return=minimal",
+          },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) {
+          const t = await res.text().catch(() => "");
+          throw new Error(`HTTP ${res.status} ${t.slice(0, 120)}`);
+        }
+        form.style.display = "none";
+        thanks.classList.add("show");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } catch (err) {
+        console.error(err);
+        errBox.textContent = "Something went wrong. Please try again, or email info@milesminds.com.";
+        errBox.classList.add("show");
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit my answers";
+      }
+    });
+  </script>
+</body>
+</html>

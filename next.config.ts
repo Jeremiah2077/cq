@@ -21,6 +21,8 @@ const STATIC_PAGES = [
   "chengdu",
   "guilin",
   "zhangjiajie",
+  "survey-student",
+  "survey-teacher",
 ];
 
 const nextConfig: NextConfig = {

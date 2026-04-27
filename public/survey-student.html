@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>China Quest · Student Survey</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #0f1923;
+      --primary: #1b3a5c;
+      --primary-light: #2a5580;
+      --primary-subtle: #e9eff5;
+      --accent: #c4683c;
+      --accent-hover: #a8562f;
+      --bg: #fafaf8;
+      --gray-100: #f0eeeb;
+      --gray-200: #e2dfda;
+      --gray-300: #c8c4bd;
+      --gray-400: #9e9a93;
+      --gray-500: #6b6760;
+      --gray-600: #4a4640;
+      --gray-700: #2d2a26;
+      --radius: 8px;
+      --input-h: 48px;
+    }
+    html, body { background: var(--bg); }
+    body {
+      font-family: 'DM Sans', -apple-system, "Helvetica Neue", Arial, sans-serif;
+      font-size: 15px;
+      color: var(--gray-700);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== Header ===== */
+    .survey-top {
+      background: linear-gradient(135deg, var(--ink) 0%, #1b2d3f 100%);
+      color: #fff;
+      text-align: center;
+      padding: 32px 24px 24px;
+      border-bottom: 3px solid var(--accent);
+    }
+    .survey-top .brand {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.04em;
+      color: #fff;
+      line-height: 1;
+    }
+    .survey-top .eyebrow {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .survey-top .event-tag {
+      display: inline-block;
+      margin-top: 8px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-left: 8px;
+    }
+
+    /* ===== Section divider ===== */
+    .section-divider {
+      text-align: center;
+      padding: 22px 24px 0;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .section-divider h2 {
+      display: inline-block;
+      padding: 8px 28px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      color: #fff;
+      background: var(--primary);
+    }
+
+    /* ===== Wrapper / panels ===== */
+    .survey-wrap {
+      max-width: 760px;
+      margin: 12px auto 32px;
+      background: #fff;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(15,25,35,0.06);
+      border: 1px solid var(--gray-200);
+    }
+    .survey-head {
+      padding: 32px 36px 22px;
+      background: var(--primary-subtle);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .survey-head h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-weight: 400;
+      font-size: 1.8rem;
+      color: var(--ink);
+      letter-spacing: -0.005em;
+      line-height: 1.15;
+    }
+    .survey-head .subtitle {
+      font-size: 0.95rem;
+      color: var(--gray-600);
+      margin-top: 8px;
+    }
+    .survey-body {
+      padding: 30px 36px 36px;
+    }
+
+    /* ===== Question block ===== */
+    .question { margin-bottom: 26px; }
+    .q-label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--ink);
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    .q-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-right: 10px;
+      vertical-align: middle;
+      background: var(--primary);
+    }
+    .opt {
+      font-size: 0.78rem;
+      color: var(--gray-500);
+      font-weight: 400;
+      margin-left: 6px;
+    }
+    .req { color: var(--accent); font-weight: 700; margin-left: 3px; }
+
+    /* ===== Inputs ===== */
+    input[type="text"], input[type="email"], input[type="tel"], select, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--gray-300);
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: var(--ink);
+      background: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      min-height: var(--input-h);
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(27,58,92,0.1);
+    }
+    textarea { min-height: 96px; resize: vertical; line-height: 1.55; }
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%231b3a5c' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+    .input-hint { font-size: 0.8rem; color: var(--gray-500); margin-top: 6px; }
+
+    /* ===== Yes/No ===== */
+    .yes-no-group { display: flex; gap: 12px; flex-wrap: wrap; }
+    .yes-no-group label { flex: 1; min-width: 110px; max-width: 200px; }
+    .yes-no-group input[type="radio"] { display: none; }
+    .yes-no-group .btn-option {
+      display: block;
+      text-align: center;
+      padding: 13px 20px;
+      border: 1.5px solid var(--gray-300);
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.98rem;
+      background: #fff;
+      transition: all 0.15s;
+      min-height: var(--input-h);
+      line-height: 1.2;
+    }
+    .yes-no-group input[type="radio"]:checked + .btn-option {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    /* ===== Checkbox / radio list ===== */
+    .check-group { display: flex; flex-direction: column; gap: 10px; }
+    .check-group label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      padding: 12px 14px;
+      background: #fff;
+      border: 1.5px solid var(--gray-300);
+      border-radius: var(--radius);
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .check-group label:hover { border-color: var(--primary); }
+    .check-group input[type="checkbox"], .check-group input[type="radio"] {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    /* ===== 1–5 scale ===== */
+    .scale-group { display: flex; gap: 10px; flex-wrap: wrap; }
+    .scale-group label { flex: 1; min-width: 56px; text-align: center; }
+    .scale-group input[type="radio"] { display: none; }
+    .scale-btn {
+      display: block;
+      padding: 12px 8px 8px;
+      border: 1.5px solid var(--gray-300);
+      border-radius: var(--radius);
+      cursor: pointer;
+      background: #fff;
+      transition: all 0.15s;
+    }
+    .scale-btn .num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      color: var(--primary);
+      display: block;
+      line-height: 1;
+    }
+    .scale-btn .lbl {
+      font-size: 0.66rem;
+      color: var(--gray-500);
+      display: block;
+      margin-top: 4px;
+      line-height: 1.2;
+    }
+    .scale-group input[type="radio"]:checked + .scale-btn {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+    .scale-group input[type="radio"]:checked + .scale-btn .num,
+    .scale-group input[type="radio"]:checked + .scale-btn .lbl {
+      color: #fff;
+    }
+
+    hr.sep { border: none; border-top: 1px dashed var(--gray-200); margin: 22px 0; }
+
+    /* ===== Submit ===== */
+    .submit-row {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid var(--gray-200);
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 16px 24px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-submit:hover:not(:disabled) { background: var(--accent-hover); }
+    .btn-submit:active:not(:disabled) { transform: translateY(1px); }
+    .btn-submit:disabled { opacity: 0.55; cursor: not-allowed; }
+
+    .form-error {
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: var(--radius);
+      background: #fff5f3;
+      border: 1px solid #f0c4b3;
+      color: var(--accent-hover);
+      font-size: 0.88rem;
+      display: none;
+    }
+    .form-error.show { display: block; }
+
+    .privacy-note {
+      font-size: 0.78rem;
+      color: var(--gray-500);
+      margin-top: 18px;
+      line-height: 1.6;
+    }
+
+    /* ===== Success state ===== */
+    .thanks-panel {
+      display: none;
+      text-align: center;
+      padding: 56px 36px;
+      background: #fff;
+    }
+    .thanks-panel.show { display: block; }
+    .thanks-panel .check-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    .thanks-panel h2 {
+      font-family: 'DM Serif Display', serif;
+      font-weight: 400;
+      font-size: 1.8rem;
+      color: var(--ink);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    .thanks-panel p {
+      color: var(--gray-600);
+      max-width: 440px;
+      margin: 0 auto;
+      font-size: 0.98rem;
+    }
+    .thanks-panel a {
+      display: inline-block;
+      margin-top: 22px;
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(196,104,60,0.3);
+      padding-bottom: 2px;
+    }
+
+    /* ===== Footer ===== */
+    .survey-foot {
+      text-align: center;
+      padding: 18px 24px;
+      font-size: 0.78rem;
+      color: var(--gray-400);
+      max-width: 760px;
+      margin: 0 auto 32px;
+    }
+    .survey-foot strong { color: var(--ink); font-weight: 600; }
+
+    @media (max-width: 600px) {
+      .survey-head, .survey-body, .thanks-panel { padding-left: 22px; padding-right: 22px; }
+      .survey-head h1 { font-size: 1.5rem; }
+      .scale-btn .lbl { font-size: 0.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="survey-top">
+    <div class="brand">China Quest</div>
+    <div>
+      <span class="eyebrow">Student Survey</span>
+      <span class="event-tag">TY Show · 28 Apr 2026</span>
+    </div>
+  </header>
+
+  <div class="section-divider"><h2>Student Survey</h2></div>
+
+  <form id="student-form" class="survey-wrap" novalidate>
+    <div class="survey-head">
+      <h1>What do you know about China?</h1>
+      <div class="subtitle">Take 30 seconds — you might win a prize!</div>
+    </div>
+
+    <div class="survey-body">
+
+      <div class="question">
+        <label class="q-label" for="year_group"><span class="q-num">1</span> What year are you in?</label>
+        <select id="year_group" name="year_group" required>
+          <option value="" disabled selected>Select your year…</option>
+          <option value="TY">TY</option>
+          <option value="5th">5th Year</option>
+          <option value="6th">6th Year</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <hr class="sep" />
+
+      <div class="question">
+        <label class="q-label"><span class="q-num">2</span> Have you ever been to Asia?</label>
+        <div class="yes-no-group">
+          <label><input type="radio" name="been_to_asia" value="yes"><span class="btn-option">Yes</span></label>
+          <label><input type="radio" name="been_to_asia" value="no"><span class="btn-option">No</span></label>
+        </div>
+      </div>
+      <hr class="sep" />
+
+      <div class="question">
+        <label class="q-label"><span class="q-num">3</span> What interests you most about China? <span class="opt">(tick all that apply)</span></label>
+        <div class="check-group">
+          <label><input type="checkbox" name="interests" value="history"> History &amp; ancient sites</label>
+          <label><input type="checkbox" name="interests" value="food"> Food &amp; cooking</label>
+          <label><input type="checkbox" name="interests" value="tech"> Technology &amp; innovation</label>
+          <label><input type="checkbox" name="interests" value="nature"> Nature &amp; landscapes</label>
+          <label><input type="checkbox" name="interests" value="martial"> Martial arts &amp; sports</label>
+          <label><input type="checkbox" name="interests" value="art"> Music &amp; art</label>
+          <label><input type="checkbox" name="interests" value="language"> Language</label>
+          <label><input type="checkbox" name="interests" value="none"> None of the above</label>
+        </div>
+      </div>
+      <hr class="sep" />
+
+      <div class="question">
+        <label class="q-label"><span class="q-num">4</span> Would you be interested in a school trip to China?</label>
+        <div class="scale-group">
+          <label><input type="radio" name="interest_level" value="1"><span class="scale-btn"><span class="num">1</span><span class="lbl">Not at all</span></span></label>
+          <label><input type="radio" name="interest_level" value="2"><span class="scale-btn"><span class="num">2</span><span class="lbl">&nbsp;</span></span></label>
+          <label><input type="radio" name="interest_level" value="3"><span class="scale-btn"><span class="num">3</span><span class="lbl">Maybe</span></span></label>
+          <label><input type="radio" name="interest_level" value="4"><span class="scale-btn"><span class="num">4</span><span class="lbl">&nbsp;</span></span></label>
+          <label><input type="radio" name="interest_level" value="5"><span class="scale-btn"><span class="num">5</span><span class="lbl">Definitely!</span></span></label>
+        </div>
+      </div>
+      <hr class="sep" />
+
+      <div class="question">
+        <label class="q-label" for="expected_cost"><span class="q-num">5</span> How much would you expect a 10-day school trip to China to cost?</label>
+        <input type="text" id="expected_cost" name="expected_cost" placeholder="e.g. 2500" />
+        <div class="input-hint">Per person, in euros (€).</div>
+      </div>
+      <hr class="sep" />
+
+      <div class="question">
+        <label class="q-label" for="school_name"><span class="q-num">6</span> What's your school name?</label>
+        <input type="text" id="school_name" name="school_name" placeholder="Your school name" />
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="btn-submit" id="student-submit">Submit my answers</button>
+        <div class="form-error" id="student-error">Something went wrong. Please try again, or come find us at the booth.</div>
+        <p class="privacy-note">Your answers help us design the right China trips for Irish schools. We won't share your school name with anyone outside Miles Minds.</p>
+      </div>
+    </div>
+  </form>
+
+  <div class="survey-wrap thanks-panel" id="student-thanks">
+    <div class="check-icon">✓</div>
+    <h2>Thank you!</h2>
+    <p>Your answers are in — come find us at the booth to collect your raffle ticket.</p>
+    <a href="/pioneer">Learn about the Pioneer Programme →</a>
+  </div>
+
+  <footer class="survey-foot">
+    <strong>China Quest</strong> · by Miles Minds · chinaquest.ie
+  </footer>
+
+  <script>
+    const SUPABASE_URL = "https://eetjeyfyrwwoeeujxvmo.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_CfYxUmRrtijUNTxwSceTyQ_mA17jzYv";
+    const TABLE = "survey_student";
+
+    const form = document.getElementById("student-form");
+    const submitBtn = document.getElementById("student-submit");
+    const errBox = document.getElementById("student-error");
+    const thanks = document.getElementById("student-thanks");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      errBox.classList.remove("show");
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting…";
+
+      const fd = new FormData(form);
+      const interests = fd.getAll("interests");
+      const payload = {
+        year_group: fd.get("year_group") || null,
+        been_to_asia: fd.get("been_to_asia") === "yes" ? true : fd.get("been_to_asia") === "no" ? false : null,
+        interests,
+        interest_level: fd.get("interest_level") ? parseInt(fd.get("interest_level"), 10) : null,
+        expected_cost: (fd.get("expected_cost") || "").trim() || null,
+        school_name: (fd.get("school_name") || "").trim() || null,
+        user_agent: navigator.userAgent,
+      };
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/${TABLE}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+            Prefer: "return=minimal",
+          },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) {
+          const t = await res.text().catch(() => "");
+          throw new Error(`HTTP ${res.status} ${t.slice(0, 120)}`);
+        }
+        form.style.display = "none";
+        thanks.classList.add("show");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } catch (err) {
+        console.error(err);
+        errBox.textContent = "Something went wrong. Please try again, or come find us at the booth.";
+        errBox.classList.add("show");
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit my answers";
+      }
+    });
+  </script>
+</body>
+</html>
