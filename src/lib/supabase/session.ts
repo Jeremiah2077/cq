@@ -47,24 +47,16 @@ export async function updateSession(request: NextRequest) {
   }
 
   if (user && isProtected) {
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("onboarding_complete")
-      .eq("id", user.id)
-      .maybeSingle();
+    const [{ data: profile }, { data: studentProfile }] = await Promise.all([
+      supabase.from("profiles").select("onboarding_complete").eq("id", user.id).maybeSingle(),
+      supabase.from("student_profiles").select("is_minor, parent_verified, parent_email").eq("id", user.id).maybeSingle(),
+    ]);
 
     if (!profile?.onboarding_complete) {
       const url = request.nextUrl.clone();
       url.pathname = "/onboarding";
       return NextResponse.redirect(url);
     }
-
-    // Minor without parent verification → force to /parent-verify
-    const { data: studentProfile } = await supabase
-      .from("student_profiles")
-      .select("is_minor, parent_verified, parent_email")
-      .eq("id", user.id)
-      .maybeSingle();
 
     if (studentProfile?.is_minor && !studentProfile.parent_verified && studentProfile.parent_email) {
       const url = request.nextUrl.clone();
