@@ -27,7 +27,7 @@ export const PIONEER_MILESTONES: Milestone[] = [
     key: "application_close",
     phase: "Application",
     title: "Applications close",
-    detail: "Two-week window — don't wait for the last day.",
+    detail: "Two-week window. Don't wait for the last day.",
     target: "TBD",
   },
   {
