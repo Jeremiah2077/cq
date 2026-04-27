@@ -28,7 +28,7 @@ export default async function ForgotPasswordPage({
     >
       {success && (
         <div className="mb-5 rounded-[var(--radius-sm)] border border-[var(--gold-light)] bg-[var(--gold-light)] px-4 py-3 text-[0.85rem] text-[var(--gray-700)]">
-          Check your inbox — we sent a password reset link.
+          Check your inbox. We sent a password reset link.
         </div>
       )}
       {error && (

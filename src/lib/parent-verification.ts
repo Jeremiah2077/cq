@@ -52,7 +52,7 @@ export async function sendParentVerificationEmail({
           <span style="background-color: #f8f7f5; border: 2px solid #c4683c; padding: 16px 32px; border-radius: 8px; font-size: 28px; font-weight: 700; letter-spacing: 6px; color: #0f1923; display: inline-block;">${code}</span>
         </p>
         <p>To give your consent, visit <a href="${verifyUrl}" style="color: #c4683c; font-weight: 600;">${verifyUrl}</a> and enter this code.</p>
-        <p>This code expires in <strong>7 days</strong>. If you did not expect this email, you can safely ignore it — no account will be activated without your consent.</p>
+        <p>This code expires in <strong>7 days</strong>. If you did not expect this email, you can safely ignore it. No account will be activated without your consent.</p>
         <p style="margin-top: 32px; color: #9e9a93; font-size: 14px;">
           China Quest — Miles Minds Limited, Ireland<br>
           info@milesminds.com
