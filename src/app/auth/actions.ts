@@ -274,6 +274,56 @@ export async function resendParentVerification() {
   redirect("/dashboard?parent_resent=true");
 }
 
+export async function updateParentEmail(formData: FormData) {
+  const newEmail = String(formData.get("parent_email") ?? "").trim();
+  if (!newEmail) return;
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) redirect("/login");
+
+  const { data: studentProfile } = await supabase
+    .from("student_profiles")
+    .select("is_minor, parent_verified")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  if (!studentProfile?.is_minor || studentProfile.parent_verified) {
+    redirect("/dashboard");
+  }
+
+  // Update parent email
+  await supabase
+    .from("student_profiles")
+    .update({ parent_email: newEmail })
+    .eq("id", user.id);
+
+  // Send verification to new email
+  const hdrs = await headers();
+  const host = hdrs.get("x-forwarded-host") ?? hdrs.get("host") ?? "localhost:3000";
+  const proto = hdrs.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
+  const origin = `${proto}://${host}`;
+
+  const fullName =
+    (user.user_metadata?.full_name as string) ||
+    (user.user_metadata?.name as string) ||
+    user.email ||
+    "Your child";
+
+  const { sendParentVerificationEmail } = await import("@/lib/parent-verification");
+  await sendParentVerificationEmail({
+    userId: user.id,
+    parentEmail: newEmail,
+    studentName: fullName,
+    origin,
+  });
+
+  redirect(`/parent-verify?parent_email=${encodeURIComponent(newEmail)}`);
+}
+
 export async function parentVerify(formData: FormData) {
   const code = String(formData.get("code") ?? "").trim();
 

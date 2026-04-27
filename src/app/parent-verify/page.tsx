@@ -4,7 +4,7 @@ import { useState, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
-import { parentVerify } from "@/app/auth/actions";
+import { parentVerify, updateParentEmail } from "@/app/auth/actions";
 
 export default function ParentVerifyPage() {
   return (
@@ -22,6 +22,8 @@ function ParentVerifyContent() {
   const [code, setCode] = useState("");
   const [error, setError] = useState(urlError);
   const [loading, setLoading] = useState(false);
+  const [showUpdateEmail, setShowUpdateEmail] = useState(false);
+  const [newEmail, setNewEmail] = useState("");
 
   if (success) {
     return (
@@ -116,12 +118,49 @@ function ParentVerifyContent() {
               </button>
             </form>
 
-            <p className="mt-5 text-center text-[0.82rem] text-[var(--gray-400)]">
-              Didn&apos;t receive the code? Ask your child to resend it from their dashboard, or contact{" "}
-              <Link href="mailto:info@milesminds.com" className="text-[var(--accent)] underline">
-                info@milesminds.com
-              </Link>
-            </p>
+            <div className="mt-5 text-center">
+              {!showUpdateEmail ? (
+                <button
+                  type="button"
+                  onClick={() => setShowUpdateEmail(true)}
+                  className="text-[0.82rem] text-[var(--accent)] font-semibold underline cursor-pointer"
+                >
+                  Update email
+                </button>
+              ) : (
+                <form action={updateParentEmail} className="space-y-3 text-left">
+                  <label className="block">
+                    <span className="field-label">New parent/guardian email</span>
+                    <input
+                      name="parent_email"
+                      type="email"
+                      required
+                      value={newEmail}
+                      onChange={(e) => setNewEmail(e.target.value)}
+                      placeholder="parent@example.com"
+                      className="field-input text-[0.9rem]"
+                    />
+                  </label>
+                  <div className="flex gap-2">
+                    <button
+                      type="submit"
+                      disabled={!newEmail}
+                      className="btn-primary flex-1 text-[0.82rem]"
+                      style={{ opacity: !newEmail ? 0.6 : 1 }}
+                    >
+                      Update &amp; resend code
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => { setShowUpdateEmail(false); setNewEmail(""); }}
+                      className="px-3 py-2 text-[0.82rem] text-[var(--gray-500)] border border-[var(--gray-200)] rounded-[var(--radius-sm)]"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
           </div>
         </div>
       </main>
