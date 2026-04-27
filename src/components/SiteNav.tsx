@@ -151,7 +151,7 @@ export function SiteNav({
               <a href="tel:+353894841019" className="hover:text-white transition-colors">+353 89 484 1019</a>
             </div>
             <div className="flex gap-4 items-center">
-              <span>Ireland-based since 2005</span>
+              <span>Ireland-based since 2025</span>
               {rightSlot}
             </div>
           </div>
@@ -239,7 +239,7 @@ export function SiteFooter() {
         <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-12 mb-12">
           <div>
             <div className="font-display text-[1.35rem] text-white mb-4">China Quest</div>
-            <p className="text-[0.88rem] leading-[1.8] max-w-[300px]">A structured educational journey across modern China. Designed for Irish and international schools by Miles Minds Limited, Ireland. Founded 2005.</p>
+            <p className="text-[0.88rem] leading-[1.8] max-w-[300px]">A structured educational journey across modern China. Designed for Irish and international schools by Miles Minds Limited, Ireland. Founded 2025.</p>
           </div>
           <div>
             <h5 className="text-white text-[0.85rem] font-semibold uppercase tracking-[1.5px] mb-5">Programmes</h5>
