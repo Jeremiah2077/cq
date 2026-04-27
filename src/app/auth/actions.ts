@@ -76,8 +76,19 @@ export async function signUp(formData: FormData) {
     redirect(`/login?error=${encodeURIComponent("This email is already registered. Please sign in instead.")}`);
   }
 
-  // Send parent verification email immediately at signup (don't wait for student to verify)
+  // For minors: skip student email verification, only require parent consent (GDPR Art. 8)
   if (data.user && isMinor && parentEmail) {
+    // Auto-confirm the student's email so they don't need to verify
+    const { createClient: createAdminClient } = await import("@supabase/supabase-js");
+    const adminSupabase = createAdminClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    );
+    await adminSupabase.auth.admin.updateUserById(data.user.id, {
+      email_confirm: true,
+    });
+
+    // Send verification email to parent only
     const { sendParentVerificationEmail } = await import("@/lib/parent-verification");
     await sendParentVerificationEmail({
       userId: data.user.id,
@@ -85,10 +96,29 @@ export async function signUp(formData: FormData) {
       studentName: fullName || email,
       origin,
     });
+
+    // Create profiles immediately (since we're skipping the verify→callback flow)
+    await supabase.from("profiles").upsert({
+      id: data.user.id,
+      full_name: fullName,
+      school,
+      role,
+      year_group: yearGroup,
+      onboarding_complete: true,
+    });
+    await supabase.from("student_profiles").upsert({
+      id: data.user.id,
+      year_group: yearGroup,
+      age_group: ageGroup,
+      is_minor: true,
+      parent_email: parentEmail,
+      parent_verified: false,
+    });
+
+    redirect(`/login?message=${encodeURIComponent("Registration complete. A verification email has been sent to your parent/guardian. You can log in once they confirm.")}`);
   }
 
-  // If email confirmations are enabled, session will be null until the user confirms.
-  // Redirect to verify page where user enters the 8-digit code.
+  // Non-minor flow: student verifies their own email as usual
   if (!data.session) {
     redirect(`/verify?email=${encodeURIComponent(email)}`);
   }
