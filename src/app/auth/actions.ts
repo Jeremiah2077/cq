@@ -76,6 +76,17 @@ export async function signUp(formData: FormData) {
     redirect(`/login?error=${encodeURIComponent("This email is already registered. Please sign in instead.")}`);
   }
 
+  // Send parent verification email immediately at signup (don't wait for student to verify)
+  if (data.user && isMinor && parentEmail) {
+    const { sendParentVerificationEmail } = await import("@/lib/parent-verification");
+    await sendParentVerificationEmail({
+      userId: data.user.id,
+      parentEmail,
+      studentName: fullName || email,
+      origin,
+    });
+  }
+
   // If email confirmations are enabled, session will be null until the user confirms.
   // Redirect to verify page where user enters the 8-digit code.
   if (!data.session) {
@@ -169,21 +180,7 @@ export async function verifyOtp(formData: FormData) {
             parent_email: parentEmail || null,
             parent_verified: false,
           });
-          // Send parent verification email for minors
-          if (isMinor && parentEmail) {
-            const hdrs = await headers();
-            const host = hdrs.get("x-forwarded-host") ?? hdrs.get("host") ?? "localhost:3000";
-            const proto = hdrs.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
-            const origin = `${proto}://${host}`;
-
-            const { sendParentVerificationEmail } = await import("@/lib/parent-verification");
-            await sendParentVerificationEmail({
-              userId: user.id,
-              parentEmail,
-              studentName: fullName || email,
-              origin,
-            });
-          }
+          // Parent verification email is already sent at signup time — no duplicate here
         } else if (role === "teacher") {
           const roleTitle = (meta.role_title as string) || "";
 
