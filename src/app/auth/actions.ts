@@ -18,7 +18,11 @@ export async function signIn(formData: FormData) {
       await supabase.auth.resend({ type: "signup", email });
       redirect(`/verify?email=${encodeURIComponent(email)}`);
     }
-    redirect(`/login?error=${encodeURIComponent(error.message)}`);
+    const msg =
+      error.message === "Invalid login credentials"
+        ? "Email or password is incorrect. If you haven't registered yet, please sign up first."
+        : error.message;
+    redirect(`/login?error=${encodeURIComponent(msg)}`);
   }
 
   revalidatePath("/", "layout");
