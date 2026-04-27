@@ -119,7 +119,10 @@ export async function signUp(formData: FormData) {
       parent_verified: false,
     });
 
-    redirect(`/login?message=${encodeURIComponent("Registration complete. A verification email has been sent to your parent/guardian. You can log in once they confirm.")}`);
+    // Auto sign-in the student, then redirect to parent verify page
+    await supabase.auth.signInWithPassword({ email, password });
+    revalidatePath("/", "layout");
+    redirect(`/parent-verify?parent_email=${encodeURIComponent(parentEmail)}`);
   }
 
   // Non-minor flow: student verifies their own email as usual
@@ -309,7 +312,8 @@ export async function parentVerify(formData: FormData) {
     .update({ parent_verified: true })
     .eq("id", request.user_id);
 
-  redirect("/parent-verify?success=true");
+  revalidatePath("/", "layout");
+  redirect("/dashboard");
 }
 
 export async function signOut() {

@@ -18,6 +18,7 @@ function ParentVerifyContent() {
   const searchParams = useSearchParams();
   const success = searchParams.get("success");
   const urlError = searchParams.get("error") || "";
+  const parentEmail = searchParams.get("parent_email") || "";
   const [code, setCode] = useState("");
   const [error, setError] = useState(urlError);
   const [loading, setLoading] = useState(false);
@@ -68,7 +69,11 @@ function ParentVerifyContent() {
             Parent/Guardian consent.
           </h1>
           <p className="text-center text-[var(--gray-500)] text-[0.95rem] leading-[1.7] mb-8 max-w-sm mx-auto">
-            Enter the 8-digit code sent to your email to confirm consent for your child&apos;s China Quest account.
+            {parentEmail ? (
+              <>A verification code has been sent to <strong className="text-[var(--ink)]">{parentEmail}</strong>. Enter the code below to verify your account.</>
+            ) : (
+              <>Enter the 8-digit code sent to your parent/guardian&apos;s email to verify your account.</>
+            )}
           </p>
 
           <div className="bg-white border border-[var(--gray-200)] rounded-[var(--radius-md)] p-8 shadow-[0_4px_30px_rgba(15,25,35,0.04)]">
