@@ -329,7 +329,7 @@ function nextSteps(status: ApplicationStatus): string[] {
       return [
         "Keep your email and phone reachable. We'll contact you first when applications open.",
         "Start thinking about your 60–90 second video: why you want to go to China.",
-        "Mention the programme to your principal or a teacher — early support helps.",
+        "Mention the programme to your principal or a teacher. Early support helps.",
       ];
     case "applying":
       return [
