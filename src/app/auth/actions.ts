@@ -88,39 +88,37 @@ export async function signUp(formData: FormData) {
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.SUPABASE_SERVICE_ROLE_KEY!,
     );
+    // Auto-confirm email, then run everything else in parallel
     await adminSupabase.auth.admin.updateUserById(data.user.id, {
       email_confirm: true,
     });
 
-    // Send verification email to parent only
     const { sendParentVerificationEmail } = await import("@/lib/parent-verification");
-    await sendParentVerificationEmail({
-      userId: data.user.id,
-      parentEmail,
-      studentName: fullName || email,
-      origin,
-    });
-
-    // Create profiles using admin client to bypass RLS
-    await adminSupabase.from("profiles").upsert({
-      id: data.user.id,
-      full_name: fullName,
-      school,
-      role,
-      year_group: yearGroup,
-      onboarding_complete: true,
-    });
-    await adminSupabase.from("student_profiles").upsert({
-      id: data.user.id,
-      year_group: yearGroup,
-      age_group: ageGroup,
-      is_minor: true,
-      parent_email: parentEmail,
-      parent_verified: false,
-    });
-
-    // Auto sign-in the student, then redirect to parent verify page
-    await supabase.auth.signInWithPassword({ email, password });
+    await Promise.all([
+      sendParentVerificationEmail({
+        userId: data.user.id,
+        parentEmail,
+        studentName: fullName || email,
+        origin,
+      }),
+      adminSupabase.from("profiles").upsert({
+        id: data.user.id,
+        full_name: fullName,
+        school,
+        role,
+        year_group: yearGroup,
+        onboarding_complete: true,
+      }),
+      adminSupabase.from("student_profiles").upsert({
+        id: data.user.id,
+        year_group: yearGroup,
+        age_group: ageGroup,
+        is_minor: true,
+        parent_email: parentEmail,
+        parent_verified: false,
+      }),
+      supabase.auth.signInWithPassword({ email, password }),
+    ]);
     revalidatePath("/", "layout");
     redirect(`/parent-verify?parent_email=${encodeURIComponent(parentEmail)}`);
   }
