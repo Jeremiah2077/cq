@@ -185,31 +185,39 @@ export async function signOut() {
 export async function resetPassword(formData: FormData) {
   const email = String(formData.get("email") ?? "").trim();
 
-  const hdrs = await headers();
-  const host = hdrs.get("x-forwarded-host") ?? hdrs.get("host") ?? "localhost:3000";
-  const proto = hdrs.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
-  const origin = `${proto}://${host}`;
-
   const supabase = await createClient();
-  const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${origin}/auth/callback?next=/reset-password`,
-  });
+  const { error } = await supabase.auth.resetPasswordForEmail(email);
 
   if (error) {
     redirect(`/forgot-password?error=${encodeURIComponent(error.message)}`);
   }
 
-  redirect("/forgot-password?success=true");
+  redirect(`/reset-password?email=${encodeURIComponent(email)}`);
 }
 
-export async function updatePassword(formData: FormData) {
+export async function verifyResetAndUpdatePassword(formData: FormData) {
+  const email = String(formData.get("email") ?? "").trim();
+  const token = String(formData.get("token") ?? "").trim();
   const password = String(formData.get("password") ?? "");
 
   const supabase = await createClient();
-  const { error } = await supabase.auth.updateUser({ password });
 
-  if (error) {
-    redirect(`/reset-password?error=${encodeURIComponent(error.message)}`);
+  // Verify the OTP token first
+  const { error: verifyError } = await supabase.auth.verifyOtp({
+    email,
+    token,
+    type: "recovery",
+  });
+
+  if (verifyError) {
+    redirect(`/reset-password?email=${encodeURIComponent(email)}&error=${encodeURIComponent(verifyError.message)}`);
+  }
+
+  // Now update the password
+  const { error: updateError } = await supabase.auth.updateUser({ password });
+
+  if (updateError) {
+    redirect(`/reset-password?email=${encodeURIComponent(email)}&error=${encodeURIComponent(updateError.message)}`);
   }
 
   revalidatePath("/", "layout");
@@ -224,37 +232,31 @@ export async function requestAccountDeletion() {
 
   if (!user) redirect("/login");
 
-  const hdrs = await headers();
-  const host = hdrs.get("x-forwarded-host") ?? hdrs.get("host") ?? "localhost:3000";
-  const proto = hdrs.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
-  const origin = `${proto}://${host}`;
+  // Generate 8-digit code
+  const code = String(Math.floor(10000000 + Math.random() * 90000000));
 
-  // Create deletion request with token
-  const { data, error } = await supabase
+  // Store code in deletion requests table
+  const { error } = await supabase
     .from("account_deletion_requests")
-    .insert({ user_id: user.id })
-    .select("token")
-    .single();
+    .insert({ user_id: user.id, token: code });
 
-  if (error || !data) {
+  if (error) {
     redirect("/dashboard?error=deletion-request-failed");
   }
 
-  // Send confirmation email
+  // Send verification code email
   const { sendEmail } = await import("@/lib/email");
   await sendEmail({
     to: user.email!,
-    subject: "Confirm account deletion — China Quest",
+    subject: "Your account deletion code — China Quest",
     html: `
       <h2>Account Deletion Request</h2>
       <p>Hi there,</p>
-      <p>We received a request to permanently delete your China Quest account. This will remove all your data and cannot be undone.</p>
-      <p style="margin: 32px 0;">
-        <a href="${origin}/delete-confirm?token=${data.token}" style="background-color: #c4683c; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px;">
-          Confirm deletion
-        </a>
+      <p>We received a request to permanently delete your China Quest account. Your verification code is:</p>
+      <p style="margin: 32px 0; text-align: center;">
+        <span style="background-color: #f8f7f5; border: 2px solid #c4683c; padding: 16px 32px; border-radius: 8px; font-size: 28px; font-weight: 700; letter-spacing: 6px; color: #0f1923; display: inline-block;">${code}</span>
       </p>
-      <p>This link expires in 24 hours. If you didn't request this, you can safely ignore this email.</p>
+      <p>This code expires in 24 hours. If you didn't request this, you can safely ignore this email.</p>
       <p style="margin-top: 32px; color: #9e9a93; font-size: 14px;">
         China Quest — Miles Minds Limited, Ireland<br>
         info@milesminds.com
@@ -262,10 +264,19 @@ export async function requestAccountDeletion() {
     `,
   });
 
-  redirect("/dashboard?notice=deletion-email-sent");
+  redirect("/delete-confirm");
 }
 
-export async function confirmAccountDeletion(token: string) {
+export async function confirmAccountDeletion(formData: FormData) {
+  const code = String(formData.get("code") ?? "").trim();
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) redirect("/login");
+
   const { createClient: createAdminClient } = await import("@supabase/supabase-js");
   const adminSupabase = createAdminClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -276,15 +287,18 @@ export async function confirmAccountDeletion(token: string) {
   const { data: request } = await adminSupabase
     .from("account_deletion_requests")
     .select("*")
-    .eq("token", token)
+    .eq("token", code)
+    .eq("user_id", user.id)
     .eq("used", false)
     .single();
 
-  if (!request) return { error: "Invalid or expired link." };
+  if (!request) {
+    redirect("/delete-confirm?error=Invalid+or+expired+code");
+  }
 
   // Check expiry
   if (new Date(request.expires_at) < new Date()) {
-    return { error: "This link has expired. Please request deletion again." };
+    redirect("/delete-confirm?error=Code+has+expired.+Please+request+again");
   }
 
   // Mark token as used
@@ -294,12 +308,16 @@ export async function confirmAccountDeletion(token: string) {
     .eq("id", request.id);
 
   // Delete profile data
-  await adminSupabase.from("student_profiles").delete().eq("id", request.user_id);
-  await adminSupabase.from("teacher_profiles").delete().eq("id", request.user_id);
-  await adminSupabase.from("profiles").delete().eq("id", request.user_id);
+  await adminSupabase.from("student_profiles").delete().eq("id", user.id);
+  await adminSupabase.from("teacher_profiles").delete().eq("id", user.id);
+  await adminSupabase.from("profiles").delete().eq("id", user.id);
 
   // Delete auth user
-  await adminSupabase.auth.admin.deleteUser(request.user_id);
+  await adminSupabase.auth.admin.deleteUser(user.id);
 
-  return { success: true };
+  // Sign out
+  await supabase.auth.signOut();
+
+  revalidatePath("/", "layout");
+  redirect("/delete-confirm?success=true");
 }
