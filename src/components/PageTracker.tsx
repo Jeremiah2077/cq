@@ -16,26 +16,73 @@ function getSessionId() {
   return sid;
 }
 
+function track(pathname: string, eventType: string, eventTarget?: string) {
+  fetch(`${SUPABASE_URL}/rest/v1/page_views`, {
+    method: "POST",
+    headers: {
+      apikey: SUPABASE_ANON_KEY,
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+      "Content-Type": "application/json",
+      Prefer: "return=minimal",
+    },
+    body: JSON.stringify({
+      path: pathname,
+      referrer: document.referrer || null,
+      user_agent: navigator.userAgent,
+      screen_width: screen.width,
+      session_id: getSessionId(),
+      event_type: eventType,
+      event_target: eventTarget || null,
+    }),
+  }).catch(() => {});
+}
+
 export function PageTracker() {
   const pathname = usePathname();
 
   useEffect(() => {
-    fetch(`${SUPABASE_URL}/rest/v1/page_views`, {
-      method: "POST",
-      headers: {
-        apikey: SUPABASE_ANON_KEY,
-        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-        "Content-Type": "application/json",
-        Prefer: "return=minimal",
-      },
-      body: JSON.stringify({
-        path: pathname,
-        referrer: document.referrer || null,
-        user_agent: navigator.userAgent,
-        screen_width: screen.width,
-        session_id: getSessionId(),
-      }),
-    }).catch(() => {});
+    track(pathname, "pageview");
+
+    // Scroll depth tracking
+    const scrollMarks: Record<number, boolean> = {};
+    function onScroll() {
+      const scrollPct = Math.round(
+        ((window.scrollY + window.innerHeight) / document.body.scrollHeight) * 100
+      );
+      [25, 50, 75, 100].forEach((mark) => {
+        if (scrollPct >= mark && !scrollMarks[mark]) {
+          scrollMarks[mark] = true;
+          track(pathname, "scroll", mark + "%");
+        }
+      });
+    }
+    window.addEventListener("scroll", onScroll);
+
+    // Click tracking
+    function onClick(e: MouseEvent) {
+      const el = (e.target as HTMLElement).closest("a, button");
+      if (!el) return;
+      const text = el.textContent?.trim().slice(0, 60) || "";
+      const href = el.getAttribute("href") || "";
+
+      if (
+        el.classList.contains("btn-primary") ||
+        el.classList.contains("nav-cta") ||
+        el.tagName === "BUTTON"
+      ) {
+        track(pathname, "click", text);
+      }
+
+      if (href.startsWith("mailto:") || href.startsWith("tel:")) {
+        track(pathname, "click", href);
+      }
+    }
+    document.addEventListener("click", onClick);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("click", onClick);
+    };
   }, [pathname]);
 
   return null;
