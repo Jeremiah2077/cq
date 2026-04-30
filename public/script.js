@@ -261,27 +261,88 @@ if (interestForm) {
 }
 
 
-// ---- Page view tracking ----
+// ---- Analytics tracking ----
 (function() {
+    var SUPABASE_URL = 'https://eetjeyfyrwwoeeujxvmo.supabase.co';
+    var ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldGpleWZ5cnd3b2VldWp4dm1vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3ODQwMjQsImV4cCI6MjA5MjM2MDAyNH0.VZIxzI0X1g7p1GgV-AyMTRRTaGpT1mxb_kwP91lfcEs';
+
     var sid = sessionStorage.getItem('cq_sid');
     if (!sid) {
         sid = Math.random().toString(36).slice(2) + Date.now().toString(36);
         sessionStorage.setItem('cq_sid', sid);
     }
-    fetch('https://eetjeyfyrwwoeeujxvmo.supabase.co/rest/v1/page_views', {
-        method: 'POST',
-        headers: {
-            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldGpleWZ5cnd3b2VldWp4dm1vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3ODQwMjQsImV4cCI6MjA5MjM2MDAyNH0.VZIxzI0X1g7p1GgV-AyMTRRTaGpT1mxb_kwP91lfcEs',
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldGpleWZ5cnd3b2VldWp4dm1vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3ODQwMjQsImV4cCI6MjA5MjM2MDAyNH0.VZIxzI0X1g7p1GgV-AyMTRRTaGpT1mxb_kwP91lfcEs',
-            'Content-Type': 'application/json',
-            'Prefer': 'return=minimal'
-        },
-        body: JSON.stringify({
-            path: location.pathname,
-            referrer: document.referrer || null,
-            user_agent: navigator.userAgent,
-            screen_width: screen.width,
-            session_id: sid
-        })
-    }).catch(function() {});
+
+    function track(eventType, eventTarget) {
+        fetch(SUPABASE_URL + '/rest/v1/page_views', {
+            method: 'POST',
+            headers: {
+                'apikey': ANON_KEY,
+                'Authorization': 'Bearer ' + ANON_KEY,
+                'Content-Type': 'application/json',
+                'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify({
+                path: location.pathname,
+                referrer: document.referrer || null,
+                user_agent: navigator.userAgent,
+                screen_width: screen.width,
+                session_id: sid,
+                event_type: eventType,
+                event_target: eventTarget || null
+            })
+        }).catch(function() {});
+    }
+
+    // Page view
+    track('pageview');
+
+    // Scroll depth (25%, 50%, 75%, 100%)
+    var scrollMarks = {};
+    window.addEventListener('scroll', function() {
+        var scrollPct = Math.round((window.scrollY + window.innerHeight) / document.body.scrollHeight * 100);
+        [25, 50, 75, 100].forEach(function(mark) {
+            if (scrollPct >= mark && !scrollMarks[mark]) {
+                scrollMarks[mark] = true;
+                track('scroll', mark + '%');
+            }
+        });
+    });
+
+    // CTA button clicks
+    document.addEventListener('click', function(e) {
+        var el = e.target.closest('a, button');
+        if (!el) return;
+
+        // CTA buttons
+        if (el.classList.contains('nav-cta') || el.classList.contains('pricing-cta') ||
+            el.classList.contains('form-submit') || el.classList.contains('cta-btn') ||
+            el.classList.contains('btn-primary')) {
+            track('click', el.textContent.trim().slice(0, 60));
+        }
+
+        // Programme card links
+        if (el.closest('.programme-card') || el.closest('.cross-sell-card') || el.closest('.dest-card')) {
+            track('click', 'card:' + (el.getAttribute('href') || el.textContent.trim().slice(0, 40)));
+        }
+
+        // Nav links
+        if (el.closest('.nav-links')) {
+            track('click', 'nav:' + (el.textContent.trim().slice(0, 40)));
+        }
+
+        // External links (email, phone)
+        var href = el.getAttribute('href') || '';
+        if (href.startsWith('mailto:') || href.startsWith('tel:')) {
+            track('click', href);
+        }
+    });
+
+    // Form interactions
+    document.addEventListener('focusin', function(e) {
+        var form = e.target.closest('form');
+        if (form && !form.dataset.tracked) {
+            form.dataset.tracked = '1';
+            track('form_start', form.id || form.action || 'unknown');
+        }
+    });
 })();
