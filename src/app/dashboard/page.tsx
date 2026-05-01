@@ -25,6 +25,7 @@ type ProfileRow = {
   school: string | null;
   year_group: string | null;
   role: string | null;
+  profile_state: "minimal" | "partial" | "complete" | null;
 };
 
 type StudentProfileRow = {
@@ -44,7 +45,7 @@ export default async function DashboardPage() {
   const [{ data: profile }, { data: application }, { data: studentProfile }] = await Promise.all([
     supabase
       .from("profiles")
-      .select("full_name, school, year_group, role")
+      .select("full_name, school, year_group, role, profile_state")
       .eq("id", user.id)
       .maybeSingle<ProfileRow>(),
     supabase
@@ -87,6 +88,12 @@ export default async function DashboardPage() {
     studentProfile?.is_minor === true &&
     studentProfile.parent_verified === false &&
     !!studentProfile.parent_email;
+
+  // Minimal profile (new two-stage signup, before any feature engagement) →
+  // show a welcome / explore screen instead of the rich application dashboard.
+  if (profile?.profile_state === "minimal") {
+    return <MinimalDashboard email={user.email ?? ""} />;
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--bg)]">
@@ -403,4 +410,109 @@ function formatDate(iso: string): string {
   } catch {
     return iso;
   }
+}
+
+function MinimalDashboard({ email }: { email: string }) {
+  return (
+    <div className="min-h-screen flex flex-col bg-[var(--bg)]">
+      <SiteNav
+        rightSlot={
+          <form action={signOut}>
+            <button
+              type="submit"
+              style={{ background: "none", border: "none", color: "#c4683c", fontWeight: 600, cursor: "pointer", fontSize: "inherit", fontFamily: "inherit" }}
+            >
+              Sign Out
+            </button>
+          </form>
+        }
+      />
+
+      <section className="bg-gradient-to-br from-[var(--ink)] to-[var(--ink-light)] text-white">
+        <div className="max-w-[1200px] mx-auto px-8 py-16 md:py-20">
+          <div className="eyebrow eyebrow-accent">Welcome</div>
+          <h1 className="font-display text-[3rem] md:text-[3.6rem] leading-[1.1] mt-5 mb-4 max-w-3xl">
+            Your account is ready,
+            <br />
+            <span className="text-[var(--accent)]">explore at your pace.</span>
+          </h1>
+          <p className="text-white/60 max-w-xl text-[1.02rem] leading-[1.75]">
+            Signed in as <strong className="text-white/85">{email}</strong>. We&apos;ll only ask for
+            personal details (school, age, etc.) when you start an application — not before.
+          </p>
+        </div>
+      </section>
+
+      <main className="flex-1 max-w-[1200px] w-full mx-auto px-8 py-16 space-y-12">
+        <section>
+          <div className="eyebrow mb-6">Pick a path</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Link
+              href="/onboarding/pioneer"
+              className="block bg-white border border-[var(--gray-200)] rounded-[var(--radius-md)] p-8 hover:border-[var(--accent)] hover:shadow-[0_4px_30px_rgba(196,104,60,0.08)] transition-all"
+            >
+              <div className="text-[0.7rem] tracking-[2px] uppercase font-semibold text-[var(--accent)] mb-3">
+                Pioneer Programme
+              </div>
+              <div className="font-display text-[1.5rem] leading-[1.2] text-[var(--ink)] mb-3">
+                Apply to be a Pioneer.
+              </div>
+              <p className="text-[0.92rem] text-[var(--gray-500)] leading-[1.65]">
+                Free, fully-funded place for one student per Irish school. We&apos;ll ask for
+                school, age and a few details before submitting.
+              </p>
+              <div className="mt-5 text-[0.85rem] font-semibold text-[var(--accent)]">
+                Start application →
+              </div>
+            </Link>
+
+            <Link
+              href="/programmes"
+              className="block bg-white border border-[var(--gray-200)] rounded-[var(--radius-md)] p-8 hover:border-[var(--primary)] hover:shadow-[0_4px_30px_rgba(27,58,92,0.08)] transition-all"
+            >
+              <div className="text-[0.7rem] tracking-[2px] uppercase font-semibold text-[var(--primary)] mb-3">
+                Paid programmes
+              </div>
+              <div className="font-display text-[1.5rem] leading-[1.2] text-[var(--ink)] mb-3">
+                Browse trips & packages.
+              </div>
+              <p className="text-[0.92rem] text-[var(--gray-500)] leading-[1.65]">
+                Roots, Pulse, Horizon — see what fits your school. No commitment, just a look.
+              </p>
+              <div className="mt-5 text-[0.85rem] font-semibold text-[var(--primary)]">
+                Explore →
+              </div>
+            </Link>
+          </div>
+        </section>
+
+        <section>
+          <div className="eyebrow mb-3">When you&apos;re ready</div>
+          <p className="text-[0.95rem] text-[var(--gray-600)] leading-[1.75] max-w-2xl">
+            You can sign out and come back later. We won&apos;t send you anything you didn&apos;t
+            ask for. Questions go to{" "}
+            <a
+              href="mailto:info@milesminds.com"
+              className="font-semibold text-[var(--accent)] hover:text-[var(--accent-hover)]"
+            >
+              info@milesminds.com
+            </a>
+            .
+          </p>
+        </section>
+
+        <section className="border-t border-[var(--gray-200)] pt-12">
+          <div className="eyebrow mb-3" style={{ color: "var(--gray-400)" }}>
+            Account
+          </div>
+          <p className="text-[0.92rem] text-[var(--gray-500)] mb-4">
+            Permanently delete your account. This action cannot be undone.
+          </p>
+          <DeleteAccountButton action={requestAccountDeletion} />
+        </section>
+      </main>
+
+      <SiteFooter />
+    </div>
+  );
 }

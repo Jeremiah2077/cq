@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
+import { bootstrapProfileFromUser } from "@/lib/profile";
 
 export async function signIn(formData: FormData) {
   const email = String(formData.get("email") ?? "").trim();
@@ -29,22 +30,12 @@ export async function signIn(formData: FormData) {
   redirect("/dashboard");
 }
 
+// Two-stage signup: only email + password at registration. Role / school /
+// year / age etc. are collected later via /onboarding/[reason] when the user
+// actually engages with a feature that needs them (e.g. Pioneer Programme).
 export async function signUp(formData: FormData) {
   const email = String(formData.get("email") ?? "").trim();
   const password = String(formData.get("password") ?? "");
-  const fullName = String(formData.get("full_name") ?? "").trim();
-  const school = String(formData.get("school") ?? "").trim();
-  const role = String(formData.get("role") ?? "").trim();
-
-  // Student fields
-  const yearGroup = String(formData.get("year_group") ?? "").trim();
-  const ageGroup = String(formData.get("age_group") ?? "").trim();
-  const parentEmail = String(formData.get("parent_email") ?? "").trim();
-  const isMinor = ageGroup !== "" && parseInt(ageGroup) < 16;
-
-  // Teacher fields
-  const roleTitle = String(formData.get("role_title") ?? "").trim();
-  const phone = String(formData.get("phone") ?? "").trim();
 
   const hdrs = await headers();
   const host = hdrs.get("x-forwarded-host") ?? hdrs.get("host") ?? "localhost:3000";
@@ -53,82 +44,11 @@ export async function signUp(formData: FormData) {
 
   const supabase = await createClient();
 
-  // Minors: use admin.createUser() so Supabase does NOT send confirmation email to student
-  if (isMinor && parentEmail) {
-    const { createClient: createAdminClient } = await import("@supabase/supabase-js");
-    const adminSupabase = createAdminClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    );
-
-    const { data: adminData, error: adminError } = await adminSupabase.auth.admin.createUser({
-      email,
-      password,
-      email_confirm: true,
-      user_metadata: {
-        full_name: fullName,
-        school,
-        role,
-        year_group: yearGroup,
-        age_group: ageGroup,
-        is_minor: true,
-        parent_email: parentEmail,
-      },
-    });
-
-    if (adminError) {
-      const msg = adminError.message.includes("already been registered")
-        ? "This email is already registered. Please sign in instead."
-        : adminError.message;
-      redirect(`/signup?error=${encodeURIComponent(msg)}`);
-    }
-
-    const { sendParentVerificationEmail } = await import("@/lib/parent-verification");
-    await Promise.all([
-      sendParentVerificationEmail({
-        userId: adminData.user.id,
-        parentEmail,
-        studentName: fullName || email,
-        origin,
-      }),
-      adminSupabase.from("profiles").upsert({
-        id: adminData.user.id,
-        full_name: fullName,
-        school,
-        role,
-        year_group: yearGroup,
-        onboarding_complete: true,
-      }),
-      adminSupabase.from("student_profiles").upsert({
-        id: adminData.user.id,
-        year_group: yearGroup,
-        age_group: ageGroup,
-        is_minor: true,
-        parent_email: parentEmail,
-        parent_verified: false,
-      }),
-      supabase.auth.signInWithPassword({ email, password }),
-    ]);
-    revalidatePath("/", "layout");
-    redirect(`/parent-verify?parent_email=${encodeURIComponent(parentEmail)}`);
-  }
-
-  // Non-minor flow: normal signUp (Supabase sends confirmation email to student)
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
       emailRedirectTo: `${origin}/auth/callback`,
-      data: {
-        full_name: fullName,
-        school,
-        role,
-        year_group: role === "student" ? yearGroup : undefined,
-        age_group: role === "student" ? ageGroup : undefined,
-        is_minor: false,
-        role_title: role === "teacher" ? roleTitle : undefined,
-        phone: role === "teacher" ? phone : undefined,
-      },
     },
   });
 
@@ -187,62 +107,17 @@ export async function verifyOtp(formData: FormData) {
     redirect(`/verify?email=${encodeURIComponent(email)}&error=${encodeURIComponent(error.message)}`);
   }
 
-  // After verification, check/create profile (same as callback logic)
+  // After verification, ensure a profile row exists. Two cases:
+  //   1. Legacy: OTP email was sent before the two-stage rewrite — user_metadata
+  //      has role/school/year/etc. → restore a 'complete' profile to preserve
+  //      what the user saw on the dashboard pre-rewrite.
+  //   2. New flow: no metadata, just create a 'minimal' row.
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
   if (user) {
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("onboarding_complete")
-      .eq("id", user.id)
-      .maybeSingle();
-
-    if (!profile?.onboarding_complete) {
-      const meta = user.user_metadata || {};
-      const role = (meta.role as string) || "";
-
-      if (role) {
-        const fullName = (meta.full_name as string) || (meta.name as string) || "";
-        const school = (meta.school as string) || "";
-        const yearGroup = (meta.year_group as string) || "";
-        const phone = (meta.phone as string) || "";
-
-        await supabase.from("profiles").upsert({
-          id: user.id,
-          full_name: fullName,
-          school,
-          role,
-          phone: role === "teacher" ? phone : null,
-          year_group: role === "student" ? yearGroup : null,
-          onboarding_complete: true,
-        });
-
-        if (role === "student") {
-          const ageGroup = (meta.age_group as string) || "";
-          const isMinor = (meta.is_minor as boolean) || false;
-          const parentEmail = (meta.parent_email as string) || "";
-
-          await supabase.from("student_profiles").upsert({
-            id: user.id,
-            year_group: yearGroup,
-            age_group: ageGroup,
-            is_minor: isMinor,
-            parent_email: parentEmail || null,
-            parent_verified: false,
-          });
-          // Parent verification email is already sent at signup time — no duplicate here
-        } else if (role === "teacher") {
-          const roleTitle = (meta.role_title as string) || "";
-
-          await supabase.from("teacher_profiles").upsert({
-            id: user.id,
-            role_title: roleTitle,
-          });
-        }
-      }
-    }
+    await bootstrapProfileFromUser(supabase, user);
   }
 
   revalidatePath("/", "layout");

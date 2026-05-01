@@ -47,16 +47,17 @@ export async function updateSession(request: NextRequest) {
   }
 
   if (user && isProtected) {
-    const [{ data: profile }, { data: studentProfile }] = await Promise.all([
-      supabase.from("profiles").select("onboarding_complete").eq("id", user.id).maybeSingle(),
-      supabase.from("student_profiles").select("is_minor, parent_verified, parent_email").eq("id", user.id).maybeSingle(),
-    ]);
-
-    if (!profile?.onboarding_complete) {
-      const url = request.nextUrl.clone();
-      url.pathname = "/onboarding";
-      return NextResponse.redirect(url);
-    }
+    // Two-stage signup: do NOT force /onboarding. Minimal-state users land on
+    // the dashboard and are guided to fill in details when they engage with a
+    // feature (e.g. clicking "Apply for Pioneer" → /onboarding/pioneer).
+    //
+    // We still keep the parent-verify redirect for minor students, since GDPR
+    // requires parental consent before they can use student-side features.
+    const { data: studentProfile } = await supabase
+      .from("student_profiles")
+      .select("is_minor, parent_verified, parent_email")
+      .eq("id", user.id)
+      .maybeSingle();
 
     if (studentProfile?.is_minor && !studentProfile.parent_verified && studentProfile.parent_email) {
       const url = request.nextUrl.clone();
