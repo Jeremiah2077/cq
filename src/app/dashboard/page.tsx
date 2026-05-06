@@ -26,6 +26,7 @@ type ProfileRow = {
   year_group: string | null;
   role: string | null;
   profile_state: "minimal" | "partial" | "complete" | null;
+  onboarding_complete: boolean | null;
 };
 
 type StudentProfileRow = {
@@ -45,7 +46,7 @@ export default async function DashboardPage() {
   const [{ data: profile }, { data: application }, { data: studentProfile }] = await Promise.all([
     supabase
       .from("profiles")
-      .select("full_name, school, year_group, role, profile_state")
+      .select("full_name, school, year_group, role, profile_state, onboarding_complete")
       .eq("id", user.id)
       .maybeSingle<ProfileRow>(),
     supabase
