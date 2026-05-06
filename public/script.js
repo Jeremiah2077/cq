@@ -199,7 +199,9 @@ if (hasSession) {
                     btn.style.background = '#9e9a93';
                     btn.style.cursor = 'default';
                     btn.style.pointerEvents = 'none';
-                    btn.textContent = 'Registered';
+                    btn.innerHTML = 'Registered';
+                    btn.style.padding = '16px 32px';
+                    btn.style.justifyContent = 'center';
                 });
             }
         }).catch(function() {});
