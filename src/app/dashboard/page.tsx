@@ -456,7 +456,7 @@ function MinimalDashboard({ email }: { email: string }) {
           <div className="eyebrow mb-6">Pick a path</div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Link
-              href="/pioneer/apply"
+              href="/pioneer.html"
               className="block bg-white border border-[var(--gray-200)] rounded-[var(--radius-md)] p-8 hover:border-[var(--accent)] hover:shadow-[0_4px_30px_rgba(196,104,60,0.08)] transition-all"
             >
               <div className="text-[0.7rem] tracking-[2px] uppercase font-semibold text-[var(--accent)] mb-3">
