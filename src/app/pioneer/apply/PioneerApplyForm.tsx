@@ -5,9 +5,11 @@ import { useState } from "react";
 export function PioneerApplyForm({
   action,
   email,
+  prefillName,
 }: {
   action: (formData: FormData) => void;
   email: string;
+  prefillName: string;
 }) {
   const [ageGroup, setAgeGroup] = useState("");
   const [parentEmailError, setParentEmailError] = useState("");
@@ -33,6 +35,16 @@ export function PioneerApplyForm({
       }}
       className="space-y-5"
     >
+      <label className="block">
+        <span className="field-label">Full name</span>
+        <input name="full_name" type="text" required defaultValue={prefillName} className="field-input" />
+      </label>
+
+      <label className="block">
+        <span className="field-label">School</span>
+        <input name="school" type="text" required className="field-input" />
+      </label>
+
       <label className="block">
         <span className="field-label">Year group</span>
         <select name="year_group" required className="field-input" defaultValue="">
@@ -78,6 +90,11 @@ export function PioneerApplyForm({
           </p>
         </div>
       )}
+
+      <label className="block">
+        <span className="field-label">Phone <span style={{ fontWeight: 400, color: "var(--gray-400)" }}>(optional)</span></span>
+        <input name="phone" type="tel" className="field-input" placeholder="+353..." />
+      </label>
 
       <button type="submit" className="btn-primary w-full">Submit application</button>
     </form>

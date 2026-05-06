@@ -13,12 +13,27 @@ export async function applyForPioneer(formData: FormData) {
 
   if (!user) redirect("/login");
 
+  const fullName = String(formData.get("full_name") ?? "").trim();
+  const school = String(formData.get("school") ?? "").trim();
+  const yearGroup = String(formData.get("year_group") ?? "").trim();
   const ageGroup = String(formData.get("age_group") ?? "").trim();
   const parentEmail = String(formData.get("parent_email") ?? "").trim();
-  const yearGroup = String(formData.get("year_group") ?? "").trim();
+  const phone = String(formData.get("phone") ?? "").trim();
   const isMinor = ageGroup !== "" && parseInt(ageGroup) < 16;
 
-  // Write student-specific data to student_profiles
+  // Update profiles with all info + mark as complete
+  await supabase.from("profiles").upsert({
+    id: user.id,
+    full_name: fullName,
+    school,
+    role: "student",
+    phone: phone || null,
+    year_group: yearGroup,
+    onboarding_complete: true,
+    profile_state: "complete",
+  });
+
+  // Write student-specific data
   await supabase.from("student_profiles").upsert({
     id: user.id,
     year_group: yearGroup,
@@ -28,15 +43,15 @@ export async function applyForPioneer(formData: FormData) {
     parent_verified: false,
   });
 
-  // Update year_group in profiles too
-  await supabase.from("profiles").update({
-    year_group: yearGroup,
-  }).eq("id", user.id);
-
   // Create application record
   await supabase.from("applications").upsert({
     user_id: user.id,
     status: "interest",
+  });
+
+  // Update user metadata
+  await supabase.auth.updateUser({
+    data: { full_name: fullName, school, role: "student" },
   });
 
   // Send parent verification email for minors
@@ -46,17 +61,11 @@ export async function applyForPioneer(formData: FormData) {
     const proto = hdrs.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
     const origin = `${proto}://${host}`;
 
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("full_name")
-      .eq("id", user.id)
-      .maybeSingle();
-
     const { sendParentVerificationEmail } = await import("@/lib/parent-verification");
     await sendParentVerificationEmail({
       userId: user.id,
       parentEmail,
-      studentName: profile?.full_name || user.email || "Your child",
+      studentName: fullName || user.email || "Your child",
       origin,
     });
 

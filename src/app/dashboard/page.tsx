@@ -99,7 +99,7 @@ export default async function DashboardPage() {
 
   // Minimal profile (new two-stage signup, before any feature engagement) →
   // show a welcome / explore screen instead of the rich application dashboard.
-  if (profile?.profile_state === "minimal" || !profile?.onboarding_complete) {
+  if (!profile?.onboarding_complete) {
     return <MinimalDashboard email={user.email ?? ""} />;
   }
 

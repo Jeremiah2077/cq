@@ -12,17 +12,6 @@ export default async function PioneerApplyPage() {
 
   if (!user) redirect("/login");
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("full_name, school, role, onboarding_complete")
-    .eq("id", user.id)
-    .maybeSingle();
-
-  // Must complete basic profile first
-  if (!profile?.onboarding_complete) {
-    redirect("/onboarding");
-  }
-
   // Check if already applied
   const { data: existing } = await supabase
     .from("applications")
@@ -33,6 +22,11 @@ export default async function PioneerApplyPage() {
   if (existing) {
     redirect("/dashboard");
   }
+
+  const prefillName =
+    (user.user_metadata?.full_name as string) ||
+    (user.user_metadata?.name as string) ||
+    "";
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--bg)]">
@@ -46,12 +40,13 @@ export default async function PioneerApplyPage() {
             Apply for Pioneer.
           </h1>
           <p className="text-center text-[var(--gray-500)] text-[0.95rem] leading-[1.7] mb-8 max-w-sm mx-auto">
-            A few more details so we can process your application.
+            Tell us about yourself and we'll register your interest.
           </p>
           <div className="bg-white border border-[var(--gray-200)] rounded-[var(--radius-md)] p-8 shadow-[0_4px_30px_rgba(15,25,35,0.04)]">
             <PioneerApplyForm
               action={applyForPioneer}
               email={user.email ?? ""}
+              prefillName={prefillName}
             />
           </div>
         </div>
