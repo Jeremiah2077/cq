@@ -106,6 +106,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--bg)]">
+      <PioneerFlag applied={!!application} />
       <SiteNav
         rightSlot={
           <form action={signOut}>
