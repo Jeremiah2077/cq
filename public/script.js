@@ -190,14 +190,20 @@ if (authNavMobile) {
 
 
 // ---- Pioneer button: gray out if already applied ----
-if (hasSession && localStorage.getItem('cq_pioneer') === '1') {
+if (hasSession) {
     var pioBtns = document.querySelectorAll('a.pio-btn[href="/pioneer/apply"]');
-    pioBtns.forEach(function(btn) {
-        btn.style.background = '#9e9a93';
-        btn.style.cursor = 'default';
-        btn.style.pointerEvents = 'none';
-        btn.textContent = 'Registered';
-    });
+    if (pioBtns.length > 0) {
+        fetch('/api/pioneer-status').then(function(r) { return r.json(); }).then(function(data) {
+            if (data && data.applied) {
+                pioBtns.forEach(function(btn) {
+                    btn.style.background = '#9e9a93';
+                    btn.style.cursor = 'default';
+                    btn.style.pointerEvents = 'none';
+                    btn.textContent = 'Registered';
+                });
+            }
+        }).catch(function() {});
+    }
 }
 
 
