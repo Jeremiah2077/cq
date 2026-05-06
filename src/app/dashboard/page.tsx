@@ -457,38 +457,49 @@ function MinimalDashboard({ email }: { email: string }) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Link
               href="/pioneer.html"
-              className="block bg-white border border-[var(--gray-200)] rounded-[var(--radius-md)] p-8 hover:border-[var(--accent)] hover:shadow-[0_4px_30px_rgba(196,104,60,0.08)] transition-all"
+              className="group block bg-white border border-[var(--gray-200)] rounded-[var(--radius-md)] overflow-hidden hover:border-[var(--accent)] hover:shadow-[0_8px_30px_rgba(196,104,60,0.08)] transition-all"
             >
-              <div className="text-[0.7rem] tracking-[2px] uppercase font-semibold text-[var(--accent)] mb-3">
-                Pioneer Programme
+              <div className="relative h-[160px] overflow-hidden bg-[var(--gray-100)]">
+                <img src="/images/beijing/greatwall.jpg" alt="Pioneer Programme" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                <span className="absolute top-3 left-3 text-[0.68rem] font-bold uppercase tracking-[1.5px] px-2.5 py-1 rounded-[4px] text-white bg-[#2d8a4e]">Free</span>
               </div>
-              <div className="font-display text-[1.5rem] leading-[1.2] text-[var(--ink)] mb-3">
-                Apply to be a Pioneer.
-              </div>
-              <p className="text-[0.92rem] text-[var(--gray-500)] leading-[1.65]">
-                Free, fully-funded place for one student per Irish school. We&apos;ll ask for
-                school, age and a few details before submitting.
-              </p>
-              <div className="mt-5 text-[0.85rem] font-semibold text-[var(--accent)]">
-                Start application →
+              <div className="p-6">
+                <div className="text-[0.7rem] tracking-[2px] uppercase font-semibold text-[var(--accent)] mb-1.5">
+                  Pioneer Programme
+                </div>
+                <div className="font-display text-[1.3rem] leading-[1.2] text-[var(--ink)] mb-2">
+                  Apply to be a Pioneer.
+                </div>
+                <p className="text-[0.88rem] text-[var(--gray-500)] leading-[1.65] mb-4">
+                  A fully-funded place for one student per Irish school. 11 days in China, filming, learning, and representing your school.
+                </p>
+                <span className="text-[0.85rem] font-semibold text-[var(--accent)]">
+                  Learn more →
+                </span>
               </div>
             </Link>
 
             <Link
-              href="/programmes"
-              className="block bg-white border border-[var(--gray-200)] rounded-[var(--radius-md)] p-8 hover:border-[var(--primary)] hover:shadow-[0_4px_30px_rgba(27,58,92,0.08)] transition-all"
+              href="/roots.html"
+              className="group block bg-white border border-[var(--gray-200)] rounded-[var(--radius-md)] overflow-hidden hover:border-[var(--primary)] hover:shadow-[0_8px_30px_rgba(27,58,92,0.08)] transition-all"
             >
-              <div className="text-[0.7rem] tracking-[2px] uppercase font-semibold text-[var(--primary)] mb-3">
-                Paid programmes
+              <div className="relative h-[160px] overflow-hidden bg-[var(--gray-100)]">
+                <img src="/images/forbidden-city.jpg" alt="Roots Programme" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                <span className="absolute top-3 left-3 text-[0.68rem] font-bold uppercase tracking-[1.5px] px-2.5 py-1 rounded-[4px] text-white" style={{ background: "var(--primary)" }}>School Trip</span>
               </div>
-              <div className="font-display text-[1.5rem] leading-[1.2] text-[var(--ink)] mb-3">
-                Browse trips & packages.
-              </div>
-              <p className="text-[0.92rem] text-[var(--gray-500)] leading-[1.65]">
-                Roots, Pulse, Horizon — see what fits your school. No commitment, just a look.
-              </p>
-              <div className="mt-5 text-[0.85rem] font-semibold text-[var(--primary)]">
-                Explore →
+              <div className="p-6">
+                <div className="text-[0.7rem] tracking-[2px] uppercase font-semibold text-[var(--primary)] mb-1.5">
+                  Heritage &amp; Culture
+                </div>
+                <div className="font-display text-[1.3rem] leading-[1.2] text-[var(--ink)] mb-2">
+                  Roots
+                </div>
+                <p className="text-[0.88rem] text-[var(--gray-500)] leading-[1.65] mb-4">
+                  Beijing, Xi&apos;an, Shanghai. 11 days through imperial palaces, the Terracotta Army, the Great Wall, and modern Shanghai.
+                </p>
+                <span className="text-[0.85rem] font-semibold text-[var(--primary)]">
+                  View itinerary →
+                </span>
               </div>
             </Link>
           </div>
