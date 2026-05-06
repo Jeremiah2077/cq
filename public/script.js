@@ -189,6 +189,40 @@ if (authNavMobile) {
 }
 
 
+// ---- Pioneer button: gray out if already applied ----
+if (hasSession) {
+    var pioBtns = document.querySelectorAll('a.pio-btn[href="/pioneer/apply"]');
+    if (pioBtns.length > 0) {
+        var sbCookie = document.cookie.split(';').find(function(c) {
+            return c.trim().indexOf('sb-') === 0 && c.indexOf('auth-token') > -1;
+        });
+        if (sbCookie) {
+            var tokenMatch = sbCookie.match(/base64-(.*)/);
+            var tokenStr = tokenMatch ? atob(tokenMatch[1]) : null;
+            var accessToken = null;
+            if (tokenStr) { try { accessToken = JSON.parse(tokenStr).access_token; } catch(e) {} }
+            if (accessToken) {
+                fetch('https://eetjeyfyrwwoeeujxvmo.supabase.co/rest/v1/applications?select=status&limit=1', {
+                    headers: {
+                        'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldGpleWZ5cnd3b2VldWp4dm1vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3ODQwMjQsImV4cCI6MjA5MjM2MDAyNH0.VZIxzI0X1g7p1GgV-AyMTRRTaGpT1mxb_kwP91lfcEs',
+                        'Authorization': 'Bearer ' + accessToken
+                    }
+                }).then(function(r) { return r.json(); }).then(function(data) {
+                    if (data && data.length > 0) {
+                        pioBtns.forEach(function(btn) {
+                            btn.style.background = '#9e9a93';
+                            btn.style.cursor = 'default';
+                            btn.style.pointerEvents = 'none';
+                            btn.textContent = 'Registered';
+                        });
+                    }
+                }).catch(function() {});
+            }
+        }
+    }
+}
+
+
 // ---- Interest form: role-based field toggling + Tally submission ----
 const interestForm = document.getElementById('interestForm');
 if (interestForm) {
