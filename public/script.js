@@ -199,9 +199,7 @@ if (hasSession) {
                     btn.style.background = '#9e9a93';
                     btn.style.cursor = 'default';
                     btn.style.pointerEvents = 'none';
-                    btn.innerHTML = 'Registered';
-                    btn.style.padding = '16px 32px';
-                    btn.style.justifyContent = 'center';
+                    btn.innerHTML = 'Registered <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 2l5 5-5 5"/></svg>';
                 });
             }
         }).catch(function() {});
