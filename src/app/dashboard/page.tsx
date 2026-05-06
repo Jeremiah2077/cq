@@ -100,7 +100,7 @@ export default async function DashboardPage() {
   // Minimal profile (new two-stage signup, before any feature engagement) →
   // show a welcome / explore screen instead of the rich application dashboard.
   if (!profile?.onboarding_complete) {
-    return <MinimalDashboard email={user.email ?? ""} />;
+    return <MinimalDashboard email={user.email ?? ""} applicationStatus={application?.status ?? null} />;
   }
 
   return (
@@ -420,7 +420,8 @@ function formatDate(iso: string): string {
   }
 }
 
-function MinimalDashboard({ email }: { email: string }) {
+function MinimalDashboard({ email, applicationStatus }: { email: string; applicationStatus: ApplicationStatus | null }) {
+  const hasApplied = !!applicationStatus;
   return (
     <div className="min-h-screen flex flex-col bg-[var(--bg)]">
       <SiteNav
@@ -456,25 +457,33 @@ function MinimalDashboard({ email }: { email: string }) {
           <div className="eyebrow mb-6">Pick a path</div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Link
-              href="/pioneer.html"
-              className="group block bg-white border border-[var(--gray-200)] rounded-[var(--radius-md)] overflow-hidden hover:border-[var(--accent)] hover:shadow-[0_8px_30px_rgba(196,104,60,0.08)] transition-all"
+              href={hasApplied ? "/dashboard" : "/pioneer.html"}
+              className={`group block bg-white border rounded-[var(--radius-md)] overflow-hidden transition-all ${hasApplied ? "border-[var(--accent)]/30" : "border-[var(--gray-200)] hover:border-[var(--accent)] hover:shadow-[0_8px_30px_rgba(196,104,60,0.08)]"}`}
             >
               <div className="relative h-[160px] overflow-hidden bg-[var(--gray-100)]">
-                <img src="/images/beijing/greatwall.jpg" alt="Pioneer Programme" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                <span className="absolute top-3 left-3 text-[0.68rem] font-bold uppercase tracking-[1.5px] px-2.5 py-1 rounded-[4px] text-white bg-[#2d8a4e]">Free</span>
+                <img src="/images/beijing/greatwall.jpg" alt="Pioneer Programme" className={`w-full h-full object-cover transition-transform duration-500 ${hasApplied ? "brightness-[0.6]" : "group-hover:scale-105"}`} loading="lazy" />
+                {hasApplied ? (
+                  <span className="absolute top-3 left-3 text-[0.68rem] font-bold uppercase tracking-[1.5px] px-2.5 py-1 rounded-[4px] text-white bg-[var(--accent)]">
+                    {APPLICATION_STATUS_LABEL[applicationStatus]}
+                  </span>
+                ) : (
+                  <span className="absolute top-3 left-3 text-[0.68rem] font-bold uppercase tracking-[1.5px] px-2.5 py-1 rounded-[4px] text-white bg-[#2d8a4e]">Free</span>
+                )}
               </div>
               <div className="p-6">
                 <div className="text-[0.7rem] tracking-[2px] uppercase font-semibold text-[var(--accent)] mb-1.5">
                   Pioneer Programme
                 </div>
                 <div className="font-display text-[1.3rem] leading-[1.2] text-[var(--ink)] mb-2">
-                  Apply to be a Pioneer.
+                  {hasApplied ? "You've applied." : "Apply to be a Pioneer."}
                 </div>
                 <p className="text-[0.88rem] text-[var(--gray-500)] leading-[1.65] mb-4">
-                  A fully-funded place for one student per Irish school. 11 days in China, filming, learning, and representing your school.
+                  {hasApplied
+                    ? "Your interest is registered. We'll be in touch when applications open."
+                    : "A fully-funded place for one student per Irish school. 11 days in China, filming, learning, and representing your school."}
                 </p>
                 <span className="text-[0.85rem] font-semibold text-[var(--accent)]">
-                  Learn more →
+                  {hasApplied ? "View status →" : "Learn more →"}
                 </span>
               </div>
             </Link>
