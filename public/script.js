@@ -190,7 +190,7 @@ if (authNavMobile) {
 
 
 // ---- Pioneer button: gray out if already applied ----
-if (localStorage.getItem('cq_pioneer') === '1') {
+if (hasSession && localStorage.getItem('cq_pioneer') === '1') {
     var pioBtns = document.querySelectorAll('a.pio-btn[href="/pioneer/apply"]');
     pioBtns.forEach(function(btn) {
         btn.style.background = '#9e9a93';
