@@ -485,7 +485,6 @@ function MinimalDashboard({ email }: { email: string }) {
             >
               <div className="relative h-[160px] overflow-hidden bg-[var(--gray-100)]">
                 <img src="/images/forbidden-city.jpg" alt="Roots Programme" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                <span className="absolute top-3 left-3 text-[0.68rem] font-bold uppercase tracking-[1.5px] px-2.5 py-1 rounded-[4px] text-white" style={{ background: "var(--primary)" }}>School Trip</span>
               </div>
               <div className="p-6">
                 <div className="text-[0.7rem] tracking-[2px] uppercase font-semibold text-[var(--primary)] mb-1.5">
@@ -503,21 +502,6 @@ function MinimalDashboard({ email }: { email: string }) {
               </div>
             </Link>
           </div>
-        </section>
-
-        <section>
-          <div className="eyebrow mb-3">When you&apos;re ready</div>
-          <p className="text-[0.95rem] text-[var(--gray-600)] leading-[1.75] max-w-2xl">
-            You can sign out and come back later. We won&apos;t send you anything you didn&apos;t
-            ask for. Questions go to{" "}
-            <a
-              href="mailto:info@milesminds.com"
-              className="font-semibold text-[var(--accent)] hover:text-[var(--accent-hover)]"
-            >
-              info@milesminds.com
-            </a>
-            .
-          </p>
         </section>
 
         <section className="border-t border-[var(--gray-200)] pt-12">
