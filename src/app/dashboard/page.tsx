@@ -100,7 +100,7 @@ export default async function DashboardPage() {
   // Minimal profile (new two-stage signup, before any feature engagement) →
   // show a welcome / explore screen instead of the rich application dashboard.
   if (!profile?.onboarding_complete) {
-    return <MinimalDashboard email={user.email ?? ""} />;
+    return <MinimalDashboard email={user.email ?? ""} hasApplied={!!application} />;
   }
 
   return (
@@ -420,7 +420,7 @@ function formatDate(iso: string): string {
   }
 }
 
-function MinimalDashboard({ email }: { email: string }) {
+function MinimalDashboard({ email, hasApplied }: { email: string; hasApplied: boolean }) {
   return (
     <div className="min-h-screen flex flex-col bg-[var(--bg)]">
       <SiteNav
@@ -468,7 +468,7 @@ function MinimalDashboard({ email }: { email: string }) {
                   Pioneer Programme
                 </div>
                 <div className="font-display text-[1.3rem] leading-[1.2] text-[var(--ink)] mb-2">
-                  Apply to be a Pioneer.
+                  {hasApplied ? "You've applied." : "Apply to be a Pioneer."}
                 </div>
                 <p className="text-[0.88rem] text-[var(--gray-500)] leading-[1.65] mb-4">
                   A fully-funded place for one student per Irish school. 11 days in China, filming, learning, and representing your school.
