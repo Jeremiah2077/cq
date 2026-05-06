@@ -31,7 +31,7 @@ export async function updateSession(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
   const isAuthRoute = pathname.startsWith("/login") || pathname.startsWith("/signup");
-  const isProtected = pathname.startsWith("/dashboard") || pathname.startsWith("/pioneer");
+  const isProtected = pathname.startsWith("/dashboard") || pathname.startsWith("/pioneer/");
   const isOnboarding = pathname.startsWith("/onboarding");
 
   if (!user && (isProtected || isOnboarding)) {
