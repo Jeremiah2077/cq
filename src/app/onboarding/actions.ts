@@ -2,7 +2,6 @@
 
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { headers } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
 
 export async function completeOnboarding(formData: FormData) {
@@ -16,55 +15,24 @@ export async function completeOnboarding(formData: FormData) {
   const role = String(formData.get("role") ?? "").trim();
   const fullName = String(formData.get("full_name") ?? "").trim();
   const school = String(formData.get("school") ?? "").trim();
-
-  // Student fields
-  const yearGroup = String(formData.get("year_group") ?? "").trim();
-  const ageGroup = String(formData.get("age_group") ?? "").trim();
-  const parentEmail = String(formData.get("parent_email") ?? "").trim();
-  const isMinor = ageGroup !== "" && parseInt(ageGroup) < 16;
-
-  // Teacher fields
-  const roleTitle = String(formData.get("role_title") ?? "").trim();
   const phone = String(formData.get("phone") ?? "").trim();
+  const yearGroup = String(formData.get("year_group") ?? "").trim();
+  const roleTitle = String(formData.get("role_title") ?? "").trim();
 
-  // Update profiles
+  // Update profiles table (works for all roles)
   await supabase.from("profiles").upsert({
     id: user.id,
     full_name: fullName,
     school,
     role,
-    phone: role === "teacher" ? phone : null,
+    phone: phone || null,
     year_group: role === "student" ? yearGroup : null,
     onboarding_complete: true,
+    profile_state: "complete",
   });
 
-  // Save to role-specific table
-  if (role === "student") {
-    await supabase.from("student_profiles").upsert({
-      id: user.id,
-      year_group: yearGroup,
-      age_group: ageGroup,
-      is_minor: isMinor,
-      parent_email: parentEmail || null,
-      parent_verified: false,
-    });
-
-    // Send parent verification email for minors
-    if (isMinor && parentEmail) {
-      const hdrs = await headers();
-      const host = hdrs.get("x-forwarded-host") ?? hdrs.get("host") ?? "localhost:3000";
-      const proto = hdrs.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
-      const origin = `${proto}://${host}`;
-
-      const { sendParentVerificationEmail } = await import("@/lib/parent-verification");
-      await sendParentVerificationEmail({
-        userId: user.id,
-        parentEmail,
-        studentName: fullName || user.email || "Your child",
-        origin,
-      });
-    }
-  } else if (role === "teacher") {
+  // Save to role-specific table (teacher/school_admin only at this stage)
+  if (role === "teacher" || role === "school_admin") {
     await supabase.from("teacher_profiles").upsert({
       id: user.id,
       role_title: roleTitle,

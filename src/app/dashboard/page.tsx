@@ -76,7 +76,14 @@ export default async function DashboardPage() {
     profile?.role ??
     (user.user_metadata?.role as string | undefined) ??
     "—";
-  const roleLabel = role === "student" ? "Student" : role === "teacher" ? "Teacher / Coordinator" : role;
+  const roleLabelMap: Record<string, string> = {
+    student: "Student",
+    teacher: "Teacher / Coordinator",
+    parent: "Parent / Guardian",
+    school_admin: "School Administrator",
+    partner: "Partner / Agent",
+  };
+  const roleLabel = roleLabelMap[role] ?? role;
 
   const status: ApplicationStatus = application?.status ?? "interest";
   const completion = completionPercent(status);
@@ -91,7 +98,7 @@ export default async function DashboardPage() {
 
   // Minimal profile (new two-stage signup, before any feature engagement) →
   // show a welcome / explore screen instead of the rich application dashboard.
-  if (profile?.profile_state === "minimal") {
+  if (profile?.profile_state === "minimal" || !profile?.onboarding_complete) {
     return <MinimalDashboard email={user.email ?? ""} />;
   }
 
@@ -448,7 +455,7 @@ function MinimalDashboard({ email }: { email: string }) {
           <div className="eyebrow mb-6">Pick a path</div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Link
-              href="/onboarding/pioneer"
+              href="/pioneer/apply"
               className="block bg-white border border-[var(--gray-200)] rounded-[var(--radius-md)] p-8 hover:border-[var(--accent)] hover:shadow-[0_4px_30px_rgba(196,104,60,0.08)] transition-all"
             >
               <div className="text-[0.7rem] tracking-[2px] uppercase font-semibold text-[var(--accent)] mb-3">

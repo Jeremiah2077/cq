@@ -31,7 +31,7 @@ export async function updateSession(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
   const isAuthRoute = pathname.startsWith("/login") || pathname.startsWith("/signup");
-  const isProtected = pathname.startsWith("/dashboard");
+  const isProtected = pathname.startsWith("/dashboard") || pathname.startsWith("/pioneer");
   const isOnboarding = pathname.startsWith("/onboarding");
 
   if (!user && (isProtected || isOnboarding)) {
@@ -44,27 +44,6 @@ export async function updateSession(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = "/dashboard";
     return NextResponse.redirect(url);
-  }
-
-  if (user && isProtected) {
-    // Two-stage signup: do NOT force /onboarding. Minimal-state users land on
-    // the dashboard and are guided to fill in details when they engage with a
-    // feature (e.g. clicking "Apply for Pioneer" → /onboarding/pioneer).
-    //
-    // We still keep the parent-verify redirect for minor students, since GDPR
-    // requires parental consent before they can use student-side features.
-    const { data: studentProfile } = await supabase
-      .from("student_profiles")
-      .select("is_minor, parent_verified, parent_email")
-      .eq("id", user.id)
-      .maybeSingle();
-
-    if (studentProfile?.is_minor && !studentProfile.parent_verified && studentProfile.parent_email) {
-      const url = request.nextUrl.clone();
-      url.pathname = "/parent-verify";
-      url.searchParams.set("parent_email", studentProfile.parent_email);
-      return NextResponse.redirect(url);
-    }
   }
 
   return supabaseResponse;
