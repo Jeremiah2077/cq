@@ -4,7 +4,6 @@ import { createClient } from "@/lib/supabase/server";
 import { signOut, requestAccountDeletion, resendParentVerification } from "@/app/auth/actions";
 import { DeleteAccountButton } from "@/components/DeleteAccountButton";
 import { ParentVerificationBanner } from "@/components/ParentVerificationBanner";
-import { ProgrammeCards } from "@/components/ProgrammeCards";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
 import {
   PIONEER_MILESTONES,
@@ -454,11 +453,56 @@ function MinimalDashboard({ email }: { email: string }) {
 
       <main className="flex-1 max-w-[1200px] w-full mx-auto px-8 py-16 space-y-12">
         <section>
-          <div className="eyebrow mb-2">Our Programmes</div>
-          <p className="text-[0.95rem] text-[var(--gray-500)] leading-[1.7] mb-6 max-w-2xl">
-            Explore what China Quest offers. From free pioneer placements to full school trips.
-          </p>
-          <ProgrammeCards />
+          <div className="eyebrow mb-6">Pick a path</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Link
+              href="/pioneer.html"
+              className="group block bg-white border border-[var(--gray-200)] rounded-[var(--radius-md)] overflow-hidden hover:border-[var(--accent)] hover:shadow-[0_8px_30px_rgba(196,104,60,0.08)] transition-all"
+            >
+              <div className="relative h-[160px] overflow-hidden bg-[var(--gray-100)]">
+                <img src="/images/beijing/greatwall.jpg" alt="Pioneer Programme" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                <span className="absolute top-3 left-3 text-[0.68rem] font-bold uppercase tracking-[1.5px] px-2.5 py-1 rounded-[4px] text-white bg-[#2d8a4e]">Free</span>
+              </div>
+              <div className="p-6">
+                <div className="text-[0.7rem] tracking-[2px] uppercase font-semibold text-[var(--accent)] mb-1.5">
+                  Pioneer Programme
+                </div>
+                <div className="font-display text-[1.3rem] leading-[1.2] text-[var(--ink)] mb-2">
+                  Apply to be a Pioneer.
+                </div>
+                <p className="text-[0.88rem] text-[var(--gray-500)] leading-[1.65] mb-4">
+                  A fully-funded place for one student per Irish school. 11 days in China, filming, learning, and representing your school.
+                </p>
+                <span className="text-[0.85rem] font-semibold text-[var(--accent)]">
+                  Learn more →
+                </span>
+              </div>
+            </Link>
+
+            <Link
+              href="/roots.html"
+              className="group block bg-white border border-[var(--gray-200)] rounded-[var(--radius-md)] overflow-hidden hover:border-[var(--primary)] hover:shadow-[0_8px_30px_rgba(27,58,92,0.08)] transition-all"
+            >
+              <div className="relative h-[160px] overflow-hidden bg-[var(--gray-100)]">
+                <img src="/images/forbidden-city.jpg" alt="Roots Programme" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                <span className="absolute top-3 left-3 text-[0.68rem] font-bold uppercase tracking-[1.5px] px-2.5 py-1 rounded-[4px] text-white" style={{ background: "var(--primary)" }}>School Trip</span>
+              </div>
+              <div className="p-6">
+                <div className="text-[0.7rem] tracking-[2px] uppercase font-semibold text-[var(--primary)] mb-1.5">
+                  Heritage &amp; Culture
+                </div>
+                <div className="font-display text-[1.3rem] leading-[1.2] text-[var(--ink)] mb-2">
+                  Roots
+                </div>
+                <p className="text-[0.88rem] text-[var(--gray-500)] leading-[1.65] mb-4">
+                  Beijing, Xi&apos;an, Shanghai. 11 days through imperial palaces, the Terracotta Army, the Great Wall, and modern Shanghai.
+                </p>
+                <span className="text-[0.85rem] font-semibold text-[var(--primary)]">
+                  View itinerary →
+                </span>
+              </div>
+            </Link>
+          </div>
         </section>
 
         <section className="border-t border-[var(--gray-200)] pt-12">
