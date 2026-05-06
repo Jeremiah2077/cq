@@ -47,6 +47,7 @@ export async function applyForPioneer(formData: FormData) {
   await supabase.from("applications").upsert({
     user_id: user.id,
     status: "interest",
+    programme: "pioneer",
   });
 
   // Update user metadata
