@@ -485,7 +485,6 @@ function MinimalDashboard({ email }: { email: string }) {
             >
               <div className="relative h-[160px] overflow-hidden bg-[var(--gray-100)]">
                 <img src="/images/forbidden-city.jpg" alt="Roots Programme" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                <span className="absolute top-3 left-3 text-[0.68rem] font-bold uppercase tracking-[1.5px] px-2.5 py-1 rounded-[4px] text-white" style={{ background: "var(--primary)" }}>School Trip</span>
               </div>
               <div className="p-6">
                 <div className="text-[0.7rem] tracking-[2px] uppercase font-semibold text-[var(--primary)] mb-1.5">
