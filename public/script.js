@@ -191,8 +191,6 @@ if (authNavMobile) {
 
 // ---- Pioneer button: gray out if already applied ----
 if (hasSession) {
-    var SUPABASE_URL = 'https://eetjeyfyrwwoeeujxvmo.supabase.co';
-    var ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldGpleWZ5cnd3b2VldWp4dm1vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3ODQwMjQsImV4cCI6MjA5MjM2MDAyNH0.VZIxzI0X1g7p1GgV-AyMTRRTaGpT1mxb_kwP91lfcEs';
     var pioBtns = document.querySelectorAll('a.pio-btn[href="/pioneer/apply"]');
     if (pioBtns.length > 0) {
         var sbCookie = document.cookie.split(';').find(function(c) {
@@ -200,15 +198,14 @@ if (hasSession) {
         });
         if (sbCookie) {
             var tokenMatch = sbCookie.match(/base64-(.*)/);
-            var token = tokenMatch ? atob(tokenMatch[1]) : null;
-            if (token) {
-                try { token = JSON.parse(token).access_token; } catch(e) {}
-            }
-            if (token) {
-                fetch(SUPABASE_URL + '/rest/v1/applications?select=status&limit=1', {
+            var tokenStr = tokenMatch ? atob(tokenMatch[1]) : null;
+            var accessToken = null;
+            if (tokenStr) { try { accessToken = JSON.parse(tokenStr).access_token; } catch(e) {} }
+            if (accessToken) {
+                fetch('https://eetjeyfyrwwoeeujxvmo.supabase.co/rest/v1/applications?select=status&limit=1', {
                     headers: {
-                        'apikey': ANON_KEY,
-                        'Authorization': 'Bearer ' + token
+                        'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldGpleWZ5cnd3b2VldWp4dm1vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3ODQwMjQsImV4cCI6MjA5MjM2MDAyNH0.VZIxzI0X1g7p1GgV-AyMTRRTaGpT1mxb_kwP91lfcEs',
+                        'Authorization': 'Bearer ' + accessToken
                     }
                 }).then(function(r) { return r.json(); }).then(function(data) {
                     if (data && data.length > 0) {
@@ -216,7 +213,7 @@ if (hasSession) {
                             btn.style.background = '#9e9a93';
                             btn.style.cursor = 'default';
                             btn.style.pointerEvents = 'none';
-                            btn.innerHTML = 'Registered ✓';
+                            btn.textContent = 'Registered';
                         });
                     }
                 }).catch(function() {});
@@ -224,6 +221,7 @@ if (hasSession) {
         }
     }
 }
+
 
 // ---- Interest form: role-based field toggling + Tally submission ----
 const interestForm = document.getElementById('interestForm');
