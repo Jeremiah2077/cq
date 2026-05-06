@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { signOut, requestAccountDeletion, resendParentVerification } from "@/app/auth/actions";
 import { DeleteAccountButton } from "@/components/DeleteAccountButton";
 import { ParentVerificationBanner } from "@/components/ParentVerificationBanner";
+import { PioneerFlag } from "@/components/PioneerFlag";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
 import {
   PIONEER_MILESTONES,
@@ -423,6 +424,7 @@ function formatDate(iso: string): string {
 function MinimalDashboard({ email, hasApplied }: { email: string; hasApplied: boolean }) {
   return (
     <div className="min-h-screen flex flex-col bg-[var(--bg)]">
+      <PioneerFlag applied={hasApplied} />
       <SiteNav
         rightSlot={
           <form action={signOut}>
