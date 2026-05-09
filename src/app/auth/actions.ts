@@ -62,7 +62,7 @@ export async function signUp(formData: FormData) {
   }
 
   if (!data.session) {
-    redirect(`/verify?email=${encodeURIComponent(email)}`);
+    redirect(`/login?notice=check-email`);
   }
 
   revalidatePath("/", "layout");
