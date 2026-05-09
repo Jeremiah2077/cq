@@ -14,10 +14,10 @@ export async function signIn(formData: FormData) {
   const { error } = await supabase.auth.signInWithPassword({ email, password });
 
   if (error) {
-    // If email not confirmed, resend verification code and redirect to verify
+    // If email not confirmed, resend confirmation email and redirect to login with notice
     if (error.message.toLowerCase().includes("email not confirmed")) {
       await supabase.auth.resend({ type: "signup", email });
-      redirect(`/verify?email=${encodeURIComponent(email)}`);
+      redirect(`/login?notice=check-email`);
     }
     const msg =
       error.message === "Invalid login credentials"
