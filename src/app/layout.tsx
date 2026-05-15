@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, DM_Serif_Display, Noto_Serif_SC } from "next/font/google";
 import { PageTracker } from "@/components/PageTracker";
+import { TawkWidget } from "@/components/TawkWidget";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -42,6 +43,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <PageTracker />
         {children}
+        <TawkWidget />
       </body>
     </html>
   );
