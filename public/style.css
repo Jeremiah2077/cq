@@ -179,14 +179,15 @@ a { text-decoration: none; color: inherit; }
     background: white;
     border-bottom: 1px solid var(--gray-100);
     box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-    padding: 32px 0;
+    padding: 32px 48px;
     opacity: 0;
     visibility: hidden;
     transform: perspective(400px) rotateX(-8deg);
     transform-origin: top center;
     transition: opacity 0.35s ease, visibility 0.35s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 100;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(6, auto);
     justify-content: center;
     gap: 0;
 }
