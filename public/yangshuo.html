@@ -178,33 +178,51 @@
             <h2 style="font-family:var(--font-display);font-size:2rem;color:var(--ink);">Top Attractions</h2>
         </div>
 
-        <div class="highlight-grid">
-            <div class="highlight-card">
-                <div class="highlight-card-img">
-                    <img loading="lazy" decoding="async" src="images/yangshuo/li-river.jpg" alt="Li River Cruise" onerror="this.parentElement.style.background='var(--gray-100)';this.style.display='none';">
-                </div>
-                <div class="highlight-card-body">
-                    <h3>Li River Cruise</h3>
-                    <p>A four-hour drift through some of the most photographed scenery in China. The karst peaks rise directly from the water, and cormorant fishermen still work the shallows. The landscape appears on the &yen;20 banknote.</p>
-                </div>
+        <!-- Li River Cruise: full-width feature -->
+        <div class="highlight-card" style="display:grid;grid-template-columns:1fr 1fr;margin-bottom:32px;">
+            <div class="highlight-card-img" style="aspect-ratio:auto;min-height:400px;">
+                <img loading="lazy" decoding="async" src="images/guilin/li-river.jpg" alt="Li River Cruise" style="height:100%;" onerror="this.parentElement.style.background='var(--gray-100)';this.style.display='none';">
             </div>
-            <div class="highlight-card">
-                <div class="highlight-card-img">
-                    <img loading="lazy" decoding="async" src="images/yangshuo/cycling.jpg" alt="Countryside Cycling" onerror="this.parentElement.style.background='var(--gray-100)';this.style.display='none';">
-                </div>
-                <div class="highlight-card-body">
-                    <h3>Countryside Cycling</h3>
-                    <p>Flat, quiet roads through rice paddies, bamboo groves, and farming villages. No traffic, no crowds. Students ride at their own pace, stopping to explore or photograph whatever catches their eye.</p>
-                </div>
+            <div style="padding:48px 40px;display:flex;flex-direction:column;justify-content:center;">
+                <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--ink);margin-bottom:14px;">Li River Cruise</h3>
+                <p style="font-size:0.95rem;color:var(--gray-500);line-height:1.8;margin-bottom:20px;">A four-hour drift from Guilin to Yangshuo through some of the most photographed scenery in China. Karst peaks rise directly from the water, and cormorant fishermen still work the shallows. The landscape appears on the &yen;20 banknote.</p>
+                <div style="font-size:0.78rem;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;">Featured in Horizon Europe Programme</div>
             </div>
-            <div class="highlight-card">
-                <div class="highlight-card-img">
-                    <img loading="lazy" decoding="async" src="images/yangshuo/xianggong.jpg" alt="Xianggong Mountain Sunset" onerror="this.parentElement.style.background='var(--gray-100)';this.style.display='none';">
-                </div>
-                <div class="highlight-card-body">
-                    <h3>Xianggong Mountain Sunset</h3>
-                    <p>A short but steep hike to a panoramic viewpoint above the Li River bend. On clear evenings, the karst peaks layer into the distance like a Chinese ink painting come to life.</p>
-                </div>
+        </div>
+
+        <!-- Farm-to-Table Cooking: full-width feature -->
+        <div class="highlight-card" style="display:grid;grid-template-columns:1fr 1fr;margin-bottom:32px;">
+            <div class="highlight-card-img" style="aspect-ratio:auto;min-height:400px;">
+                <img loading="lazy" decoding="async" src="images/guilin/cooking.jpg" alt="Farm-to-Table Cooking" style="height:100%;" onerror="this.parentElement.style.background='var(--gray-100)';this.style.display='none';">
+            </div>
+            <div style="padding:48px 40px;display:flex;flex-direction:column;justify-content:center;">
+                <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--ink);margin-bottom:14px;">Farm-to-Table Cooking</h3>
+                <p style="font-size:0.95rem;color:var(--gray-500);line-height:1.8;margin-bottom:20px;">Visit a local market, select seasonal produce, and cook traditional Guangxi dishes with a local chef. A hands-on lesson in food systems, local ecology, and sustainable consumption.</p>
+                <div style="font-size:0.78rem;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;">Featured in Horizon Europe Programme</div>
+            </div>
+        </div>
+
+        <!-- Countryside Cycling: full-width feature -->
+        <div class="highlight-card" style="display:grid;grid-template-columns:1fr 1fr;margin-bottom:32px;">
+            <div class="highlight-card-img" style="aspect-ratio:auto;min-height:400px;">
+                <img loading="lazy" decoding="async" src="images/yangshuo/cycling.jpg" alt="Countryside Cycling" style="height:100%;" onerror="this.parentElement.style.background='var(--gray-100)';this.style.display='none';">
+            </div>
+            <div style="padding:48px 40px;display:flex;flex-direction:column;justify-content:center;">
+                <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--ink);margin-bottom:14px;">Countryside Cycling</h3>
+                <p style="font-size:0.95rem;color:var(--gray-500);line-height:1.8;margin-bottom:20px;">Flat, quiet roads through rice paddies, bamboo groves, and farming villages. No traffic, no crowds. Students ride at their own pace, stopping to explore or photograph whatever catches their eye.</p>
+                <div style="font-size:0.78rem;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;">Featured in Horizon Europe Programme</div>
+            </div>
+        </div>
+
+        <!-- Xianggong Mountain Sunset: full-width feature -->
+        <div class="highlight-card" style="display:grid;grid-template-columns:1fr 1fr;">
+            <div class="highlight-card-img" style="aspect-ratio:auto;min-height:400px;">
+                <img loading="lazy" decoding="async" src="images/yangshuo/xianggong.jpg" alt="Xianggong Mountain Sunset" style="height:100%;" onerror="this.parentElement.style.background='var(--gray-100)';this.style.display='none';">
+            </div>
+            <div style="padding:48px 40px;display:flex;flex-direction:column;justify-content:center;">
+                <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--ink);margin-bottom:14px;">Xianggong Mountain Sunset</h3>
+                <p style="font-size:0.95rem;color:var(--gray-500);line-height:1.8;margin-bottom:20px;">A short but steep hike to a panoramic viewpoint above the Li River bend. On clear evenings, the karst peaks layer into the distance like a Chinese ink painting come to life.</p>
+                <div style="font-size:0.78rem;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;">Featured in Horizon Europe Programme</div>
             </div>
         </div>
     </div>
