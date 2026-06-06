@@ -23,6 +23,7 @@ const STATIC_PAGES = [
   "zhangjiajie",
   "survey-student",
   "survey-teacher",
+  "roots-europe",
 ];
 
 const nextConfig: NextConfig = {
