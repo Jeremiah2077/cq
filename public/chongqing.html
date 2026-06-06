@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chongqing — China Quest</title>
+    <meta name="description" content="Explore Chongqing with China Quest: mountain city skyline, hotpot culture, Dazu Rock Carvings, Wulong sinkholes, and smart tech. Designed for school groups.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .dest-intro { max-width: 720px; }
+        .dest-intro p { font-size: 0.95rem; color: var(--gray-600); line-height: 1.85; margin-bottom: 16px; }
+        .highlight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .highlight-card {
+            background: var(--white);
+            border: 1px solid var(--gray-100);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+        }
+        .highlight-card-img {
+            aspect-ratio: 4/3;
+            overflow: hidden;
+        }
+        .highlight-card-img img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .highlight-card:hover .highlight-card-img img { transform: scale(1.05); }
+        .highlight-card-body { padding: 24px; }
+        .highlight-card-body h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+        .highlight-card-body p {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+            line-height: 1.7;
+        }
+        .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .info-card {
+            padding: 28px 24px;
+            background: var(--white);
+            border: 1px solid var(--gray-100);
+            border-radius: var(--radius-md);
+        }
+        .info-card h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .info-card p {
+            font-size: 0.88rem;
+            color: var(--gray-500);
+            line-height: 1.7;
+        }
+        @media (max-width: 768px) {
+            .highlight-grid { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+            .highlight-card[style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+            }
+            .highlight-card[style*="grid-template-columns"] > div:last-child {
+                padding: 28px 24px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===================== NAVIGATION ===================== -->
+<nav class="nav" id="nav">
+    <div class="nav-top"><div class="container"><div class="nav-top-left"><a href="mailto:info@milesminds.com">info@milesminds.com</a><a href="tel:+353894841019">+353 89 484 1019</a></div><div class="nav-top-right"><span id="auth-nav"></span></div></div></div>
+    <div class="nav-main"><div class="container">
+        <a href="index.html" class="logo">China Quest</a>
+        <ul class="nav-links">
+            <li><a href="/pioneer" class="nav-pioneer"><span class="nav-pulse"></span>Pioneer Programme</a></li>
+            <li><a href="index.html#programmes">Programmes</a></li>
+            <li class="nav-dropdown">
+                <a href="#" class="nav-dropdown-trigger">Destinations <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-left:4px;vertical-align:middle;"><path d="M1 1l4 4 4-4"/></svg></a>
+                <div class="nav-dropdown-menu">
+                    <a href="beijing.html">Beijing</a>
+                    <a href="shanghai.html">Shanghai</a>
+                    <a href="xian.html">Xi'an</a>
+                    <a href="hangzhou.html">Hangzhou</a>
+                    <a href="shenzhen.html">Shenzhen</a>
+                    <a href="chengdu.html">Chengdu</a>
+                    <a href="guilin.html">Guilin</a>
+                    <a href="zhangjiajie.html">Zhangjiajie</a>
+                </div>
+            </li>
+            <li><a href="why.html">Why Us</a></li>
+            <li><a href="safety.html">Safety</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="mobile-menu-btn" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+    </div></div>
+    <div class="mobile-menu">
+        <a href="/pioneer" class="nav-pioneer"><span class="nav-pulse"></span>Pioneer Programme</a>
+        <a href="index.html#programmes">Programmes</a>
+        <div class="mobile-dropdown">
+            <a href="#" onclick="event.preventDefault();this.parentElement.classList.toggle('open');">Destinations <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-left:4px;vertical-align:middle;"><path d="M1 1l4 4 4-4"/></svg></a>
+            <div class="mobile-dropdown-menu">
+                <a href="beijing.html">Beijing</a>
+                <a href="shanghai.html">Shanghai</a>
+                <a href="xian.html">Xi'an</a>
+                <a href="hangzhou.html">Hangzhou</a>
+                <a href="shenzhen.html">Shenzhen</a>
+                <a href="chengdu.html">Chengdu</a>
+                <a href="guilin.html">Guilin</a>
+                <a href="zhangjiajie.html">Zhangjiajie</a>
+            </div>
+        </div>
+        <a href="why.html">Why China Quest</a>
+        <a href="safety.html">Safety</a>
+        <a href="contact.html">Contact</a>
+        <span id="auth-nav-mobile"></span>
+    </div>
+</nav>
+
+
+<!-- ===================== PAGE HERO ===================== -->
+<section class="page-hero" style="background-image:url('images/chongqing/hero.jpg');">
+    <div class="page-hero-overlay"></div>
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="breadcrumb-sep">/</span>
+            <a href="#">Destinations</a>
+            <span class="breadcrumb-sep">/</span>
+            <span>Chongqing</span>
+        </nav>
+        <h1 class="page-hero-title">Chongqing</h1>
+        <p style="font-size:1.05rem;color:rgba(255,255,255,0.75);max-width:520px;margin-top:12px;line-height:1.7;">Mountain city, river city, hotpot city.</p>
+    </div>
+</section>
+
+
+<!-- ===================== INTRO ===================== -->
+<section style="padding:72px 0;background:var(--white);">
+    <div class="container">
+        <div class="dest-intro">
+            <div style="font-size:0.72rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;">About Chongqing</div>
+            <h2 style="font-family:var(--font-display);font-size:2rem;color:var(--ink);margin-bottom:20px;">A megacity built on mountains at the confluence of two rivers</h2>
+            <p>Chongqing is a city built on mountains, wrapped in fog, and powered by ambition. One of China's four direct-controlled municipalities, it sits at the confluence of the Yangtze and Jialing rivers. With over 30 million people, it is one of the largest urban areas on Earth, yet most visitors have never heard of it.</p>
+            <p>The city is a study in contrasts. Monorails thread through apartment buildings. Cable cars cross the river where ancient trade routes once ran. Street-side hotpot stalls share pavements with tech startups. For students, Chongqing offers something no other Chinese city can: the raw energy of a megacity that hasn't been polished for tourists.</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===================== TOP ATTRACTIONS ===================== -->
+<section style="padding:72px 0;background:var(--gray-50);border-top:1px solid var(--gray-100);">
+    <div class="container">
+        <div style="margin-bottom:40px;">
+            <div style="font-size:0.72rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;">What You'll Experience</div>
+            <h2 style="font-family:var(--font-display);font-size:2rem;color:var(--ink);">Top Attractions</h2>
+        </div>
+
+        <div class="highlight-grid">
+            <div class="highlight-card">
+                <div class="highlight-card-img">
+                    <img loading="lazy" decoding="async" src="images/chongqing/hongyadong.jpg" alt="Hongyadong & Night Skyline" onerror="this.parentElement.style.background='var(--gray-100)';this.style.display='none';">
+                </div>
+                <div class="highlight-card-body">
+                    <h3>Hongyadong &amp; Night Skyline</h3>
+                    <p>Eleven storeys of stilted architecture clinging to a riverside cliff, lit up at night like a scene from Spirited Away. The surrounding Jiefangbei district is Chongqing's commercial heart.</p>
+                </div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-card-img">
+                    <img loading="lazy" decoding="async" src="images/chongqing/dazu.jpg" alt="Dazu Rock Carvings" onerror="this.parentElement.style.background='var(--gray-100)';this.style.display='none';">
+                </div>
+                <div class="highlight-card-body">
+                    <h3>Dazu Rock Carvings <span style="font-size:0.75rem;font-weight:600;color:var(--accent);vertical-align:middle;margin-left:8px;">UNESCO</span></h3>
+                    <p>Over 50,000 Buddhist, Taoist, and Confucian sculptures carved between the 9th and 13th centuries. Remarkable for their scale, preservation, and the way three belief systems sit side by side on the same cliff face.</p>
+                </div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-card-img">
+                    <img loading="lazy" decoding="async" src="images/chongqing/wulong.jpg" alt="Wulong Karst" onerror="this.parentElement.style.background='var(--gray-100)';this.style.display='none';">
+                </div>
+                <div class="highlight-card-body">
+                    <h3>Wulong Karst <span style="font-size:0.75rem;font-weight:600;color:var(--accent);vertical-align:middle;margin-left:8px;">UNESCO</span></h3>
+                    <p>The Three Natural Bridges form the world's largest natural stone arch group. Below them, the Longshuixia Gorge drops into a deep-cut canyon of waterfalls and stalactites. This is the landscape that inspired the Transformers film locations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===================== PRACTICAL INFO ===================== -->
+<section style="padding:72px 0;background:var(--white);">
+    <div class="container">
+        <div style="margin-bottom:40px;">
+            <div style="font-size:0.72rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;">Plan Your Visit</div>
+            <h2 style="font-family:var(--font-display);font-size:2rem;color:var(--ink);">Good to Know</h2>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>Best Time to Visit</h4>
+                <p>March to May and September to November. Summers are extremely hot and humid. Chongqing is known as one of China's &ldquo;furnace cities.&rdquo;</p>
+            </div>
+            <div class="info-card">
+                <h4>Getting Around</h4>
+                <p>The city's monorail and metro system is an experience in itself. Line 2 passes directly through a residential building at Liziba station.</p>
+            </div>
+            <div class="info-card">
+                <h4>Local Food</h4>
+                <p>Chongqing hotpot is fiercer than Sichuan's. Expect numbing Sichuan peppercorn, chilli oil, and offal alongside the usual meats and vegetables. Xiaomian noodles are the city's everyday breakfast.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===================== FEATURED PROGRAMME ===================== -->
+<section style="padding:72px 0;background:var(--ink);color:white;">
+    <div class="container" style="text-align:center;max-width:640px;">
+        <div style="font-size:0.72rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;">Featured Programme</div>
+        <h2 style="font-family:var(--font-display);font-size:2rem;color:white;margin-bottom:16px;">Chongqing features in Horizon Europe</h2>
+        <p style="font-size:0.95rem;color:rgba(255,255,255,0.6);line-height:1.8;margin-bottom:32px;">Chongqing features in our Horizon Europe programme. Shanghai &rarr; Hangzhou &rarr; Shenzhen.</p>
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+            <a href="horizon-europe.html" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:var(--accent);color:white;border-radius:6px;font-size:0.88rem;font-weight:600;transition:background 0.2s;">View Horizon Europe Programme <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h8M8 3l4 4-4 4"/></svg></a>
+            <a href="index.html#register" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border:1px solid rgba(255,255,255,0.25);color:white;border-radius:6px;font-size:0.88rem;font-weight:600;transition:border-color 0.2s;">Register Interest</a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo">China Quest</div>
+                <p>A structured educational journey across China. Designed for Irish and international schools by Miles Minds Limited, Ireland.</p>
+            </div>
+            <div><h5>Programmes</h5><ul>
+                <li><a href="roots.html">Roots — Heritage &amp; Culture</a></li>
+                <li><a href="pulse.html">Pulse — STEM &amp; Innovation</a></li>
+                <li><a href="horizon.html">Horizon — Nature &amp; Landscapes</a></li>
+                <li><a href="tailored.html">Custom Programmes</a></li>
+            </ul></div>
+            <div><h5>For Schools</h5><ul>
+                <li><a href="why.html">Why China Quest</a></li>
+                <li><a href="safety.html">Safety &amp; Support</a></li>
+                <li><a href="contact.html">Contact / TY Show</a></li>
+            </ul></div>
+            <div><h5>Contact</h5><ul>
+                <li><a href="mailto:info@milesminds.com">info@milesminds.com</a></li>
+                <li><a href="tel:+353894841019">+353 89 484 1019</a></li>
+                <li style="margin-top:16px;font-size:0.82rem;color:rgba(255,255,255,0.35);">Miles Minds Limited<br>Company No. 802673<br>Ireland</li>
+            </ul></div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 China Quest / Miles Minds Limited. All rights reserved.</span>
+            <div class="footer-legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms</a><a href="cookies.html">Cookie Policy</a></div>
+        </div>
+    </div>
+</footer>
+<script src="script.js" defer></script>
+
+</body>
+</html>

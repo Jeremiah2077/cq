@@ -26,6 +26,9 @@ const STATIC_PAGES = [
   "roots-europe",
   "pulse-europe",
   "horizon-europe",
+  "chongqing",
+  "yangshuo",
+  "longji",
 ];
 
 const nextConfig: NextConfig = {
