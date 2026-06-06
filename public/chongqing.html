@@ -178,33 +178,39 @@
             <h2 style="font-family:var(--font-display);font-size:2rem;color:var(--ink);">Top Attractions</h2>
         </div>
 
-        <div class="highlight-grid">
-            <div class="highlight-card">
-                <div class="highlight-card-img">
-                    <img loading="lazy" decoding="async" src="images/chongqing/hongyadong.jpg" alt="Hongyadong & Night Skyline" onerror="this.parentElement.style.background='var(--gray-100)';this.style.display='none';">
-                </div>
-                <div class="highlight-card-body">
-                    <h3>Hongyadong &amp; Night Skyline</h3>
-                    <p>Eleven storeys of stilted architecture clinging to a riverside cliff, lit up at night like a scene from Spirited Away. The surrounding Jiefangbei district is Chongqing's commercial heart.</p>
-                </div>
+        <!-- Hongyadong: full-width feature -->
+        <div class="highlight-card" style="display:grid;grid-template-columns:1fr 1fr;margin-bottom:32px;">
+            <div class="highlight-card-img" style="aspect-ratio:auto;min-height:400px;">
+                <img loading="lazy" decoding="async" src="images/chongqing/hongyadong.jpg" alt="Hongyadong & Night Skyline" style="height:100%;" onerror="this.parentElement.style.background='var(--gray-100)';this.style.display='none';">
             </div>
-            <div class="highlight-card">
-                <div class="highlight-card-img">
-                    <img loading="lazy" decoding="async" src="images/chongqing/dazu.jpg" alt="Dazu Rock Carvings" onerror="this.parentElement.style.background='var(--gray-100)';this.style.display='none';">
-                </div>
-                <div class="highlight-card-body">
-                    <h3>Dazu Rock Carvings <span style="font-size:0.75rem;font-weight:600;color:var(--accent);vertical-align:middle;margin-left:8px;">UNESCO</span></h3>
-                    <p>Over 50,000 Buddhist, Taoist, and Confucian sculptures carved between the 9th and 13th centuries. Remarkable for their scale, preservation, and the way three belief systems sit side by side on the same cliff face.</p>
-                </div>
+            <div style="padding:48px 40px;display:flex;flex-direction:column;justify-content:center;">
+                <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--ink);margin-bottom:14px;">Hongyadong &amp; Night Skyline</h3>
+                <p style="font-size:0.95rem;color:var(--gray-500);line-height:1.8;margin-bottom:20px;">Eleven storeys of stilted architecture clinging to a riverside cliff, lit up at night like a scene from Spirited Away. The surrounding Jiefangbei district is Chongqing's commercial heart.</p>
+                <div style="font-size:0.78rem;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;">Featured in Horizon Europe Programme</div>
             </div>
-            <div class="highlight-card">
-                <div class="highlight-card-img">
-                    <img loading="lazy" decoding="async" src="images/chongqing/wulong.jpg" alt="Wulong Karst" onerror="this.parentElement.style.background='var(--gray-100)';this.style.display='none';">
-                </div>
-                <div class="highlight-card-body">
-                    <h3>Wulong Karst <span style="font-size:0.75rem;font-weight:600;color:var(--accent);vertical-align:middle;margin-left:8px;">UNESCO</span></h3>
-                    <p>The Three Natural Bridges form the world's largest natural stone arch group. Below them, the Longshuixia Gorge drops into a deep-cut canyon of waterfalls and stalactites. This is the landscape that inspired the Transformers film locations.</p>
-                </div>
+        </div>
+
+        <!-- Dazu Rock Carvings: full-width feature -->
+        <div class="highlight-card" style="display:grid;grid-template-columns:1fr 1fr;margin-bottom:32px;">
+            <div class="highlight-card-img" style="aspect-ratio:auto;min-height:400px;">
+                <img loading="lazy" decoding="async" src="images/chongqing/dazu.jpg" alt="Dazu Rock Carvings" style="height:100%;" onerror="this.parentElement.style.background='var(--gray-100)';this.style.display='none';">
+            </div>
+            <div style="padding:48px 40px;display:flex;flex-direction:column;justify-content:center;">
+                <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--ink);margin-bottom:14px;">Dazu Rock Carvings <span style="font-size:0.75rem;font-weight:600;color:var(--accent);vertical-align:middle;margin-left:8px;">UNESCO</span></h3>
+                <p style="font-size:0.95rem;color:var(--gray-500);line-height:1.8;margin-bottom:20px;">Over 50,000 Buddhist, Taoist, and Confucian sculptures carved between the 9th and 13th centuries. Remarkable for their scale, preservation, and the way three belief systems sit side by side on the same cliff face.</p>
+                <div style="font-size:0.78rem;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;">Featured in Horizon Europe Programme</div>
+            </div>
+        </div>
+
+        <!-- Wulong Karst: full-width feature -->
+        <div class="highlight-card" style="display:grid;grid-template-columns:1fr 1fr;">
+            <div class="highlight-card-img" style="aspect-ratio:auto;min-height:400px;">
+                <img loading="lazy" decoding="async" src="images/chongqing/wulong.jpg" alt="Wulong Karst" style="height:100%;" onerror="this.parentElement.style.background='var(--gray-100)';this.style.display='none';">
+            </div>
+            <div style="padding:48px 40px;display:flex;flex-direction:column;justify-content:center;">
+                <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--ink);margin-bottom:14px;">Wulong Karst <span style="font-size:0.75rem;font-weight:600;color:var(--accent);vertical-align:middle;margin-left:8px;">UNESCO</span></h3>
+                <p style="font-size:0.95rem;color:var(--gray-500);line-height:1.8;margin-bottom:20px;">The Three Natural Bridges form the world's largest natural stone arch group. Below them, the Longshuixia Gorge drops into a deep-cut canyon of waterfalls and stalactites. This is the landscape that inspired the Transformers film locations.</p>
+                <div style="font-size:0.78rem;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;">Featured in Horizon Europe Programme</div>
             </div>
         </div>
     </div>
