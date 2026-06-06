@@ -24,6 +24,7 @@ const STATIC_PAGES = [
   "survey-student",
   "survey-teacher",
   "roots-europe",
+  "pulse-europe",
 ];
 
 const nextConfig: NextConfig = {
