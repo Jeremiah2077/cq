@@ -12,6 +12,9 @@ const destinations = [
   { name: "Chengdu", href: "/chengdu.html" },
   { name: "Guilin", href: "/guilin.html" },
   { name: "Zhangjiajie", href: "/zhangjiajie.html" },
+  { name: "Chongqing", href: "/chongqing.html" },
+  { name: "Yangshuo", href: "/yangshuo.html" },
+  { name: "Longji", href: "/longji.html" },
 ];
 
 export function SiteNav({
