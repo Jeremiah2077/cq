@@ -247,9 +247,9 @@ export function SiteFooter() {
           <div>
             <h5 className="text-white text-[0.85rem] font-semibold uppercase tracking-[1.5px] mb-5">Programmes</h5>
             <ul className="space-y-2.5 text-[0.88rem]">
-              <li><a href="/roots-europe.html" className="hover:text-white transition-colors">Roots — Heritage &amp; Culture</a></li>
-              <li><a href="/pulse-europe.html" className="hover:text-white transition-colors">Pulse — STEM &amp; Innovation</a></li>
-              <li><a href="/horizon-europe.html" className="hover:text-white transition-colors">Horizon — Nature &amp; Landscapes</a></li>
+              <li><a href="/roots.html" className="hover:text-white transition-colors">Roots — Heritage &amp; Culture</a></li>
+              <li><a href="/pulse.html" className="hover:text-white transition-colors">Pulse — STEM &amp; Innovation</a></li>
+              <li><a href="/horizon.html" className="hover:text-white transition-colors">Horizon — Nature &amp; Landscapes</a></li>
               <li><a href="/tailored.html" className="hover:text-white transition-colors">Custom Programmes</a></li>
             </ul>
           </div>
