@@ -121,7 +121,7 @@ export default async function DashboardPage() {
 
             {/* Roots card */}
             <Link
-              href="/roots.html"
+              href="/roots-europe.html"
               className="group block bg-white border border-[var(--gray-200)] rounded-[var(--radius-md)] overflow-hidden hover:border-[var(--primary)] hover:shadow-[0_8px_30px_rgba(27,58,92,0.08)] transition-all"
             >
               <div className="relative h-[160px] overflow-hidden bg-[var(--gray-100)]">
